@@ -3,7 +3,6 @@ public class SpecialAnimals {
     int y;
     int buyPrice;
     int sellPrice;
-    int iliyaIsOskol;
 
     public SpecialAnimals() {
     }
