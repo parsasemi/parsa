@@ -1,3 +1,5 @@
+package LevelDesign;
+
 public class Factory {
     int buildPrice;
     int duration;

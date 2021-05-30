@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+package LevelDesign;
 
 public class Map {
     int length;

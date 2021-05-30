@@ -1,3 +1,5 @@
+package LevelDesign;
+
 public class Bucket {
     int capacity;
     int duration;

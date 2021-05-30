@@ -1,7 +1,11 @@
+package LevelDesign;
+
 public class Ingredient {
-    String name;
-    int price;
-    int size;
+    public String name;
+    public int price;
+    public int size;
+    public int x;
+    public int y;
 
     public Ingredient() {
     }

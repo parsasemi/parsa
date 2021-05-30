@@ -1,3 +1,5 @@
+import LevelDesign.Level;
+
 import java.util.ArrayList;
 
 public class User {

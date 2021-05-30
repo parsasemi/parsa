@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="First edit">
-      <change afterPath="$PROJECT_DIR$/LoginUser.java" afterDir="false" />
+    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Login User">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Manager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Bucket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DomesticAnimals.java" beforeDir="false" afterPath="$PROJECT_DIR$/Animals/DomesticAnimals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Factory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Ingredient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Level.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MotorCycle.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/MotorCycle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpecialAnimals.java" beforeDir="false" afterPath="$PROJECT_DIR$/Animals/SpecialAnimals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Storage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WildAnimals.java" beforeDir="false" afterPath="$PROJECT_DIR$/Animals/WildAnimals.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +51,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="LevelDesign" />
+      <recent name="Animals" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -83,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622375274796</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Login User">
+      <created>1622377568651</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1622377568651</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -103,6 +130,8 @@
     <MESSAGE value="Taqirati Dadam" />
     <MESSAGE value="First View" />
     <MESSAGE value="First edit" />
-    <option name="LAST_COMMIT_MESSAGE" value="First edit" />
+    <MESSAGE value="Second edit" />
+    <MESSAGE value="Login User" />
+    <option name="LAST_COMMIT_MESSAGE" value="Login User" />
   </component>
 </project>

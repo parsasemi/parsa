@@ -1,3 +1,5 @@
+package LevelDesign;
+
 public class Cell {
     int x;
     int y;
