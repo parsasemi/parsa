@@ -3,6 +3,7 @@ public class SpecialAnimals {
     int y;
     int buyPrice;
     int sellPrice;
+    int iliyaIsOskol;
 
     public SpecialAnimals() {
     }
@@ -12,6 +13,7 @@ public class SpecialAnimals {
         this.y = y;
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
+
     }
 
     public static class Dog extends SpecialAnimals{
