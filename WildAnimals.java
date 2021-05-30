@@ -6,6 +6,8 @@ public class WildAnimals {
     int capacity;
     int speed;
 
+    public WildAnimals() {
+    }
 
     public static class Bear extends WildAnimals {
     }
