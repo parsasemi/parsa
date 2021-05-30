@@ -6,12 +6,13 @@ public class  DomesticAnimals {
     int health;
     int speed;
     int capacity;
-    int product;
+    String product;
+    int size;
 
     public DomesticAnimals() {
     }
 
-    public DomesticAnimals(int sellPrice, int buyPrice, int x, int y, int health, int speed, int capacity, int product) {
+    public DomesticAnimals(int sellPrice, int buyPrice, int x, int y, int health, int speed, int capacity, String product, int size) {
         SellPrice = sellPrice;
         BuyPrice = buyPrice;
         this.x = x;
@@ -20,6 +21,7 @@ public class  DomesticAnimals {
         this.speed = speed;
         this.capacity = capacity;
         this.product = product;
+        this.size = size;
     }
 
     public static class Buffalo extends DomesticAnimals {

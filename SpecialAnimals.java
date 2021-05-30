@@ -3,16 +3,17 @@ public class SpecialAnimals {
     int y;
     int buyPrice;
     int sellPrice;
-    int iliyaIsOskol;
+    int size;
 
     public SpecialAnimals() {
     }
 
-    public SpecialAnimals(int x, int y, int buyPrice, int sellPrice) {
+    public SpecialAnimals(int x, int y, int buyPrice, int sellPrice, int size) {
         this.x = x;
         this.y = y;
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
+        this.size = size;
 
     }
 
