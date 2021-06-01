@@ -127,6 +127,7 @@ public class Manager {
 
     }
     int P = 3;
+    final boolean iliyaisoskol = true;
 
 
 }
