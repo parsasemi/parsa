@@ -15,6 +15,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+        int iliyaoskol = 2;
         Manager manager = new Manager();
         InputProcessor inputProcessor = new InputProcessor(manager);
         inputProcessor.run();
