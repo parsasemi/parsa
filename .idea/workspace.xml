@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Hi">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LevelDesign/Bucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Bucket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LevelDesign/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LevelDesign/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Factory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LevelDesign/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Ingredient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LevelDesign/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LevelDesign/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Storage.java" afterDir="false" />
+    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Functions test">
       <change beforePath="$PROJECT_DIR$/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622389124415</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Functions 2">
+      <created>1622538006306</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1622538006306</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,6 +154,8 @@
     <MESSAGE value="Starting Manager" />
     <MESSAGE value="Starting Manager 2" />
     <MESSAGE value="Hi" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hi" />
+    <MESSAGE value="Functions 2" />
+    <MESSAGE value="Functions test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Functions test" />
   </component>
 </project>
