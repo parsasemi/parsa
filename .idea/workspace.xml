@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Functions test">
+    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Login User">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/InputProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/parsa/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parsa/Main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +38,12 @@
       </list>
     </option>
   </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="main" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -122,14 +148,7 @@
       <option name="project" value="LOCAL" />
       <updated>1622389124415</updated>
     </task>
-    <task id="LOCAL-00011" summary="Functions 2">
-      <created>1622538006306</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1622538006306</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,8 +173,36 @@
     <MESSAGE value="Starting Manager" />
     <MESSAGE value="Starting Manager 2" />
     <MESSAGE value="Hi" />
-    <MESSAGE value="Functions 2" />
-    <MESSAGE value="Functions test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Functions test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hi" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="616" height="71" key="GridCell.Tab.0.bottom" timestamp="1622539209874">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="616" height="71" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1622539209874" />
+    <state width="616" height="71" key="GridCell.Tab.0.center" timestamp="1622539209874">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="616" height="71" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1622539209874" />
+    <state width="616" height="71" key="GridCell.Tab.0.left" timestamp="1622539209874">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="616" height="71" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1622539209874" />
+    <state width="616" height="71" key="GridCell.Tab.0.right" timestamp="1622539209874">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="616" height="71" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1622539209874" />
+    <state x="93" y="93" width="1094" height="494" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1622539198315">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="93" y="93" width="1094" height="494" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1622539198315" />
+    <state x="448" y="251" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1622538909646">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="448" y="251" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1622538909646" />
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1622539100196">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1622539100196" />
   </component>
 </project>

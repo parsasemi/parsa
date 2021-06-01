@@ -14,12 +14,16 @@ import Animals.WildAnimals;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        DomesticAnimals domesticAnimal = new DomesticAnimals();
+
+        Manager manager = new Manager();
+        InputProcessor inputProcessor = new InputProcessor(manager);
+        inputProcessor.run();
+       /* DomesticAnimals domesticAnimal = new DomesticAnimals();
         Gson save = new GsonBuilder().setPrettyPrinting().create();
         FileWriter fileWriter = new FileWriter("Level2.json");
         save.toJson(domesticAnimal, fileWriter);
         fileWriter.flush();
-        fileWriter.close();
+        fileWriter.close();*/
 
     }
 }
