@@ -350,7 +350,7 @@ public class Manager {
             }
         }
     }
-    int P = 0;
+    int P = 1;
 
 
 }
