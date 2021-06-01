@@ -1,9 +1,9 @@
 package LevelDesign;
 
 public class Cell {
-    int x;
-    int y;
-    int grass;
+    public int x;
+    public int y;
+    public int grass;
 
     public Cell(int x, int y, int grass) {
         this.x = x;

@@ -6,6 +6,7 @@ public class Ingredient {
     public int size;
     public int x;
     public int y;
+    public int expire;
 
     public Ingredient() {
     }

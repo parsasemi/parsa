@@ -1,13 +1,16 @@
 package LevelDesign;
 
 public class Factory {
-    int buildPrice;
-    int duration;
-    String ingredient;
-    String product;
-    int level;
-    int ingredientC;
-    int upgradePrice;
+    public int buildPrice;
+    public int duration;
+    public int maxDuration;
+    public String ingredient;
+    public String product;
+    public int level;
+    public int ingredientC;
+    public int upgradePrice;
+    public boolean existence  =false;
+
     public Factory() {
     }
 

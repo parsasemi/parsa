@@ -1,45 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Login User">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_8_61.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/InputProcessor.java" afterDir="false" />
+    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Hi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Animals/DomesticAnimals.java" beforeDir="false" afterPath="$PROJECT_DIR$/Animals/DomesticAnimals.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Bucket.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Bucket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Cell.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Factory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Ingredient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Storage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/DomesticAnimals$Buffalo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/DomesticAnimals$Chicken.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/DomesticAnimals$Turkey.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/DomesticAnimals.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parsa/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/SpecialAnimals$Cat.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/SpecialAnimals$Dog.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/SpecialAnimals.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/WildAnimals$Bear.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/WildAnimals$Lion.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/WildAnimals$Tiger.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/WildAnimals.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/parsa/parsa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/parsa/parsa.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/parsa.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +25,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -74,45 +43,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SharifMarket/src/gson-2.8.6.jar" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="LevelDesign" />
       <recent name="Animals" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="parsa" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -122,7 +58,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1622363510513</updated>
-      <workItem from="1622529532065" duration="391000" />
     </task>
     <task id="LOCAL-00001" summary="Man ino Sakhtam">
       <created>1622363979789</created>
@@ -166,11 +101,36 @@
       <option name="project" value="LOCAL" />
       <updated>1622377568651</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Starting Manager">
+      <created>1622388555523</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1622388555523</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Starting Manager">
+      <created>1622388667717</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1622388667717</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Starting Manager 2">
+      <created>1622388983602</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1622388983602</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Hi">
+      <created>1622389124415</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1622389124415</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -191,44 +151,9 @@
     <MESSAGE value="First edit" />
     <MESSAGE value="Second edit" />
     <MESSAGE value="Login User" />
-    <option name="LAST_COMMIT_MESSAGE" value="Login User" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="93" y="93" width="1094" height="494" key="DiffContextDialog" timestamp="1622389337757">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="93" y="93" width="1094" height="494" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1622389337757" />
-    <state x="308" y="80" key="FileChooserDialogImpl" timestamp="1622450774925">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="308" y="80" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1622450774925" />
-    <state width="1233" height="146" key="GridCell.Tab.0.bottom" timestamp="1622525576736">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1233" height="146" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1622525576736" />
-    <state width="1233" height="146" key="GridCell.Tab.0.center" timestamp="1622525576735">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1233" height="146" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1622525576735" />
-    <state width="1233" height="146" key="GridCell.Tab.0.left" timestamp="1622525576735">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1233" height="146" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1622525576735" />
-    <state width="1233" height="146" key="GridCell.Tab.0.right" timestamp="1622525576736">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1233" height="146" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1622525576736" />
-    <state x="121" y="0" key="SettingsEditor" timestamp="1622450777741">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="121" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1622450777741" />
-    <state x="490" y="250" key="VCS.ChangelistChooser" timestamp="1622389209320">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="490" y="250" key="VCS.ChangelistChooser/0.0.1280.680@0.0.1280.680" timestamp="1622389209320" />
-    <state x="448" y="251" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1622389337726">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="448" y="251" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1622389337726" />
+    <MESSAGE value="Starting Manager" />
+    <MESSAGE value="Starting Manager 2" />
+    <MESSAGE value="Hi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hi" />
   </component>
 </project>
