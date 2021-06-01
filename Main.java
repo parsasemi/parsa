@@ -15,6 +15,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
+
         Manager manager = new Manager();
         InputProcessor inputProcessor = new InputProcessor(manager);
         inputProcessor.run();
@@ -22,7 +23,7 @@ public class Main {
         Gson save = new GsonBuilder().setPrettyPrinting().create();
         FileWriter fileWriter = new FileWriter("Level2.json");
         save.toJson(domesticAnimal, fileWriter);
-        fileWriter.flush();
+        fileWriter.flush();x
         fileWriter.close();*/
 
     }

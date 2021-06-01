@@ -9,6 +9,7 @@ public class DomesticAnimals {
     public int speed;
     public int capacity;
     public String product;
+    public int productTime;
 
     public DomesticAnimals() {
     }

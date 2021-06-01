@@ -19,14 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Functions test4">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_8_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_8_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_8_61.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_8_61.xml" afterDir="false" />
+    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Functions 4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Animals/WildAnimals.java" beforeDir="false" afterPath="$PROJECT_DIR$/Animals/WildAnimals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Animals/DomesticAnimals.java" beforeDir="false" afterPath="$PROJECT_DIR$/Animals/DomesticAnimals.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/InputProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/InputProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Factory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Ingredient.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Ingredient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LevelDesign/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/LevelDesign/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parsa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/parsa.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +61,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -72,6 +74,20 @@
       <recent name="LevelDesign" />
       <recent name="Animals" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="parsa" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -152,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622389124415</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Functions 3">
+      <created>1622552587582</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1622552587582</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -177,19 +200,16 @@
     <MESSAGE value="Starting Manager" />
     <MESSAGE value="Starting Manager 2" />
     <MESSAGE value="Hi" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hi" />
+    <MESSAGE value="Functions 3" />
+    <MESSAGE value="Functions 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="Functions 4" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Manager.java</url>
-          <line>403</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Manager.java</url>
-          <line>237</line>
+          <line>207</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
