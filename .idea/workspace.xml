@@ -16,16 +16,18 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </select>
+    <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Login User" />
+    <list default="true" id="a7fb1c57-cfbc-40ef-95b3-bcd8130ccbec" name="Default Changelist" comment="Functions test4">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_8_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_8_6.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/gson_2_8_61.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/gson_2_8_61.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Animals/WildAnimals.java" beforeDir="false" afterPath="$PROJECT_DIR$/Animals/WildAnimals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/InputProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/InputProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parsa.iml" beforeDir="false" afterPath="$PROJECT_DIR$/parsa.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,8 +40,8 @@
       </list>
     </option>
   </component>
-  <component name="Git.Pull.Settings">
-    <option name="BRANCH" value="main" />
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/manager" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,8 +63,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -78,7 +81,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1622363510513</updated>
-      <workItem from="1622539215257" duration="359000" />
     </task>
     <task id="LOCAL-00001" summary="Man ino Sakhtam">
       <created>1622363979789</created>
@@ -150,37 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1622389124415</updated>
     </task>
-    <task id="LOCAL-00011" summary="test">
-      <created>1622539283062</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1622539283062</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="11" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -197,41 +177,22 @@
     <MESSAGE value="Starting Manager" />
     <MESSAGE value="Starting Manager 2" />
     <MESSAGE value="Hi" />
-    <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hi" />
   </component>
-  <component name="WindowStateProjectService">
-    <state width="616" height="71" key="GridCell.Tab.0.bottom" timestamp="1622539209874">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="616" height="71" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1622539209874" />
-    <state width="616" height="71" key="GridCell.Tab.0.center" timestamp="1622539209874">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="616" height="71" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1622539209874" />
-    <state width="616" height="71" key="GridCell.Tab.0.left" timestamp="1622539209874">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="616" height="71" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1622539209874" />
-    <state width="616" height="71" key="GridCell.Tab.0.right" timestamp="1622539209874">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="616" height="71" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1622539209874" />
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2" timestamp="1622539307679">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="233" y="73" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1622539307679" />
-    <state x="93" y="93" width="1094" height="494" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1622539198315">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="93" y="93" width="1094" height="494" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1280.680@0.0.1280.680" timestamp="1622539198315" />
-    <state x="448" y="251" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1622538909646">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="448" y="251" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.680@0.0.1280.680" timestamp="1622538909646" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1622539100196">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1622539100196" />
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Manager.java</url>
+          <line>403</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Manager.java</url>
+          <line>237</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

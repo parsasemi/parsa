@@ -7,7 +7,8 @@ public class WildAnimals {
     public int cageP;
     public int capacity;
     public int speed;
-
+    public boolean inCage = false;
+    public int inCageCounter = 5;
     public WildAnimals() {
     }
 

@@ -2,10 +2,17 @@ import Animals.DomesticAnimals;
 import LevelDesign.Bucket;
 import LevelDesign.Level;
 import LevelDesign.Map;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Manager {
     public static final String ANSI_RED = "\u001B[31m";
@@ -55,6 +62,7 @@ public class Manager {
                     if (level.storage.capacity >= level.ingredients.get(i).size) {
                         level.storage.names.add(level.ingredients.get(i).name);
                         level.storage.quantities.add(1);
+                        level.storage.capacity -= level.ingredients.get(i).size;
                         level.ingredients.remove(i);
                         break;
                     } else {
@@ -62,9 +70,10 @@ public class Manager {
                     }
                 }
             }
-            if (t==0){
-                    System.out.println("Please enter valid coordinates!");
-                }
+
+            if (t==0) {
+                System.out.println("Please enter valid coordinates!");
+            }
         }
     }
 
@@ -358,8 +367,81 @@ public class Manager {
         }
     }
 
+    public void Cage (int x, int y, Level leve , int counter){
+        int l=-1;
+        int b=-1;
+        int t=-1;
+        for (int i=0; i<level.lions.size(); i++){
+            if (level.lions.get(i).x == x && level.lions.get(i).y ==y) {
+                l = i;
+                break;
+            }
+        }
+        if (l!=-1){
+            for (int i=0 ;i  < level.bears.size(); i++){
+                if (level.bears.get(i).x == x && level.bears.get(i).y ==y) {
+                    b = i;
+                    break;
+                }
+            }
+            if (t!=-1){
+                for (int i=0 ;i < level.tigers.size(); i++){
+                    if (level.tigers.get(i).x == x && level.tigers.get(i).y ==y) {
+                        t = i;
+                        break;
+                    }
+                }
+            }
+        }
+        if (l==-1 && t==-1 && b==-1 ){
+            System.out.println("There is no wild animal in that coordination, choose wisely!");
+        }
 
-    private ArrayList<LoginUser> Users = new ArrayList<>();
+        else if (l!=-1){
+            if (counter == level.lions.get(l).cageP){
+                level.lions.get(l).inCage = true;
+                // shomarande zaman
+                // endatkhtan to storage
+            }
+        }
+        else if (b!=-1){
+            if (counter == level.bears.get(b).cageP){
+                level.bears.get(b).inCage = true;
+                // shomarande zaman
+                // endatkhtan to storage
+            }
+
+
+        }
+        else if (t!=-1){
+            if (counter == level.bears.get(t).cageP){
+                level.bears.get(t).inCage = true;
+                // shomarande zaman
+                // endatkhtan to storage
+            }
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void readUsersInfo() throws IOException {
         File file1 = new File("");
