@@ -1,6 +1,6 @@
 package Animals;
 
-public class  DomesticAnimals {
+public class DomesticAnimals {
     public int SellPrice;
     public int BuyPrice;
     public int x;
@@ -14,8 +14,8 @@ public class  DomesticAnimals {
     }
 
     public DomesticAnimals(int sellPrice, int buyPrice, int x, int y, int health, int speed, int capacity, String product) {
-        SellPrice = sellPrice;
-        BuyPrice = buyPrice;
+        this.SellPrice = sellPrice;
+        this.BuyPrice = buyPrice;
         this.x = x;
         this.y = y;
         this.health = health;
@@ -28,12 +28,12 @@ public class  DomesticAnimals {
         public Buffalo() {
         }
 
-        public Buffalo( int x, int y) {
+        public Buffalo(int x, int y) {
             super(200, 400, x, y, 100, 1, 0, "milk");
         }
     }
 
-    public static class Chicken extends DomesticAnimals{
+    public static class Chicken extends DomesticAnimals {
         public Chicken() {
         }
 
@@ -42,7 +42,7 @@ public class  DomesticAnimals {
         }
     }
 
-    public static class Turkey extends DomesticAnimals{
+    public static class Turkey extends DomesticAnimals {
         public Turkey() {
         }
 

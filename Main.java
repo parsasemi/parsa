@@ -1,9 +1,25 @@
 
 
+import Animals.DomesticAnimals;
 import Animals.SpecialAnimals;
+import LevelDesign.Level;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import Animals.WildAnimals;
 
 public class Main {
-    public static void main(String[] args) {
-        SpecialAnimals.Dog dog = new SpecialAnimals.Dog();
+
+    public static void main(String[] args) throws IOException {
+        DomesticAnimals domesticAnimal = new DomesticAnimals();
+        Gson save = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter("Level2.json");
+        save.toJson(domesticAnimal, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
     }
 }
