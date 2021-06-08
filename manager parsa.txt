@@ -1,0 +1,86 @@
+  private void save() throws IOException {
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        for (Level l : levels) {
+            if (l.levelNumber == 1) {
+                absolutePath += "\\LevelsInfo" + l.playerName + ".json";
+                break;
+            }
+        }
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(levels, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+    }
+
+    public boolean levelCheck(String username, int levelNumber) throws IOException {
+        boolean level_check = false;
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += "\\LevelsInfo" + username + ".json";
+        File file2 = new File(absolutePath);
+        if (file2.exists()) {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get(absolutePath));
+            List<Level> temp = Arrays.asList(gson.fromJson(reader, Level[].class));
+            levels.clear();
+            levels.addAll(temp);
+
+            for (Level l : levels) {
+                if (levelNumber == l.levelNumber) {
+                    level_check = true;
+                    break;
+                }
+            }
+            if (!level_check) {
+                System.out.println(ANSI_RED + "This level has not been unlocked yet!" + ANSI_RESET);
+                System.out.println("Your unlocked levels are: ");
+                for (Level l : levels) {
+                    System.out.print(l.levelNumber);
+                    if (l.levelNumber != levels.size()) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.println();
+            }
+
+        } else {
+            System.out.println(ANSI_RED + "You have to start the game from the beginning!" + ANSI_RESET);
+            Level level = new Level();
+            level.levelNumber = 1;
+            level.coin = 10000;
+            levels.add(level);
+            Gson write = new GsonBuilder().setPrettyPrinting().create();
+            FileWriter fileWriter = new FileWriter(absolutePath);
+            write.toJson(levels, fileWriter);
+            fileWriter.flush();
+            fileWriter.close();
+        }
+        return level_check;
+
+    }
+
+    public Level levelReturner(int levelNumber) {
+        for (Level l : levels) {
+            if (l.levelNumber == levelNumber) {
+                return l;
+            }
+        }
+        return null;
+    }
+
+    public Level levelEnd(Level playerLevel) throws IOException {
+        boolean find = false;
+        for (Level l : levels) {
+            if (l.levelNumber == (playerLevel.levelNumber + 1)) {
+                return l;
+            }
+        }
+        Level newLevel = new Level();
+        newLevel.levelNumber = playerLevel.levelNumber + 1;
+        levels.add(newLevel);
+        save();
+        return newLevel;
+    }
