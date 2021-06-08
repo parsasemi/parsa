@@ -1,0 +1,67 @@
+public void readUsersInfo() throws IOException {
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += "\\usersInfo.json";
+        File file2 = new File(absolutePath);
+        if (file2.exists()) {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get("usersInfo.json"));
+            Users.clear();
+            List<LoginUser> temp = Arrays.asList(gson.fromJson(reader, LoginUser[].class));
+            Users.addAll(temp);
+            reader.close();
+        }
+
+    }
+
+    public boolean usernameCheck(String username) throws IOException {
+
+        boolean found = false;
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += "\\usersInfo.json";
+        File file2 = new File(absolutePath);
+        if (file2.exists()) {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get("usersInfo.json"));
+            Users.clear();
+            List<LoginUser> temp = Arrays.asList(gson.fromJson(reader, LoginUser[].class));
+            Users.addAll(temp);
+            reader.close();
+            for (LoginUser u : Users) {
+                if (u.username.equals(username)) {
+                    found = true;
+                }
+            }
+        }
+        if (!found) {
+        }
+        return found;
+    }
+
+    public void signUp(String username, String password) throws IOException {
+        LoginUser user = new LoginUser(username, password);
+        Users.add(user);
+
+        Gson gson = new Gson();
+        Writer writer = Files.newBufferedWriter(Paths.get("usersInfo.json"));
+        gson.toJson(Users, writer);
+        writer.close();
+
+    }
+
+    public boolean login(String username, String password) throws IOException {
+        readUsersInfo();
+        boolean flag = false;
+        for (LoginUser u : Users) {
+            if (u.username.equals(username)) {
+                if (u.password.equals(password)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+
+
+    }
