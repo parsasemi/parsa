@@ -10,7 +10,7 @@ public class Factory {
     public boolean ingredientExistence = false;
     public int productTime=0;
     public boolean existence  =false;
-
+    public int duration  = -1;
     public Factory() {
     }
 
@@ -20,7 +20,7 @@ public class Factory {
             this.buildPrice = 250;
             this.maxDuration = 5;
             this.ingredient = "feather";
-            this.product = new Ingredient.Feather();
+            this.product = new Ingredient.Feather(1,1);
             this.upgradePrice = 0;
         }
     }
@@ -31,7 +31,7 @@ public class Factory {
             this.buildPrice = 150;
             this.maxDuration = 4;
             this.ingredient = "flour";
-            this.product = new Ingredient.Flour();
+            this.product = new Ingredient.Flour(1,1);
             this.upgradePrice = 0;
         }
     }
@@ -41,7 +41,7 @@ public class Factory {
             this.buildPrice = 400;
             this.maxDuration = 6;
             this.ingredient = "milk";
-            this.product = new Ingredient.Milk();
+            this.product = new Ingredient.Milk(1,1);
             this.upgradePrice = 0;
         }
     }
@@ -51,7 +51,7 @@ public class Factory {
             this.buildPrice = 250;
             this.maxDuration = 5;
             this.ingredient = "bread";
-            this.product = new Ingredient.Bread();
+            this.product = new Ingredient.Bread(1,1);
             this.upgradePrice = 0;
         }
     }
@@ -61,7 +61,7 @@ public class Factory {
             this.buildPrice = 400;
             this.maxDuration = 6;
             this.ingredient = "cloth";
-            this.product = new Ingredient.Cloth();
+            this.product = new Ingredient.Cloth(1,1);
             this.upgradePrice = 0;
         }
     }
@@ -71,7 +71,7 @@ public class Factory {
             this.buildPrice = 550;
             this.maxDuration = 7;
             this.ingredient = "icecream";
-            this.product = new Ingredient.IceCream();
+            this.product = new Ingredient.IceCream(1,1);
             this.upgradePrice = 0;
         }
     }

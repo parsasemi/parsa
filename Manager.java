@@ -74,7 +74,7 @@ public class Manager {
         }
     }
 
-    public void expirings(Level level) {
+    public void Expirings(Level level) {
         int a = level.ingredients.size();
         for (int i = 0; i < a; i++) {
             if (level.ingredients.get(i).expire == 0) {
@@ -441,7 +441,7 @@ public class Manager {
             if (level.sewingFactory.productTime >=level.sewingFactory.maxDuration){
                 level.sewingFactory.productTime = 0;
                 level.sewingFactory.ingredientExistence = false;
-                Ingredient.Cloth product = new Ingredient.Cloth("", 0 , 0, 1, 1, 0 );
+                Ingredient.Cloth product = new Ingredient.Cloth(1,1 );
                 level.ingredients.add(product);
             }
             else{
@@ -452,7 +452,7 @@ public class Manager {
             if (level.millFactory.productTime >=level.millFactory.maxDuration){
                 level.millFactory.productTime = 0;
                 level.millFactory.ingredientExistence = false;
-                Ingredient.Flour product = new Ingredient.Flour("", 0 , 0, 1, 1, 0 );
+                Ingredient.Flour product = new Ingredient.Flour(1,1 );
                 level.ingredients.add(product);
             }
             else{
@@ -463,7 +463,7 @@ public class Manager {
             if (level.milkFactory.productTime >=level.milkFactory.maxDuration){
                 level.milkFactory.productTime = 0;
                 level.milkFactory.ingredientExistence = false;
-                Ingredient.Milk product = new Ingredient.Milk("", 0 , 0, 1, 1, 0 );
+                Ingredient.Milk product = new Ingredient.Milk(1,1 );
                 level.ingredients.add(product);
             }
             else{
@@ -475,7 +475,7 @@ public class Manager {
             if (level.bakery.productTime >=level.bakery.maxDuration){
                 level.bakery.productTime = 0;
                 level.bakery.ingredientExistence = false;
-                Ingredient.Bread product = new Ingredient.Bread("", 0 , 0, 1, 1, 0 );
+                Ingredient.Bread product = new Ingredient.Bread(1,1 );
                 level.ingredients.add(product);
             }
             else{
@@ -487,7 +487,7 @@ public class Manager {
             if (level.weaveFactory.productTime >=level.weaveFactory.maxDuration){
                 level.weaveFactory.productTime = 0;
                 level.weaveFactory.ingredientExistence = false;
-                Ingredient.Weave product = new Ingredient.Weave("", 0 , 0, 1, 1, 0 );
+                Ingredient.Weave product = new Ingredient.Weave(1,1 );
                 level.ingredients.add(product);
             }
             else{
@@ -499,7 +499,7 @@ public class Manager {
             if (level.iceFactory.productTime >=level.iceFactory.maxDuration){
                 level.iceFactory.productTime = 0;
                 level.iceFactory.ingredientExistence = false;
-                Ingredient.IceCream product = new Ingredient.IceCream("", 0 , 0, 1, 1, 0 );
+                Ingredient.IceCream product = new Ingredient.IceCream(1,1 );
                 level.ingredients.add(product);
             }
             else{
@@ -507,13 +507,6 @@ public class Manager {
             }
         }
     }
-    int p =1
-
-
-
-
-
-
 
 
 
@@ -589,5 +582,4 @@ public class Manager {
 
 
     }
-    int p=1;
 }
