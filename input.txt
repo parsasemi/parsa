@@ -1,0 +1,330 @@
+import LevelDesign.Level;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class InputProcessor {
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
+    Manager manager = new Manager();
+
+    public InputProcessor(Manager manager) {
+        this.manager = manager;
+    }
+
+    private boolean usernameCheckProcess(String username) throws IOException {
+        return manager.usernameCheck(username);
+
+    }
+
+    private boolean loginProcess(String username, String password) throws IOException {
+        return manager.login(username, password);
+
+    }
+
+    private void signupProcess(String username, String password) throws IOException {
+        manager.signUp(username, password);
+
+    }
+
+    private boolean startProcess(String username, int levelNumber) throws IOException {
+        return manager.levelCheck(username, levelNumber);
+
+    }
+
+    private void settingsProcess() {
+
+    }
+
+    private Level levelReturnerProcess(int levelNumber) {
+        return manager.levelReturner(levelNumber);
+    }
+
+    private void buyProcess(String name, Level level) throws IOException {
+        manager.Buy(name, level);
+
+    }
+
+    private void pickupProcess(int x, int y, Level level) throws IOException {
+        manager.PickUp(x, y, level);
+
+    }
+
+    private void wellProcess(Level level, int counter) throws IOException {
+        manager.Well(level, counter);
+
+    }
+
+    private void plantProcess(int x, int y, Level level) throws IOException {
+        manager.Plant(x, y, level);
+
+    }
+
+    private void buildProcess(Level level, String name) throws IOException {
+
+        manager.Build(level, name);
+    }
+
+    private void workProcess(String name, Level level) throws IOException {
+        manager.Work(level, name);
+
+    }
+
+    private void cageProcess(int x, int y, Level level, int counter) throws IOException {
+        manager.Cage(x, y, level, counter);
+
+    }
+
+    private void turnProcess() {
+
+    }
+
+    private void truckLoadProcess() {
+
+    }
+
+    private void truckUnloadProcess() {
+
+    }
+
+    private void truckGoProcess() {
+
+    }
+
+    boolean flag_logout = true, flag_endgame = true, flag_end1 = true;
+    Level playerLevel;
+    String username;
+
+
+    public void Menu() throws IOException {
+
+        while (true) {
+            while (flag_logout) {
+                Scanner scanner = new Scanner(System.in);
+                String Command;
+                boolean flag2 = false;
+
+                if (flag_endgame) {
+                    System.out.println("Please enter your username: ");
+                    username = scanner.nextLine();
+
+                    while (true) {
+                        Command = scanner.nextLine();
+                        String command = Command.toLowerCase();
+                        String[] split = command.split("\\s+");
+                        boolean bool = false;
+
+                        if (command.startsWith("log in")) {
+                            if (!usernameCheckProcess(username)) {
+                                System.out.println(ANSI_RED + "Error! because there is no such account." + ANSI_RESET);
+                            } else {
+                                System.out.println("Please enter your password: ");
+                                while (!bool) {
+
+                                    String password = scanner.nextLine();
+                                    bool = loginProcess(username, password);
+                                    if (bool) {
+                                        System.out.println(ANSI_CYAN + "Logged in successfully!" + ANSI_RESET);
+                                        flag_end1 = false;
+                                    } else {
+                                        System.out.println(ANSI_RED + "Password incorrect! please enter your password again:" + ANSI_RED);
+                                    }
+
+                                }
+                            }
+
+                        } else if (command.startsWith("signup")) {
+                            if (usernameCheckProcess(username)) {
+                                System.out.println(ANSI_RED + "Error! because the username already exists." + ANSI_RESET);
+                            } else {
+                                System.out.println("Please enter a password to create a new account: ");
+                                String password = scanner.nextLine();
+                                signupProcess(username, password);
+                                System.out.println(ANSI_CYAN + "Account created successfully!" + ANSI_RESET);
+                                flag_end1 = false;
+                            }
+
+                        } else if (command.equals("exit")) {
+                            System.exit(0);
+
+                        } else if (command.equals("log out")) {
+                            flag2 = true;
+                            break;
+
+                        } else {
+                            System.out.println(ANSI_RED + "Invalid Input! Please enter your command again:" + ANSI_RESET);
+                        }
+                        if (!flag_end1) {
+                            break;
+                        }
+
+                    }
+                }
+
+                if (!flag2) {
+                    System.out.println(ANSI_YELLOW + "=-=-=-=-=-=-=-=-=-=-=-=-=-MAIN MENU-=-=-=-=-=-=-=-=-=-=-=-=-=-=" + ANSI_RESET);
+                    System.out.println("Your commands are: ");
+                    System.out.println("1.Start [level]");
+                    System.out.println("2.log out");
+                    System.out.println("3.settings");
+                    System.out.println("4.exit");
+
+                    while (!(Command = scanner.nextLine()).equals("log out")) {
+                        String command = Command.toLowerCase();
+                        String[] split = command.split("\\s+");
+                        if (command.startsWith("start")) {
+                            if (startProcess(username, Integer.parseInt(split[1]))) {
+                                flag_logout = false;
+                                flag_end1 = true;
+                                playerLevel = levelReturnerProcess(Integer.parseInt(split[1]));
+                                playerLevel.playerName = username;
+
+                            }
+
+                        } else if (command.startsWith("settings")) {
+                            settingsProcess();
+
+                        } else if (command.startsWith("exit")) {
+                            System.exit(0);
+                        } else {
+                            System.out.println(ANSI_RED + "Invalid Input! Please enter your command again:" + ANSI_RESET)
+                            ;
+                        }
+                        if (flag_end1) {
+                            break;
+                        }
+                    }
+                    flag_endgame = true;
+                }
+                flag_end1 = false;
+
+
+
+            }
+            flag_logout = true;
+
+            System.out.println(ANSI_CYAN + "=-=-=-=-=-=-=-=-=-=-=-=- GamePlay -=-=-=-=-=-=-=-=-=-=-=-=-=" + ANSI_RESET);
+            Scanner scanner = new Scanner(System.in);
+            String Command;
+            while (!(Command = scanner.nextLine()).equals("exit")) {
+                String command = Command.toLowerCase();
+                String[] split = command.split("\\s+");
+
+                if (command.startsWith("buy")) {
+                    buyProcess(split[1], playerLevel);
+                } else if (command.startsWith("pickup")) {
+                    pickupProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
+
+                } else if (command.startsWith("well")) {
+                    //  wellProcess();
+
+                } else if (command.startsWith("plant")) {
+                    plantProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
+
+                } else if (command.startsWith("work")) {
+                    workProcess(split[1], playerLevel);
+
+                } else if (command.startsWith("cage")) {
+                    //  cageProcess();
+
+                } else if (command.startsWith("turn")) {
+                    turnProcess();
+
+                } else if (command.startsWith("truck load")) {
+                    truckLoadProcess();
+
+                } else if (command.startsWith("truck unload")) {
+                    truckUnloadProcess();
+
+                } else if (command.startsWith("truck go")) {
+                    truckGoProcess();
+
+                } else if (command.startsWith("build")) {
+                    buildProcess(playerLevel, split[1]);
+                } else if (command.equals("end")) {
+                    playerLevel = manager.levelEnd(playerLevel);
+                    System.out.println("Please enter [menu] to go to Level menu");
+                    while (!scanner.nextLine().equals("menu")) {
+
+                    }
+                    break;
+                }
+                System.out.println("Your coins: " + playerLevel.coin);
+                manager.expirings(playerLevel);
+            }
+            flag_endgame = false;
+
+
+        }
+    }
+
+  /*  public void gameplay() throws IOException {
+        System.out.println(ANSI_CYAN + "=-=-=-=-=-=-=-=-=-=-=-=-=- GamePlay -=-=-=-=-=-=-=-=-=-=-=-=-=" + ANSI_RESET);
+        Scanner scanner = new Scanner(System.in);
+        String Command;
+        while (!(Command = scanner.nextLine()).equals("exit")) {
+            String command = Command.toLowerCase();
+            String[] split = command.split("\\s+");
+
+            if (command.startsWith("buy")) {
+                buyProcess(split[1], playerLevel);
+            } else if (command.startsWith("pickup")) {
+                pickupProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
+
+            } else if (command.startsWith("well")) {
+                //  wellProcess();
+
+            } else if (command.startsWith("plant")) {
+                plantProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
+
+            } else if (command.startsWith("work")) {
+                workProcess(split[1], playerLevel);
+
+            } else if (command.startsWith("cage")) {
+                //  cageProcess();
+
+            } else if (command.startsWith("turn")) {
+                turnProcess();
+
+            } else if (command.startsWith("truck load")) {
+                truckLoadProcess();
+
+            } else if (command.startsWith("truck unload")) {
+                truckUnloadProcess();
+
+            } else if (command.startsWith("truck go")) {
+                truckGoProcess();
+
+            } else if (command.startsWith("build")) {
+                buildProcess(playerLevel, split[1]);
+            } else if (command.equals("end")) {
+                playerLevel = manager.levelEnd(playerLevel);
+                System.out.println("Please enter [menu] to go to Level menu");
+                while(!scanner.nextLine().equals("menu")){
+
+                }
+                break;
+            }
+            System.out.println("Your coins: " + playerLevel.coin);
+            manager.expirings(playerLevel);
+        }
+
+
+    }*/
+
+    public void run() throws IOException {
+
+        while (flag_logout) {
+            Menu();
+        }
+
+    }
+
+}
+
+
+
+
