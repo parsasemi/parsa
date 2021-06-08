@@ -7,7 +7,7 @@ import Animals.WildAnimals;
 import java.util.ArrayList;
 
 public class Level {
-    public String name;
+    public String playerName;
     public int levelNumber;
     public int coin;
     public int time;

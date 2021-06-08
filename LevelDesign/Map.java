@@ -1,14 +1,9 @@
 package LevelDesign;
 
 public class Map {
-    public int length;
-    public int height;
+    public int length = 6;
+    public int height = 6;
     public Cell[][] map = new Cell[height][length];
     ////////// Tamam Khane ha 0 beshan.
 
-    public Map(int length, int height) {
-        this.length = length;
-        this.height = height;
-
-    }
 }
