@@ -1,8 +1,5 @@
 import Animals.DomesticAnimals;
-import LevelDesign.Bucket;
-import LevelDesign.Ingredient;
-import LevelDesign.Level;
-import LevelDesign.Map;
+import LevelDesign.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -33,6 +30,7 @@ public class Manager {
         if (name.equals("buffalo")) {
             DomesticAnimals.Buffalo buffalo = new DomesticAnimals.Buffalo(1, 1);
             if (level.coin >= buffalo.BuyPrice) {
+                buffalo.existence = true;
                 level.buffalos.add(buffalo);
                 level.coin -= buffalo.BuyPrice;
             } else {
@@ -41,6 +39,7 @@ public class Manager {
         } else if (name.equals("turkey")) {
             DomesticAnimals.Turkey turkey = new DomesticAnimals.Turkey(1, 1);
             if (level.coin >= turkey.BuyPrice) {
+                turkey.existence = true;
                 level.turkies.add(turkey);
                 level.coin -= turkey.BuyPrice;
             } else {
@@ -49,11 +48,15 @@ public class Manager {
         } else if (name.equals("chicken")) {
             DomesticAnimals.Chicken chicken = new DomesticAnimals.Chicken(1, 1);
             if (level.coin >= chicken.BuyPrice) {
+                chicken.existence = true;
                 level.chickens.add(chicken);
                 level.coin -= chicken.BuyPrice;
             } else {
                 System.out.println("NOT ENOUGH COIN TO BUY!");
             }
+        }
+        else {
+            System.out.println("Invalid Input because there is no such animal.");
         }
     }
 
@@ -124,8 +127,8 @@ public class Manager {
         }
     }
 
-    public void Build(Level level, String name) {
-        if (name.equals("WeaveFactory")) {
+    public void Build(Level level, String name) throws IOException {
+        if (name.equals("weavefactory")) {
             if (level.weaveFactory.existence == false) {
                 if (level.coin >= level.weaveFactory.buildPrice) {
                     level.weaveFactory.existence = true;
@@ -135,7 +138,7 @@ public class Manager {
             } else {
                 System.out.println("This factory can't be built again.");
             }
-        } else if (name.equals("MillFactory")) {
+        } else if (name.equals("millfactory")) {
             if (level.millFactory.existence == false) {
                 if (level.coin >= level.millFactory.buildPrice) {
                     level.millFactory.existence = true;
@@ -145,7 +148,7 @@ public class Manager {
             } else {
                 System.out.println("This factory can't be built again.");
             }
-        } else if (name.equals("MilkFactory")) {
+        } else if (name.equals("milkfactory")) {
             if (level.milkFactory.existence == false) {
                 if (level.coin >= level.milkFactory.buildPrice) {
                     level.milkFactory.existence = true;
@@ -156,7 +159,7 @@ public class Manager {
                 System.out.println("This factory can't be built again.");
             }
 
-        } else if (name.equals("Bakery")) {
+        } else if (name.equals("bakery")) {
             if (level.bakery.existence == false) {
                 if (level.coin >= level.bakery.buildPrice) {
                     level.bakery.existence = true;
@@ -167,7 +170,7 @@ public class Manager {
                 System.out.println("This factory can't be built again.");
             }
 
-        } else if (name.equals("SewingFactory")) {
+        } else if (name.equals("sewingfactory")) {
             if (level.sewingFactory.existence == false) {
                 if (level.coin >= level.sewingFactory.buildPrice) {
                     level.sewingFactory.existence = true;
@@ -178,7 +181,7 @@ public class Manager {
                 System.out.println("This factory can't be built again.");
             }
 
-        } else if (name.equals("IceFactory")) {
+        } else if (name.equals("icefactory")) {
             if (level.iceFactory.existence == false) {
                 if (level.coin >= level.iceFactory.buildPrice) {
                     level.iceFactory.existence = true;
@@ -192,6 +195,7 @@ public class Manager {
         } else {
             System.out.println("Not a valid name!");
         }
+        save();
     }
 
     public void Work(Level level, String name) {
@@ -552,6 +556,77 @@ public class Manager {
         }
     }
 
+    public void AnimalCounter (Level level){
+        for (int i=0 ; i<level.chickens.size(); i++){
+            if (level.chickens.get(i).time >= level.chickens.get(i).productTime-1 && level.chickens.get(i).existence == true) {
+                level.chickens.get(i).time = -1;
+                Ingredient.Egg egg = new Ingredient.Egg(1,1);
+                level.ingredients.add(egg);
+            }
+            else{
+                level.chickens.get(i).time ++;
+            }
+            level.chickens.get(i).health -=10;
+            if (level.chickens.get(i).health <=0){
+                level.chickens.get(i).existence = false;
+            }
+        }
+
+        for (int i=0 ; i<level.buffalos.size(); i++){
+            if (level.buffalos.get(i).time >= level.buffalos.get(i).productTime && level.buffalos.get(i).existence == true) {
+                level.buffalos.get(i).time = -1;
+                Ingredient.Milk milk = new Ingredient.Milk(1,1);
+                level.ingredients.add(milk);
+            }
+            else{
+                level.buffalos.get(i).time ++;
+            }
+            level.buffalos.get(i).health -=10;
+            if (level.buffalos.get(i).health <=0){
+                level.buffalos.get(i).existence = false;
+            }
+        }
+
+        for (int i=0 ; i<level.turkies.size(); i++){
+            if (level.turkies.get(i).time >= level.turkies.get(i).productTime && level.turkies.get(i).existence == true) {
+                level.turkies.get(i).time = -1;
+                Ingredient.Feather feather = new Ingredient.Feather(1,1);
+                level.ingredients.add(feather);
+            }
+            else{
+                level.turkies.get(i).time ++;
+            }
+            level.turkies.get(i).health -=10;
+            if (level.turkies.get(i).health <=0){
+                level.turkies.get(i).existence = false;
+            }
+        }
+    }
+
+    public ArrayList<DomesticAnimals> AnimalHealth (Level level) {
+        ArrayList<DomesticAnimals> needed = new ArrayList<>();
+        for (int i = 0; i < level.chickens.size(); i++) {
+/*            int x = level.chickens.get(i).x;
+            int y = level.chickens.get(i).y;*/
+            if (level.chickens.get(i).health <= 40) {
+                needed.add(level.chickens.get(i));
+            }
+        }
+        for (int i = 0; i < level.buffalos.size(); i++) {
+            if (level.buffalos.get(i).health <= 40) {
+                needed.add(level.buffalos.get(i));
+            }
+        }
+        for (int i = 0; i < level.turkies.size(); i++) {
+            if (level.turkies.get(i).health <= 40) {
+                needed.add(level.turkies.get(i));
+            }
+        }
+        return needed;
+
+
+    }
+
 
 
 
@@ -644,6 +719,7 @@ public class Manager {
         fileWriter.close();
     }
 
+
     public boolean levelCheck(String username, int levelNumber) throws IOException {
         boolean level_check = false;
         File file1 = new File("");
@@ -666,32 +742,44 @@ public class Manager {
             if (!level_check) {
                 System.out.println(ANSI_RED + "This level has not been unlocked yet!" + ANSI_RESET);
                 System.out.println("Your unlocked levels are: ");
+                int max = 1;
                 for (Level l : levels) {
-                    System.out.print(l.levelNumber);
-                    if (l.levelNumber != levels.size()) {
+                    if (l.levelNumber > 1) {
+                        max = l.levelNumber;
+                    }
+                }
+                for(int i=1; i<=max; i++) {
+                    System.out.print(i);
+                    if (i != levels.size()) {
                         System.out.print(", ");
                     }
                 }
+
                 System.out.println();
             }
 
         } else {
-            System.out.println(ANSI_RED + "You have to start the game from the beginning!" + ANSI_RESET);
-            Level level = new Level();
-            level.levelNumber = 1;
-            level.coin = 10000;
-            levels.add(level);
-            Gson write = new GsonBuilder().setPrettyPrinting().create();
-            FileWriter fileWriter = new FileWriter(absolutePath);
-            write.toJson(levels, fileWriter);
-            fileWriter.flush();
-            fileWriter.close();
+            if (levelNumber != 1) {
+                System.out.println(ANSI_RED + "You have to start the game from the beginning!" + ANSI_RESET);
+            }
+            if (levelNumber == 1) {
+                Level level = new Level();
+                level.playerName = username;
+                level.levelNumber = 1;
+                level.coin = 10000;
+                level.levelStarted = false;
+                levels.add(level);
+                save();
+                level_check = true;
+            }
+
         }
+
         return level_check;
 
     }
 
-    public Level levelReturner(int levelNumber)  {
+    public Level levelReturner(int levelNumber) {
         for (Level l : levels) {
             if (l.levelNumber == levelNumber) {
                 return l;
@@ -701,17 +789,80 @@ public class Manager {
     }
 
     public Level levelEnd(Level playerLevel) throws IOException {
-        boolean find = false;
         for (Level l : levels) {
             if (l.levelNumber == (playerLevel.levelNumber + 1)) {
+                playerLevel.levelEnd = true;
+                playerLevel.levelStarted = true;
+                save();
                 return l;
             }
         }
         Level newLevel = new Level();
+        newLevel.coin =10000;
+        playerLevel.levelEnd = true;
+        playerLevel.levelStarted = true;
+        newLevel.levelStarted = false;
+        newLevel.levelEnd = false;
         newLevel.levelNumber = playerLevel.levelNumber + 1;
         levels.add(newLevel);
         save();
         return newLevel;
+    }
+
+    public Level newLevel(int levelNumber, Level level) throws IOException {
+
+        for (Level l : levels) {
+            if (l.levelNumber == levelNumber) {
+                levels.remove(l);
+                break;
+            }
+        }
+        Level newLevel = new Level();
+        newLevel.playerName = level.playerName;
+        newLevel.levelNumber = levelNumber;
+        newLevel.levelStarted = false;
+        newLevel.levelEnd = false;
+        newLevel.coin = 10000;
+        levels.add(newLevel);
+
+        save();
+        return newLevel;
+    }
+
+    public void printInfo(Level level) {
+        System.out.println(ANSI_CYAN+"Passed time: " + level.passedTime + " time units");
+        for(int i=1; i<=6; i++){
+            for(int j=1; j<=6; j++){
+                System.out.print(level.map.map[i-1][j-1].grass+" ");
+            }
+            System.out.println();
+        }
+
+        for (DomesticAnimals.Chicken chicken: level.chickens) {
+            System.out.println("Chicken "+ chicken.health+"% "+"["+chicken.x+" "+chicken.y+"]");
+        }
+        for (DomesticAnimals.Turkey turkey: level.turkies){
+            System.out.println("Turkey "+ turkey.health+"% "+"["+turkey.x+" "+turkey.y+"]");
+        }
+        for(DomesticAnimals.Buffalo buffalo: level.buffalos){
+            System.out.println("Buffalo "+ buffalo.health+"% "+"["+buffalo.x+" "+buffalo.y+"]");
+        }
+        System.out.println("Products: ");
+        System.out.println("Tasks: "+ANSI_RESET);
+
+    }
+
+    public void mapInitialize(Level level) throws IOException {
+
+        for(int i=1; i<=6; i++){
+            for(int j=1; j<=6; j++){
+                level.map.map[i-1][j-1] = new Cell(i ,j);
+                level.map.map[i-1][j-1].grass = 0;
+            }
+
+        }
+
+        save();
     }
 
 }
