@@ -1,0 +1,145 @@
+
+    public boolean levelCheck(String username, int levelNumber) throws IOException {
+        boolean level_check = false;
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += "\\LevelsInfo" + username + ".json";
+        File file2 = new File(absolutePath);
+        if (file2.exists()) {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get(absolutePath));
+            List<Level> temp = Arrays.asList(gson.fromJson(reader, Level[].class));
+            levels.clear();
+            levels.addAll(temp);
+
+            for (Level l : levels) {
+                if (levelNumber == l.levelNumber) {
+                    level_check = true;
+                    break;
+                }
+            }
+            if (!level_check) {
+                System.out.println(ANSI_RED + "This level has not been unlocked yet!" + ANSI_RESET);
+                System.out.println("Your unlocked levels are: ");
+                int max = 1;
+                for (Level l : levels) {
+                    if (l.levelNumber > 1) {
+                        max = l.levelNumber;
+                    }
+                }
+                for(int i=1; i<=max; i++) {
+                    System.out.print(i);
+                    if (i != levels.size()) {
+                        System.out.print(", ");
+                    }
+                }
+
+                System.out.println();
+            }
+
+        } else {
+            if (levelNumber != 1) {
+                System.out.println(ANSI_RED + "You have to start the game from the beginning!" + ANSI_RESET);
+            }
+            if (levelNumber == 1) {
+                Level level = new Level();
+                level.playerName = username;
+                level.levelNumber = 1;
+                level.coin = 10000;
+                level.levelStarted = false;
+                levels.add(level);
+                save();
+                level_check = true;
+            }
+
+        }
+
+        return level_check;
+
+    }
+
+    public Level levelReturner(int levelNumber) {
+        for (Level l : levels) {
+            if (l.levelNumber == levelNumber) {
+                return l;
+            }
+        }
+        return null;
+    }
+
+    public Level levelEnd(Level playerLevel) throws IOException {
+        for (Level l : levels) {
+            if (l.levelNumber == (playerLevel.levelNumber + 1)) {
+                playerLevel.levelEnd = true;
+                playerLevel.levelStarted = true;
+                save();
+                return l;
+            }
+        }
+        Level newLevel = new Level();
+        newLevel.coin =10000;
+        playerLevel.levelEnd = true;
+        playerLevel.levelStarted = true;
+        newLevel.levelStarted = false;
+        newLevel.levelEnd = false;
+        newLevel.levelNumber = playerLevel.levelNumber + 1;
+        levels.add(newLevel);
+        save();
+        return newLevel;
+    }
+
+    public Level newLevel(int levelNumber, Level level) throws IOException {
+
+        for (Level l : levels) {
+            if (l.levelNumber == levelNumber) {
+                levels.remove(l);
+                break;
+            }
+        }
+        Level newLevel = new Level();
+        newLevel.playerName = level.playerName;
+        newLevel.levelNumber = levelNumber;
+        newLevel.levelStarted = false;
+        newLevel.levelEnd = false;
+        newLevel.coin = 10000;
+        levels.add(newLevel);
+
+        save();
+        return newLevel;
+    }
+
+    public void printInfo(Level level) {
+        System.out.println(ANSI_CYAN+"Passed time: " + level.passedTime + " time units");
+        for(int i=1; i<=6; i++){
+            for(int j=1; j<=6; j++){
+                System.out.print(level.map.map[i-1][j-1].grass+" ");
+            }
+            System.out.println();
+        }
+
+        for (DomesticAnimals.Chicken chicken: level.chickens) {
+            System.out.println("Chicken "+ chicken.health+"% "+"["+chicken.x+" "+chicken.y+"]");
+        }
+        for (DomesticAnimals.Turkey turkey: level.turkies){
+            System.out.println("Turkey "+ turkey.health+"% "+"["+turkey.x+" "+turkey.y+"]");
+        }
+        for(DomesticAnimals.Buffalo buffalo: level.buffalos){
+            System.out.println("Buffalo "+ buffalo.health+"% "+"["+buffalo.x+" "+buffalo.y+"]");
+        }
+        System.out.println("Products: ");
+        System.out.println("Tasks: "+ANSI_RESET);
+
+    }
+
+    public void mapInitialize(Level level) throws IOException {
+
+        for(int i=1; i<=6; i++){
+            for(int j=1; j<=6; j++){
+                level.map.map[i-1][j-1] = new Cell(i ,j);
+                level.map.map[i-1][j-1].grass = 0;
+            }
+
+        }
+
+        save();
+    }
