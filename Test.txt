@@ -1,0 +1,87 @@
+public ArrayList<DomesticAnimals> AnimalHealth (Level level) {
+        ArrayList<DomesticAnimals> needed = new ArrayList<>();
+        for (int i = 0; i < level.chickens.size(); i++) {
+/*            int x = level.chickens.get(i).x;
+            int y = level.chickens.get(i).y;*/
+            if (level.chickens.get(i).health <= 40) {
+                needed.add(level.chickens.get(i));
+            }
+        }
+        for (int i = 0; i < level.buffalos.size(); i++) {
+            if (level.buffalos.get(i).health <= 40) {
+                needed.add(level.buffalos.get(i));
+            }
+        }
+        for (int i = 0; i < level.turkies.size(); i++) {
+            if (level.turkies.get(i).health <= 40) {
+                needed.add(level.turkies.get(i));
+            }
+        }
+        return needed;
+
+
+    }
+
+    public void NeededFiller (Level level, ArrayList<DomesticAnimals> needed){
+        Collections.sort(needed, (o1, o2) -> {
+            if (o1.health > o2.health) return 1;
+            return -1;
+        });
+        for (int i=0; i<needed.size(); i ++){
+            int x = needed.get(i).x;
+            int y = needed.get(i).y;
+            if ( level.map.map[x][y].grass >=1){
+                level.map.map[x][y].grass --;
+                needed.get(i).health =100;
+            }
+        }
+    }
+
+    public void taskChecker (Level level){
+        if (level.task.totalCoin >= level.task.coinObj){
+            level.task.coinCheck = true;
+        }
+
+        if (level.chickens.size() >= level.task.chickenObj){
+            level.task.chickenCheck = true;
+        }
+        if (level.buffalos.size() >= level.task.buffaloObj){
+            level.task.buffaloCheck = true;
+        }
+        if (level.turkies.size() >= level.task.turkeyObj){
+            level.task.turkeyCheck = true;
+        }
+        if (level.task.breadCounter >= level.task.breadObj){
+            level.task.breadCheck = true;
+        }
+        if (level.task.flourCounter >= level.task.flourObj){
+            level.task.flourCheck = true;
+        }
+        if (level.task.milkCounter >= level.task.milkObj){
+            level.task.milkCheck = true;
+        }
+        if (level.task.cmilkCounter >= level.task.cmilkObj){
+            level.task.cmilkCheck = true;
+        }
+        if (level.task.iceCreamCounter >= level.task.iceCreamObj){
+            level.task.iceCreamCheck = true;
+        }
+        if (level.task.clothCounter >= level.task.clothObj){
+            level.task.clothCheck = true;
+        }
+        if (level.task.eggCounter >= level.task.eggObj){
+            level.task.eggCheck = true;
+        }
+        if (level.task.weaveCounter >= level.task.weaveObj){
+            level.task.weaveCheck = true;
+        }
+        if (level.task.featherCounter >= level.task.featherObj){
+            level.task.featherCheck = true;
+        }
+        if (level.passedTime >= level.task.timeObj){
+            level.task.timeCheck = true;
+        }
+
+
+
+    }
