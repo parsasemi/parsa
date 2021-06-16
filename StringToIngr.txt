@@ -1,0 +1,17 @@
+    public Ingredient StringToIngr (String name){
+        if (name.equals("bread"))
+            return new Ingredient.Bread(1,1);
+        else if (name.equals("flour"))
+            return new Ingredient.Flour(1,1);
+        else if (name.equals("feather"))
+            return new Ingredient.Feather(1,1);
+        else if (name.equals("milk"))
+            return new Ingredient.Milk(1,1);
+        else if (name.equals("cmilk"))
+            return new Ingredient.CMilk(1,1);
+        else if (name.equals("weave"))
+            return new Ingredient.Weave(1,1);
+        else{
+            return null;
+        }
+    }
