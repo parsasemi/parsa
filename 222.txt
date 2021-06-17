@@ -1,0 +1,165 @@
+public void Work(Level level, String name) throws IOException {
+        String[] names = {"WeaveFactory", "MillFactory", "MilkFactory", "Bakery", "SewingFactory", "IceFactory"};
+        int a = -1;
+        for (int i = 0; i < names.length; i++) {
+            if (name.equals(names[i])) {
+                a = i;
+                break;
+            }
+        }
+        if (a == -1) {
+            System.out.println("Not a valid name.");
+        } else {
+            logger("info", "build " + name, level);
+            int t = 0;
+            int r = level.storage.names.size();
+            if (a == 0) {
+                if (level.weaveFactory.existence) {
+                    if (level.weaveFactory.productTime == 0) {
+                        for (int i = 0; i < r; i++) {
+                            if (level.storage.names.get(i).equals(level.weaveFactory.ingredient)) {
+                                t = 1;
+                                level.storage.names.remove(i);
+                                level.storage.quantities.remove(i);
+                                Ingredient.Feather feather = new Ingredient.Feather(1, 1);
+                                level.storage.capacity -= feather.size;
+                                level.weaveFactory.ingredientExistence = true;
+                                // Production
+                            }
+                        }
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+                    } else {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 1) {
+                if (level.millFactory.existence) {
+                    if (level.millFactory.productTime == 0) {
+                        for (int i = 0; i < r; i++) {
+                            if (level.storage.names.get(i).equals(level.millFactory.ingredient)) {
+                                t = 1;
+                                level.storage.names.remove(i);
+                                level.storage.quantities.remove(i);
+                                Ingredient.Egg feather = new Ingredient.Egg(1, 1);
+                                level.storage.capacity -= feather.size;
+                                level.millFactory.productTime++;
+                                level.millFactory.ingredientExistence = true;
+                                // Production
+                            }
+                        }
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+                    } else {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 2) {
+                if (level.milkFactory.existence) {
+                    if (level.milkFactory.productTime == 0) {
+                        for (int i = 0; i < r; i++) {
+                            if (level.storage.names.get(i).equals(level.milkFactory.ingredient)) {
+                                t = 1;
+                                level.storage.names.remove(i);
+                                level.storage.quantities.remove(i);
+                                Ingredient.Milk feather = new Ingredient.Milk(1, 1);
+                                level.storage.capacity -= feather.size;
+                                level.milkFactory.productTime++;
+                                level.milkFactory.ingredientExistence = true;
+                                // Production
+                            }
+                        }
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+                    } else {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 3) {
+                if (level.bakery.existence) {
+                    if (level.bakery.productTime == 0) {
+                        for (int i = 0; i < r; i++) {
+                            if (level.storage.names.get(i).equals(level.bakery.ingredient)) {
+                                t = 1;
+                                level.storage.names.remove(i);
+                                level.storage.quantities.remove(i);
+                                Ingredient.Flour feather = new Ingredient.Flour(1, 1);
+                                level.storage.capacity -= feather.size;
+                                level.bakery.productTime++;
+                                level.bakery.ingredientExistence = true;
+                                // Production
+                            }
+                        }
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+                    } else {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 4) {
+                if (level.sewingFactory.existence) {
+                    if (level.sewingFactory.productTime == 0) {
+                        for (int i = 0; i < r; i++) {
+                            if (level.storage.names.get(i).equals(level.sewingFactory.ingredient)) {
+                                t = 1;
+                                level.storage.names.remove(i);
+                                level.storage.quantities.remove(i);
+                                Ingredient.Weave feather = new Ingredient.Weave(1, 1);
+                                level.storage.capacity -= feather.size;
+                                level.sewingFactory.productTime++;
+                                level.sewingFactory.ingredientExistence = true;
+                                // Production
+                            }
+                        }
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+                    } else {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 5) {
+                if (level.iceFactory.existence) {
+                    if (level.iceFactory.duration == 0) {
+                        for (int i = 0; i < r; i++) {
+                            if (level.storage.names.get(i).equals(level.iceFactory.ingredient)) {
+                                t = 1;
+                                level.storage.names.remove(i);
+                                level.storage.quantities.remove(i);
+                                Ingredient.CMilk feather = new Ingredient.CMilk(1, 1);
+                                level.storage.capacity -= feather.size;
+                                level.iceFactory.duration++;
+                                level.iceFactory.ingredientExistence = true;
+                                // Production
+                            }
+                        }
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+                    } else {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+        }
+    }
