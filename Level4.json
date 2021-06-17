@@ -1,0 +1,263 @@
+{
+  "levelNumber": 4,
+  "passedTime": 0,
+  "levelEnd": false,
+  "levelStarted": false,
+  "coin": 150,
+  "ingredients": [],
+  "chickens": [
+    {
+      "SellPrice": 50,
+      "BuyPrice": 10,
+      "x": 5,
+      "y": 5,
+      "health": 100,
+      "speed": 1,
+      "capacity": 0,
+      "product": "egg",
+      "productTime": 2,
+      "time": -1,
+      "existence": false
+    }
+  ],
+  "buffalos": [],
+  "turkies": [],
+  "bears": [],
+  "lions": [],
+  "tigers": [],
+  "cats": [],
+  "dogs": [],
+  "map": {
+    "length": 6,
+    "height": 6,
+    "map": [
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ]
+  },
+  "bucket": {
+    "capacity": 5,
+    "duration": -1,
+    "maxDuration": 5,
+    "full": true
+  },
+  "weaveFactory": {
+    "buildPrice": 250,
+    "maxDuration": 5,
+    "ingredient": "feather",
+    "product": {
+      "name": "feather",
+      "price": 20,
+      "size": 1,
+      "x": 0,
+      "y": 0,
+      "expire": 4
+    },
+    "level": 0,
+    "upgradePrice": 0,
+    "ingredientExistence": false,
+    "productTime": 0,
+    "existence": false,
+    "duration": -1
+  },
+  "millFactory": {
+    "buildPrice": 150,
+    "maxDuration": 4,
+    "ingredient": "flour",
+    "product": {
+      "name": "flour",
+      "price": 40,
+      "size": 2,
+      "x": 0,
+      "y": 0,
+      "expire": 5
+    },
+    "level": 0,
+    "upgradePrice": 0,
+    "ingredientExistence": false,
+    "productTime": 0,
+    "existence": true,
+    "duration": -1
+  },
+  "milkFactory": {
+    "buildPrice": 400,
+    "maxDuration": 6,
+    "ingredient": "milk",
+    "product": {
+      "name": "milk",
+      "price": 25,
+      "size": 1,
+      "x": 0,
+      "y": 0,
+      "expire": 4
+    },
+    "level": 0,
+    "upgradePrice": 0,
+    "ingredientExistence": false,
+    "productTime": 0,
+    "existence": false,
+    "duration": -1
+  },
+  "bakery": {
+    "buildPrice": 250,
+    "maxDuration": 5,
+    "ingredient": "bread",
+    "product": {
+      "name": "bread",
+      "price": 80,
+      "size": 4,
+      "x": 0,
+      "y": 0,
+      "expire": 6
+    },
+    "level": 0,
+    "upgradePrice": 0,
+    "ingredientExistence": false,
+    "productTime": 0,
+    "existence": false,
+    "duration": -1
+  },
+  "sewingFactory": {
+    "buildPrice": 400,
+    "maxDuration": 6,
+    "ingredient": "cloth",
+    "product": {
+      "name": "cloth",
+      "price": 100,
+      "size": 4,
+      "x": 0,
+      "y": 0,
+      "expire": 6
+    },
+    "level": 0,
+    "upgradePrice": 0,
+    "ingredientExistence": false,
+    "productTime": 0,
+    "existence": false,
+    "duration": -1
+  },
+  "iceFactory": {
+    "buildPrice": 550,
+    "maxDuration": 7,
+    "ingredient": "icecream",
+    "product": {
+      "name": "icecream",
+      "price": 120,
+      "size": 4,
+      "x": 0,
+      "y": 0,
+      "expire": 6
+    },
+    "level": 0,
+    "upgradePrice": 0,
+    "ingredientExistence": false,
+    "productTime": 0,
+    "existence": false,
+    "duration": -1
+  },
+  "storage": {
+    "capacity": 30,
+    "names": [],
+    "quantities": []
+  },
+  "motorCycle": {
+    "capacity": 10,
+    "names": [],
+    "quantities": [],
+    "counter": -1,
+    "Max": 10,
+    "coin": 0
+  },
+  "task": {
+    "taskCounter": 0,
+    "taskObj": 4,
+    "taskCheck": false,
+    "timeObj": 10000,
+    "chickenObj": 10000,
+    "buffaloObj": 10000,
+    "turkeyObj": 10000,
+    "coinObj": 300,
+    "eggObj": 6,
+    "flourObj": 4,
+    "featherObj": 10000,
+    "milkObj": 10000,
+    "cmilkObj": 10000,
+    "breadObj": 2,
+    "weaveObj": 10000,
+    "clothObj": 10000,
+    "iceCreamObj": 10000,
+    "coinCheck": false,
+    "chickenCheck": false,
+    "buffaloCheck": false,
+    "turkeyCheck": false,
+    "eggCheck": false,
+    "flourCheck": false,
+    "featherCheck": false,
+    "milkCheck": false,
+    "cmilkCheck": false,
+    "breadCheck": false,
+    "weaveCheck": false,
+    "clothCheck": false,
+    "iceCreamCheck": false,
+    "timeCheck": false,
+    "totalCoin": 150,
+    "eggCounter": 0,
+    "flourCounter": 0,
+    "featherCounter": 0,
+    "milkCounter": 0,
+    "cmilkCounter": 0,
+    "breadCounter": 0,
+    "weaveCounter": 0,
+    "clothCounter": 0,
+    "iceCreamCounter": 0,
+    "chickenCounter": 0,
+    "turkeyCounter": 0,
+    "buffaloCounter": 0
+  }
+}
