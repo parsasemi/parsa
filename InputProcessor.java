@@ -1,6 +1,7 @@
 import LevelDesign.Level;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputProcessor {
@@ -59,7 +60,7 @@ public class InputProcessor {
     }
 
     private void wellProcess(Level level, int counter) throws IOException {
-        manager.Well(level, counter);
+        manager.Well(level);
         saveProcess();
 
     }
@@ -82,22 +83,25 @@ public class InputProcessor {
 
     }
 
-    private void cageProcess(int x, int y, Level level, int counter) throws IOException {
-        manager.Cage(x, y, level, counter);
+    private void cageProcess(int x, int y, Level level) throws IOException {
+        manager.Cage(x, y, level);
         saveProcess();
 
     }
 
-    private void turnProcess() {
+    private void turnProcess(Level playerLevel, int turnCounter) throws IOException {
 
+        manager.turn(playerLevel, turnCounter);
     }
 
-    private void truckLoadProcess() throws IOException {
+    private void truckLoadProcess(Level level, String name) throws IOException {
+        manager.MotorLoad(level, name);
         saveProcess();
 
     }
 
-    private void truckUnloadProcess() throws IOException {
+    private void truckUnloadProcess(Level level, String name) throws IOException {
+        manager.MotorUnload(level, name);
         saveProcess();
 
     }
@@ -157,7 +161,7 @@ public class InputProcessor {
                                     bool = loginProcess(username, password);
                                     if (bool) {
                                         System.out.println(ANSI_CYAN + "Logged in successfully!" + ANSI_RESET);
-                                        manager.logger("info","log in",playerLevel);
+                                        manager.logger("info", "log in", playerLevel);
                                         flag_end1 = false;
                                     } else {
                                         System.out.println(ANSI_RED + "Password incorrect! please enter your password again:" + ANSI_RED);
@@ -282,22 +286,22 @@ public class InputProcessor {
 
                         } else if (command.equals("settings")) {
                             settingsProcess();
-                            manager.logger("info","settings",playerLevel);
+                            manager.logger("info", "settings", playerLevel);
 
                         } else if (command.equals("exit")) {
-                            manager.logger("info","exit",playerLevel);
+                            manager.logger("info", "exit", playerLevel);
                             System.exit(0);
                         } else {
                             System.out.println(ANSI_RED + "Invalid Input! Please enter your command again:" + ANSI_RESET)
                             ;
-                            manager.logger("error","invalid input",playerLevel);
+                            manager.logger("error", "invalid input", playerLevel);
                         }
                         if (flag_end2) {
                             break;
                         }
                     }
-                    if(Command.equals("log out")){
-                        manager.logger("info","log out",playerLevel);
+                    if (Command.equals("log out")) {
+                        manager.logger("info", "log out", playerLevel);
                     }
                     flag_endgame = true;
                 }
@@ -307,64 +311,108 @@ public class InputProcessor {
             flag_logout = true;
 
             System.out.println(ANSI_CYAN + "=-=-=-=-=-=-=-=-=-=-=-=- GamePlay -=-=-=-=-=-=-=-=-=-=-=-=-=" + ANSI_RESET);
-            System.out.println("Level goals:");
             manager.printTasks(playerLevel);
             Scanner scanner = new Scanner(System.in);
             String Command;
+            Boolean turnCheck = false;
+            int turnCounter = 0;
+            ArrayList<String> commands = new ArrayList<>();
             while (!(Command = scanner.nextLine()).equals("exit")) {
-                if(manager.tasksChecker(playerLevel)){
+                if (manager.tasksChecker(playerLevel)) {
                     playerLevel = manager.levelEnd(playerLevel);
                 }
 
-                String command = Command.toLowerCase();
-                String[] split = command.split("\\s+");
+                if (!turnCheck) {
 
-                if (command.startsWith("buy")) {
-                    buyProcess(split[1], playerLevel);
-                } else if (command.startsWith("pickup")) {
-                    pickupProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
+                    String command = Command.toLowerCase();
+                    String[] split = command.split("\\s+");
 
-                } else if (command.startsWith("well")) {
-                    //  wellProcess();
+                    if (command.startsWith("buy") && split.length == 2) {
+                        buyProcess(split[1], playerLevel);
+                    } else if (command.startsWith("pickup") && split.length == 3) {
+                        pickupProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
 
-                } else if (command.startsWith("plant")) {
-                    plantProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
+                    } else if (command.startsWith("well")) {
+                        if(playerLevel.bucket.duration >-1){
+                            System.out.println("The bucket is getting filled now.");
+                        }else if(playerLevel.bucket.full){
+                            System.out.println("The bucket must be empty to fill it again!");
+                        }
+                        else if (playerLevel.bucket.duration == -1) {
+                            playerLevel.bucket.duration = 0;
+                        }
 
-                } else if (command.startsWith("work")) {
-                    workProcess(split[1], playerLevel);
+                    } else if (command.startsWith("plant") && split.length == 3) {
+                        plantProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
 
-                } else if (command.startsWith("cage")) {
-                    //  cageProcess();
+                    } else if (command.startsWith("work") && split.length == 2) {
+                        if (split[1].equals("weavefactory")) {
+                            if (playerLevel.weaveFactory.productTime == -1) {
+                                playerLevel.weaveFactory.productTime = 0;
+                            }
+                        } else if (split[1].equals("bakery")) {
+                            if (playerLevel.bakery.productTime == -1) {
+                                playerLevel.bakery.productTime = 0;
+                            }
+                        } else if (split[1].equals("millfactory")) {
+                            if (playerLevel.millFactory.productTime == -1) {
+                                playerLevel.millFactory.productTime = 0;
+                            }
+                        } else if (split[1].equals("icefactory")) {
+                            if (playerLevel.iceFactory.productTime == -1) {
+                                playerLevel.iceFactory.productTime = 0;
+                            }
+                        } else if (split[1].equals("milkfactory")) {
+                            if (playerLevel.milkFactory.productTime == -1) {
+                                playerLevel.milkFactory.productTime = 0;
+                            }
+                        } else if (split[1].equals("sewingfactory")) {
+                            if (playerLevel.sewingFactory.productTime == -1) {
+                                playerLevel.sewingFactory.productTime = 0;
+                            }
+                        }
+                        workProcess(split[1], playerLevel);
 
-                } else if (command.startsWith("turn")) {
-                    turnProcess();
-                    printInfoProcess(playerLevel);
+                    } else if (command.startsWith("cage")) {
+                        //  cageProcess();
 
-                } else if (command.equals("truck load")) {
-                    truckLoadProcess();
+                    } else if (command.startsWith("turn") && split.length == 2) {
+                        turnCounter = Integer.parseInt(split[1]);
+                        turnCheck = true;
 
-                } else if (command.equals("truck unload")) {
-                    truckUnloadProcess();
+                    } else if (command.startsWith("truck load") && split.length == 3) {
+                        truckLoadProcess(playerLevel, split[2]);
 
-                } else if (command.equals("truck go")) {
-                    truckGoProcess();
+                    } else if (command.startsWith("truck unload") && split.length == 3) {
+                        truckUnloadProcess(playerLevel, split[2]);
 
-                } else if (command.startsWith("build")) {
-                    buildProcess(playerLevel, split[1]);
-                } else if (command.equals("end")) {
-                    playerLevel = manager.levelEnd(playerLevel);
-                    System.out.println("Please enter [menu] to go to Level menu");
-                    while (!scanner.nextLine().equals("menu")) {
+                    } else if (command.equals("truck go")) {
+                        if (playerLevel.motorCycle.capacity != 15) {
+                            playerLevel.motorCycle.counter = 0;
+                        } else {
+                            System.out.println(ANSI_RED + "The truck is empty now!" + ANSI_RESET);
+                        }
 
+                    } else if (command.startsWith("build")) {
+                        buildProcess(playerLevel, split[1]);
+                    } else if (command.equals("end")) {
+                        playerLevel = manager.levelEnd(playerLevel);
+                        System.out.println("Please enter [menu] to go to Level menu");
+                        while (!scanner.nextLine().equals("menu")) {
+
+                        }
+                        break;
+                    } else if (command.equals("inquiry")) {
+                        printInfoProcess(playerLevel);
+                    } else {
+                        System.out.println(ANSI_RED + "Invalid input! Please enter your input again:" + ANSI_RESET);
                     }
-                    break;
-                } else if (command.equals("inquiry")) {
-                    printInfoProcess(playerLevel);
-                } else {
-                    System.out.println(ANSI_RED + "Invalid input! Please enter your input again:" + ANSI_RESET);
                 }
-
-                manager.Expirings(playerLevel);
+                if (turnCheck) {
+                    turnProcess(playerLevel, turnCounter);
+                    turnCheck = false;
+                    manager.printInfo(playerLevel);
+                }
             }
             flag_endgame = false;
 
