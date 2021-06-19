@@ -1,3 +1,1217 @@
+    public void Buy(String name, Level level) throws IOException {
+        Random random = new Random();
+        if (name.equals("buffalo")) {
+            DomesticAnimals.Buffalo buffalo = new DomesticAnimals.Buffalo(random.nextInt(6)+1, random.nextInt(6)+1);
+            if (level.coin >= buffalo.BuyPrice) {
+                level.buffalos.add(buffalo);
+                level.coin -= buffalo.BuyPrice;
+                logger("info", "buy buffalo", level);
+            } else {
+                System.out.println("NOT ENOUGH COIN TO BUY!");
+                logger("error", "low coin", level);
+            }
+        } else if (name.equals("turkey")) {
+            DomesticAnimals.Turkey turkey = new DomesticAnimals.Turkey(random.nextInt(6)+1, random.nextInt(6)+1);
+            if (level.coin >= turkey.BuyPrice) {
+                level.turkies.add(turkey);
+                level.coin -= turkey.BuyPrice;
+                logger("info", "buy turkey", level);
+            } else {
+                System.out.println("NOT ENOUGH COIN TO BUY!");
+                logger("error", "low coin", level);
+            }
+        } else if (name.equals("chicken")) {
+            DomesticAnimals.Chicken chicken = new DomesticAnimals.Chicken(random.nextInt(6)+1, random.nextInt(6)+1);
+            if (level.coin >= chicken.BuyPrice) {
+                level.chickens.add(chicken);
+                level.coin -= chicken.BuyPrice;
+                logger("info", "buy chicken", level);
+            } else {
+                System.out.println("NOT ENOUGH COIN TO BUY!");
+                logger("error", "low coin", level);
+            }
+        } else {
+            System.out.println("Invalid Input because there is no such animal.");
+        }
+    }
+
+    public void PickUp(int x, int y, Level level) throws IOException {
+        if (level != null) {
+            int t = 0;
+            for (int i = 0; i < level.ingredients.size(); i++) {
+                if (level.ingredients.get(i).x == x && level.ingredients.get(i).y == y) {
+                    t = 1;
+                    if (level.storage.capacity >= level.ingredients.get(i).size) {
+                        level.storage.names.add(level.ingredients.get(i).name);
+                        level.storage.quantities.add(1);
+                        level.storage.capacity -= level.ingredients.get(i).size;
+                        Date date = new Date();
+                        log += ("[info] " + date + " " + level.ingredients.get(i).name + " x: " + level.ingredients.get(i).x + " y: " + level.ingredients.get(i).y + " !\n");
+                        if (level.ingredients.get(i).name.equals("egg")) {
+                            level.task.eggCounter++;
+                        } else if (level.ingredients.get(i).name.equals("feather")) {
+                            level.task.featherCounter++;
+                        } else if (level.ingredients.get(i).name.equals("milk")) {
+                            level.task.milkCounter++;
+                        } else if (level.ingredients.get(i).equals("flour")) {
+                            level.task.flourCounter++;
+                        } else if (level.ingredients.get(i).equals("cmilk")) {
+                            level.task.cmilkCounter++;
+                        } else if (level.ingredients.get(i).equals("bread")) {
+                            level.task.milkCounter++;
+                        } else if (level.ingredients.get(i).equals("icecream")) {
+                            level.task.iceCreamCounter++;
+                        } else if (level.ingredients.get(i).equals("cloth")) {
+                            level.task.clothCounter++;
+                        } else if (level.ingredients.get(i).equals("weave")) {
+                            level.task.weaveCounter++;
+                        }
+                        logWriter();
+                        level.ingredients.remove(i);
+                        break;
+                    } else {
+                        System.out.println("There is not enough space in the storage!");
+                        logger("error", "no space", level);
+                    }
+                }
+            }
+
+            if (t == 0) {
+                System.out.println("There's nothing there to pick up!");
+                logger("error", "nothing to pickup", level);
+            }
+        }
+    }
+
+    public void Expirings(Level level) throws IOException {
+        Date date = new Date();
+        for (int i = 0; i < level.ingredients.size(); i++) {
+            if (level.ingredients.get(i).expire == 0) {
+                log += ("[info] " + date + " " + level.ingredients.get(i).name + " x: " + level.ingredients.get(i).x + " y: " + level.ingredients.get(i).y);
+                logWriter();
+                level.ingredients.remove(i);
+
+            }
+            else{
+                level.ingredients.get(i).expire -- ;
+            }
+        }
+    }
+
+    public void Well(Level level) throws IOException {
+        if (level.bucket.duration >= level.bucket.maxDuration) {
+            Date date = new Date();
+            level.bucket.full = true;
+            level.bucket.capacity = 5;
+            level.bucket.duration = -1;
+            log += ("[info] " + date + " Bucket full!\n");
+            logWriter();
+
+        } else if (level.bucket.duration >=0){
+            level.bucket.duration ++;
+        }
+    }
+
+    public void Plant(int x, int y, Level level) throws IOException {
+        Date date = new Date();
+        if (x >= 1 && x <= level.map.length && y >= 1 && y <= level.map.height) {
+            if (level.bucket.capacity > 0) {
+                level.map.map[x - 1][y - 1].grass++;
+                level.bucket.capacity--;
+                log += ("[info] " + date + " grass x: " + level.map.map[x - 1][y - 1].x + " y: " + level.map.map[x - 1][y - 1].y) + "\n";
+                logWriter();
+                if (level.bucket.capacity == 0) {
+                    level.bucket.full = false;
+                    level.bucket.capacity = 0;
+                    level.bucket.duration = -1;
+                    log += ("[info] " + date + " Bucket empty!\n");
+                    logWriter();
+
+                }
+            } else {
+                System.out.println("Bucket is empty! Fill it again!");
+            }
+        } else {
+            System.out.println("Coordinates are not valid! Try again!");
+        }
+    }
+
+    public void Build(Level level, String name) throws IOException {
+        if (name.equals("weavefactory")) {
+            if (level.weaveFactory.existence == false) {
+                if (level.coin >= level.weaveFactory.buildPrice) {
+                    level.weaveFactory.existence = true;
+                    level.coin -= level.weaveFactory.buildPrice;
+                    logger("info", "build weave factory", level);
+                } else
+                    System.out.println("There is not enough money to build the factory.");
+            } else {
+                System.out.println("This factory can't be built again.");
+            }
+        } else if (name.equals("millfactory")) {
+            if (level.millFactory.existence == false) {
+                if (level.coin >= level.millFactory.buildPrice) {
+                    level.millFactory.existence = true;
+                    level.coin -= level.millFactory.buildPrice;
+                    logger("info", "build mill factory", level);
+                } else
+                    System.out.println("There is not enough money to build the factory.");
+            } else {
+                System.out.println("This factory can't be built again.");
+            }
+        } else if (name.equals("milkfactory")) {
+            if (level.milkFactory.existence == false) {
+                if (level.coin >= level.milkFactory.buildPrice) {
+                    level.milkFactory.existence = true;
+                    level.coin -= level.milkFactory.buildPrice;
+                    logger("info", "build milk factory", level);
+                } else
+                    System.out.println("There is not enough money to build the factory.");
+            } else {
+                System.out.println("This factory can't be built again.");
+            }
+
+        } else if (name.equals("bakery")) {
+            if (level.bakery.existence == false) {
+                if (level.coin >= level.bakery.buildPrice) {
+                    level.bakery.existence = true;
+                    level.coin -= level.bakery.buildPrice;
+                    logger("info", "build bakery", level);
+                } else
+                    System.out.println("There is not enough money to build the factory.");
+            } else {
+                System.out.println("This factory can't be built again.");
+            }
+
+        } else if (name.equals("sewingfactory")) {
+            if (level.sewingFactory.existence == false) {
+                if (level.coin >= level.sewingFactory.buildPrice) {
+                    level.sewingFactory.existence = true;
+                    level.coin -= level.sewingFactory.buildPrice;
+                    logger("info", "build sewing", level);
+                } else
+                    System.out.println("There is not enough money to build the factory.");
+            } else {
+                System.out.println("This factory can't be built again.");
+            }
+
+        } else if (name.equals("icefactory")) {
+            if (level.iceFactory.existence == false) {
+                if (level.coin >= level.iceFactory.buildPrice) {
+                    level.iceFactory.existence = true;
+                    level.coin -= level.iceFactory.buildPrice;
+                    logger("info", "build ice factory", level);
+                } else
+                    System.out.println("There is not enough money to build the factory.");
+            } else {
+                System.out.println("This factory can't be built again.");
+            }
+
+        } else {
+            System.out.println("Not a valid name!");
+        }
+    }
+
+    public void Work(Level level, String name) throws IOException {
+        String[] names = {"weavefactory", "millfactory", "milkfactory", "bakery", "sewingfactory", "icefactory"};
+        int a = -1;
+        for (int i = 0; i < names.length; i++) {
+            if (name.equals(names[i])) {
+                a = i;
+                break;
+            }
+        }
+        if (a == -1) {
+            System.out.println("Not a valid name.");
+        } else {
+            logger("info", "build " + name, level);
+            int t = 0;
+            if (a == 0) {
+                if (level.weaveFactory.existence) {
+                    if (level.weaveFactory.productTime == 0) {
+                        if (level.weaveFactory.level == 1) {
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.weaveFactory.ingredient)) {
+                                    t = 1;
+                                    level.storage.names.remove(i);
+                                    level.storage.quantities.remove(i);
+                                    Ingredient.Feather feather = new Ingredient.Feather(1, 1);
+                                    level.storage.capacity -= feather.size;
+                                    level.weaveFactory.ingredientExistence = true;
+                                    // Production
+                                }
+                            }
+                        }
+
+                        if (level.weaveFactory.level == 2){
+                            int r= 0;
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.weaveFactory.ingredient)) {
+                                    r++;
+                                }
+                            }
+                            if (r>=2){
+                                r=2;
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.weaveFactory.ingredient) && r>0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Feather feather = new Ingredient.Feather(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.weaveFactory.ingredientExistence2 = true;
+                                    }
+                                }
+                            }
+                            if (r==1){
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.weaveFactory.ingredient) && r!=0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Feather feather = new Ingredient.Feather(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.weaveFactory.ingredientExistence = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+
+                    } else if (level.weaveFactory.productTime > 0) {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 1) {
+                if (level.millFactory.existence) {
+                    if (level.millFactory.productTime == 0) {
+                        if (level.millFactory.level == 1) {
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.millFactory.ingredient)) {
+                                    t = 1;
+                                    level.storage.names.remove(i);
+                                    level.storage.quantities.remove(i);
+                                    Ingredient.Egg feather = new Ingredient.Egg(1, 1);
+                                    level.storage.capacity -= feather.size;
+                                    level.millFactory.ingredientExistence = true;
+                                    // Production
+                                }
+                            }
+                        }
+
+                        if (level.millFactory.level == 2){
+                            int r= 0;
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.millFactory.ingredient)) {
+                                    r++;
+                                }
+                            }
+                            if (r>=2){
+                                r=2;
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.millFactory.ingredient) && r>0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Egg feather = new Ingredient.Egg(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.millFactory.ingredientExistence2 = true;
+                                    }
+                                }
+                            }
+                            if (r==1){
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.millFactory.ingredient) && r!=0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Egg feather = new Ingredient.Egg(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.millFactory.ingredientExistence = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+
+                    }
+                    else if (level.millFactory.productTime > 0) {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 2) {
+                if (level.milkFactory.existence) {
+                    if (level.milkFactory.productTime == 0) {
+                        if (level.milkFactory.level == 1) {
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.milkFactory.ingredient)) {
+                                    t = 1;
+                                    level.storage.names.remove(i);
+                                    level.storage.quantities.remove(i);
+                                    Ingredient.Milk feather = new Ingredient.Milk(1, 1);
+                                    level.storage.capacity -= feather.size;
+                                    level.milkFactory.ingredientExistence = true;
+                                    // Production
+                                }
+                            }
+                        }
+
+                        if (level.milkFactory.level == 2){
+                            int r= 0;
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.milkFactory.ingredient)) {
+                                    r++;
+                                }
+                            }
+                            if (r>=2){
+                                r=2;
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.milkFactory.ingredient) && r>0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Milk feather = new Ingredient.Milk(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.milkFactory.ingredientExistence2 = true;
+                                    }
+                                }
+                            }
+                            if (r==1){
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.milkFactory.ingredient) && r!=0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Milk feather = new Ingredient.Milk(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.milkFactory.ingredientExistence = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+
+                    } else if (level.milkFactory.productTime>0) {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 3) {
+                if (level.bakery.existence) {
+                    if (level.bakery.productTime == 0) {
+                        if (level.bakery.level == 1) {
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.bakery.ingredient)) {
+                                    t = 1;
+                                    level.storage.names.remove(i);
+                                    level.storage.quantities.remove(i);
+                                    Ingredient.Flour feather = new Ingredient.Flour(1, 1);
+                                    level.storage.capacity -= feather.size;
+                                    level.bakery.ingredientExistence = true;
+                                    // Production
+                                }
+                            }
+                        }
+
+                        if (level.bakery.level == 2){
+                            int r= 0;
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.bakery.ingredient)) {
+                                    r++;
+                                }
+                            }
+                            if (r>=2){
+                                r=2;
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.bakery.ingredient) && r>0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Flour feather = new Ingredient.Flour(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.bakery.ingredientExistence2 = true;
+                                    }
+                                }
+                            }
+                            if (r==1){
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.bakery.ingredient) && r!=0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Flour feather = new Ingredient.Flour(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.bakery.ingredientExistence = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+
+                    } else if (level.bakery.productTime > 0) {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 4) {
+                if (level.sewingFactory.existence) {
+                    if (level.sewingFactory.productTime == 0) {
+                        if (level.sewingFactory.level == 1) {
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.sewingFactory.ingredient)) {
+                                    t = 1;
+                                    level.storage.names.remove(i);
+                                    level.storage.quantities.remove(i);
+                                    Ingredient.Weave feather = new Ingredient.Weave(1, 1);
+                                    level.storage.capacity -= feather.size;
+                                    level.sewingFactory.ingredientExistence = true;
+                                    // Production
+                                }
+                            }
+                        }
+
+                        if (level.sewingFactory.level == 2){
+                            int r= 0;
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.sewingFactory.ingredient)) {
+                                    r++;
+                                }
+                            }
+                            if (r>=2){
+                                r=2;
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.sewingFactory.ingredient) && r>0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Weave feather = new Ingredient.Weave(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.sewingFactory.ingredientExistence2 = true;
+                                    }
+                                }
+                            }
+                            if (r==1){
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.sewingFactory.ingredient) && r!=0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.Weave feather = new Ingredient.Weave(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.sewingFactory.ingredientExistence = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+
+                    } else {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+
+            if (a == 5) {
+                if (level.iceFactory.existence) {
+                    if (level.iceFactory.productTime == 0) {
+                        if (level.iceFactory.level == 1) {
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.iceFactory.ingredient)) {
+                                    t = 1;
+                                    level.storage.names.remove(i);
+                                    level.storage.quantities.remove(i);
+                                    Ingredient.CMilk feather = new Ingredient.CMilk(1, 1);
+                                    level.storage.capacity -= feather.size;
+                                    level.iceFactory.ingredientExistence = true;
+                                    // Production
+                                }
+                            }
+                        }
+
+                        if (level.iceFactory.level == 2){
+                            int r= 0;
+                            for (int i = 0; i < level.storage.names.size(); i++) {
+                                if (level.storage.names.get(i).equals(level.iceFactory.ingredient)) {
+                                    r++;
+                                }
+                            }
+                            if (r>=2){
+                                r=2;
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.iceFactory.ingredient) && r>0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.CMilk feather = new Ingredient.CMilk(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.iceFactory.ingredientExistence2 = true;
+                                    }
+                                }
+                            }
+                            if (r==1){
+                                for (int i = 0; i < level.storage.names.size(); i++) {
+                                    if (level.storage.names.get(i).equals(level.iceFactory.ingredient) && r!=0) {
+                                        r--;
+                                        t = 1;
+                                        level.storage.names.remove(i);
+                                        level.storage.quantities.remove(i);
+                                        Ingredient.CMilk feather = new Ingredient.CMilk(1, 1);
+                                        level.storage.capacity -= feather.size;
+                                        level.iceFactory.ingredientExistence = true;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (t == 0)
+                            System.out.println("There is not enough ingredient to start!");
+
+                    } else if (level.iceFactory.productTime > 0) {
+                        System.out.println("The factory is working now, You must wait to end the production.");
+                    }
+                } else {
+                    System.out.println("You must first build the factory.");
+                }
+            }
+        }
+    }
+
+    public void Cage(int x, int y, Level level) {
+        int l = -1;
+        int b = -1;
+        int t = -1;
+        for (int i = 0; i < level.lions.size(); i++) {
+            if (level.lions.get(i).x == x && level.lions.get(i).y == y) {
+                l = i;
+                break;
+            }
+        }
+        if (l == -1) {
+            for (int i = 0; i < level.bears.size(); i++) {
+                if (level.bears.get(i).x == x && level.bears.get(i).y == y) {
+                    b = i;
+                    break;
+                }
+            }
+            if (b == -1) {
+                for (int i = 0; i < level.tigers.size(); i++) {
+                    if (level.tigers.get(i).x == x && level.tigers.get(i).y == y) {
+                        t = i;
+                        break;
+                    }
+                }
+            }
+        }
+        if (l == -1 && t == -1 && b == -1) {
+            System.out.println("There is no wild animal in that coordination, choose wisely!");
+        } else if (l != -1) {
+            level.lions.get(l).cageCounter++;
+            level.lions.get(l).cagePlus = true;
+        } else if (b != -1) {
+            level.bears.get(b).cageCounter++;
+            level.bears.get(l).cagePlus = true;
+        } else if (t != -1) {
+            level.tigers.get(t).cageCounter++;
+            level.bears.get(l).cagePlus = true;
+        }
+    }
+
+    public void CageCounter(Level level) {
+        for (int i = 0; i < level.lions.size(); i++) {
+            if (!level.lions.get(i).cagePlus) {
+                if (level.lions.get(i).cageCounter > 0)
+                    level.lions.get(i).cageCounter--;
+            }
+        }
+        for (int i = 0; i < level.bears.size(); i++) {
+            if (!level.bears.get(i).cagePlus) {
+                if (level.bears.get(i).cageCounter > 0)
+                    level.bears.get(i).cageCounter--;
+            }
+        }
+        for (int i = 0; i < level.tigers.size(); i++) {
+            if (!level.tigers.get(i).cagePlus) {
+                if (level.tigers.get(i).cageCounter > 0)
+                    level.tigers.get(i).cageCounter--;
+            }
+        }
+
+    }
+
+    public void InCageCounter(Level level) {
+        for (int i = 0; i < level.lions.size(); i++) {
+            if (level.lions.get(i).inCage) {
+                level.lions.get(i).inCageCounter++;
+            }
+        }
+        for (int i = 0; i < level.bears.size(); i++) {
+            if (level.bears.get(i).inCage) {
+                level.bears.get(i).inCageCounter++;
+            }
+        }
+        for (int i = 0; i < level.tigers.size(); i++) {
+            if (level.tigers.get(i).inCage) {
+                level.tigers.get(i).inCageCounter++;
+            }
+        }
+    }
+
+    public void CageEnd(Level level) {
+        for (int i = 0; i < level.lions.size(); i++) {
+            if (level.lions.get(i).inCageCounter == 5) {
+                level.lions.remove(i);
+            }
+            if (level.bears.get(i).inCageCounter == 5) {
+                level.bears.remove(i);
+            }
+            if (level.tigers.get(i).inCageCounter == 5) {
+                level.tigers.remove(i);
+            }
+        }
+    }
+
+    public void CageStore(Level level) {
+        for (int i = 0; i < level.lions.size(); i++) {
+            if (level.lions.get(i).inCage) {
+                if (level.storage.capacity >= level.lions.get(i).capacity) {
+                    level.storage.names.add("lion");
+                    level.storage.quantities.add(1);
+                    level.storage.capacity -= level.lions.get(i).capacity;
+                    level.lions.remove(i);
+                }
+            }
+        }
+        for (int i = 0; i < level.bears.size(); i++) {
+            if (level.bears.get(i).inCage) {
+                if (level.storage.capacity >= level.bears.get(i).capacity) {
+                    level.storage.names.add("bear");
+                    level.storage.quantities.add(1);
+                    level.storage.capacity -= level.bears.get(i).capacity;
+                    level.bears.remove(i);
+                }
+            }
+        }
+        for (int i = 0; i < level.tigers.size(); i++) {
+            if (level.tigers.get(i).inCage) {
+                if (level.storage.capacity >= level.tigers.get(i).capacity) {
+                    level.storage.names.add("tiger");
+                    level.storage.quantities.add(1);
+                    level.storage.capacity -= level.tigers.get(i).capacity;
+                    level.tigers.remove(i);
+                }
+            }
+        }
+    }
+
+    public void FactoryCounter(Level level) {
+        Random random = new Random();
+        if (level.sewingFactory.existence ) {
+            if (level.sewingFactory.ingredientExistence) {
+                if (level.sewingFactory.productTime >= level.sewingFactory.maxDuration) {
+
+                    level.sewingFactory.productTime = -1;
+                    level.sewingFactory.ingredientExistence = false;
+                    int a = random.nextInt(6);
+                    int b = random.nextInt(6);
+                    Ingredient.Cloth product = new Ingredient.Cloth(a + 1, b + 1);
+                    level.ingredients.add(product);
+                } else if (level.sewingFactory.productTime > -1) {
+                    level.sewingFactory.productTime+= level.sewingFactory.level;
+                }
+            }
+        }
+
+        if (level.millFactory.existence && level.millFactory.ingredientExistence) {
+            if (level.millFactory.productTime >= level.millFactory.maxDuration) {
+                level.millFactory.productTime = -1;
+                level.millFactory.ingredientExistence = false;
+                int a = random.nextInt(6);
+                int b = random.nextInt(6);
+                Ingredient.Flour product = new Ingredient.Flour(a+1, b+1);
+                level.ingredients.add(product);
+            } else if (level.millFactory.productTime > -1) {
+                level.millFactory.productTime++;
+            }
+        }
+        if (level.milkFactory.existence && level.milkFactory.ingredientExistence) {
+            if (level.milkFactory.productTime >= level.milkFactory.maxDuration) {
+                level.milkFactory.productTime = -1;
+                level.milkFactory.ingredientExistence = false;
+                int a = random.nextInt(6);
+                int b = random.nextInt(6);
+                Ingredient.Milk product = new Ingredient.Milk(a+1, b+1);
+                level.ingredients.add(product);
+            } else if (level.milkFactory.productTime > -1) {
+                level.milkFactory.productTime++;
+            }
+        }
+
+        if (level.bakery.existence && level.bakery.ingredientExistence) {
+            if (level.bakery.productTime >= level.bakery.maxDuration) {
+                level.bakery.productTime = -1;
+                level.bakery.ingredientExistence = false;
+                int a = random.nextInt(6);
+                int b = random.nextInt(6);
+                Ingredient.Bread product = new Ingredient.Bread(a+1, b+1);
+                level.ingredients.add(product);
+            } else if (level.bakery.productTime > -1) {
+                level.bakery.productTime++;
+            }
+        }
+
+        if (level.weaveFactory.existence && level.weaveFactory.ingredientExistence) {
+            if (level.weaveFactory.productTime >= level.weaveFactory.maxDuration) {
+                level.weaveFactory.productTime = -1;
+                level.weaveFactory.ingredientExistence = false;
+                int a = random.nextInt(6);
+                int b = random.nextInt(6);
+                Ingredient.Weave product = new Ingredient.Weave(a+1, b+1);
+                level.ingredients.add(product);
+            } else if (level.weaveFactory.productTime > -1) {
+                level.weaveFactory.productTime++;
+            }
+        }
+
+        if (level.iceFactory.existence && level.iceFactory.ingredientExistence) {
+            if (level.iceFactory.productTime >= level.iceFactory.maxDuration) {
+                level.iceFactory.productTime = -1;
+                level.iceFactory.ingredientExistence = false;
+                int a = random.nextInt(6);
+                int b = random.nextInt(6);
+                Ingredient.IceCream product = new Ingredient.IceCream(a+1,b+ 1);
+                level.ingredients.add(product);
+            } else if (level.iceFactory.productTime > -1) {
+                level.iceFactory.productTime++;
+            }
+        }
+    }
+
+    public void AnimalCounter(Level level) {
+        for (int i = 0; i < level.chickens.size(); i++) {
+            if (level.chickens.get(i).time >= level.chickens.get(i).productTime - 1 && level.chickens.get(i).existence == true) {
+                int a = level.chickens.get(i).x;
+                int b = level.chickens.get(i).y;
+                level.chickens.get(i).time = -1;
+                Ingredient.Egg egg = new Ingredient.Egg(a, b);
+                level.ingredients.add(egg);
+            } else {
+                level.chickens.get(i).time++;
+            }
+            level.chickens.get(i).health -= 10;
+            if (level.chickens.get(i).health <= 0) {
+                level.chickens.remove(i);
+            }
+        }
+
+        for (int i = 0; i < level.buffalos.size(); i++) {
+            if (level.buffalos.get(i).time >= level.buffalos.get(i).productTime && level.buffalos.get(i).existence == true) {
+                int a = level.buffalos.get(i).x;
+                int b = level.buffalos.get(i).y;
+                level.buffalos.get(i).time = -1;
+                Ingredient.Milk milk = new Ingredient.Milk(a, b);
+                level.ingredients.add(milk);
+            } else {
+                level.buffalos.get(i).time++;
+            }
+            level.buffalos.get(i).health -= 10;
+            if (level.buffalos.get(i).health <= 0) {
+                level.buffalos.get(i).existence = false;
+            }
+        }
+
+        for (int i = 0; i < level.turkies.size(); i++) {
+            if (level.turkies.get(i).time >= level.turkies.get(i).productTime && level.turkies.get(i).existence == true) {
+                int a = level.turkies.get(i).x;
+                int b = level.turkies.get(i).y;
+                level.turkies.get(i).time = -1;
+                Ingredient.Feather feather = new Ingredient.Feather(a, b);
+                level.ingredients.add(feather);
+            } else {
+                level.turkies.get(i).time++;
+            }
+            level.turkies.get(i).health -= 10;
+            if (level.turkies.get(i).health <= 0) {
+                level.turkies.get(i).existence = false;
+            }
+        }
+    }
+
+    public ArrayList<DomesticAnimals> AnimalHealth(Level level) {
+        ArrayList<DomesticAnimals> needed = new ArrayList<>();
+        for (int i = 0; i < level.chickens.size(); i++) {
+/*            int x = level.chickens.get(i).x;
+            int y = level.chickens.get(i).y;*/
+            if (level.chickens.get(i).health <= 40) {
+                needed.add(level.chickens.get(i));
+            }
+        }
+        for (int i = 0; i < level.buffalos.size(); i++) {
+            if (level.buffalos.get(i).health <= 40) {
+                needed.add(level.buffalos.get(i));
+            }
+        }
+        for (int i = 0; i < level.turkies.size(); i++) {
+            if (level.turkies.get(i).health <= 40) {
+                needed.add(level.turkies.get(i));
+            }
+        }
+        return needed;
+
+
+    }
+
+    public void NeededFiller(Level level, ArrayList<DomesticAnimals> needed) {
+        Collections.sort(needed, (o1, o2) -> {
+            if (o1.health > o2.health) return 1;
+            return -1;
+        });
+        for (int i = 0; i < needed.size(); i++) {
+            int x = needed.get(i).x;
+            int y = needed.get(i).y;
+            if (level.map.map[x][y].grass >= 1) {
+                level.map.map[x][y].grass--;
+                needed.get(i).health = 100;
+            }
+        }
+    }
+
+    public void taskChecker(Level level) {
+        if (level.task.totalCoin >= level.task.coinObj) {
+            level.task.coinCheck = true;
+        }
+
+        if (level.chickens.size() >= level.task.chickenObj) {
+            level.task.chickenCheck = true;
+        }
+        if (level.buffalos.size() >= level.task.buffaloObj) {
+            level.task.buffaloCheck = true;
+        }
+        if (level.turkies.size() >= level.task.turkeyObj) {
+            level.task.turkeyCheck = true;
+        }
+        if (level.task.breadCounter >= level.task.breadObj) {
+            level.task.breadCheck = true;
+        }
+        if (level.task.flourCounter >= level.task.flourObj) {
+            level.task.flourCheck = true;
+        }
+        if (level.task.milkCounter >= level.task.milkObj) {
+            level.task.milkCheck = true;
+        }
+        if (level.task.cmilkCounter >= level.task.cmilkObj) {
+            level.task.cmilkCheck = true;
+        }
+        if (level.task.iceCreamCounter >= level.task.iceCreamObj) {
+            level.task.iceCreamCheck = true;
+        }
+        if (level.task.clothCounter >= level.task.clothObj) {
+            level.task.clothCheck = true;
+        }
+        if (level.task.eggCounter >= level.task.eggObj) {
+            level.task.eggCheck = true;
+        }
+        if (level.task.weaveCounter >= level.task.weaveObj) {
+            level.task.weaveCheck = true;
+        }
+        if (level.task.featherCounter >= level.task.featherObj) {
+            level.task.featherCheck = true;
+        }
+        if (level.passedTime >= level.task.timeObj) {
+            level.task.timeCheck = true;
+        }
+
+
+    }
+
+    public void MotorLoad(Level level, String name) {
+        Ingredient ingr = StringToIngr(name);
+        WildAnimals wild = StringToAnimal(name);
+        int t = 0;
+        if (ingr != null) {
+            for (int i = 0; i < level.storage.names.size(); i++) {
+                if (level.storage.names.get(i).equals(name)) {
+                    t = 1;
+                    if (level.motorCycle.capacity >= ingr.size) {
+                        level.motorCycle.capacity -= ingr.size;
+                        level.storage.names.remove(i);
+                        level.storage.quantities.remove(i);
+                        level.storage.capacity += ingr.size;
+                        level.motorCycle.names.add(name);
+                        level.motorCycle.quantities.add(1);
+                        level.motorCycle.coin += ingr.price;
+                        System.out.println(name + " loaded successfully!");
+                    } else {
+                        System.out.println("There is not enough space in the truck!");
+                    }
+                    break;
+                }
+            }
+            if (t == 0)
+                System.out.println("There is not such an ingredient.");
+        } else if (wild != null) {
+            for (int i = 0; i < level.storage.names.size(); i++) {
+                if (level.storage.names.get(i).equals(name)) {
+                    t = 1;
+                    if (level.motorCycle.capacity >= wild.capacity) {
+                        level.motorCycle.capacity -= wild.capacity;
+                        level.storage.names.remove(i);
+                        level.storage.quantities.remove(i);
+                        level.storage.capacity += wild.capacity;
+                        level.motorCycle.names.add(name);
+                        level.motorCycle.quantities.add(1);
+                        level.motorCycle.coin += wild.sellPrice;
+                        System.out.println(name + " loaded successfully!");
+                    } else {
+                        System.out.println("There is not enough space in the truck!");
+                    }
+                    break;
+                }
+            }
+            if (t == 0)
+                System.out.println("There is not such an animal.");
+        }
+        if (ingr == null && wild == null)
+            System.out.println("Please enter a valid name.");
+    }
+
+    public void MotorUnload(Level level, String name) {
+        Ingredient ingr = StringToIngr(name);
+        WildAnimals wild = StringToAnimal(name);
+        int t = 0;
+        if (ingr != null) {
+            for (int i = 0; i < level.motorCycle.names.size(); i++) {
+                if (level.motorCycle.names.get(i).equals(name)) {
+                    if (level.storage.capacity >= ingr.size) {
+                        t = 1;
+                        level.motorCycle.names.remove(i);
+                        level.motorCycle.quantities.remove(i);
+                        level.motorCycle.capacity += ingr.size;
+                        level.storage.capacity -= ingr.size;
+                        level.storage.names.add(name);
+                        level.storage.quantities.add(1);
+                        level.motorCycle.coin -= ingr.price;
+                        System.out.println(name + " unloaded successfully!");
+                    } else {
+                        System.out.println("There is not enough space in the storage.");
+                    }
+                }
+            }
+            if (t == 0) {
+                System.out.println("There is not such an ingredient.");
+            }
+        } else if (wild != null) {
+            for (int i = 0; i < level.motorCycle.names.size(); i++) {
+                if (level.motorCycle.names.get(i).equals(name)) {
+                    if (level.storage.capacity >= wild.capacity) {
+                        t = 1;
+                        level.motorCycle.names.remove(i);
+                        level.motorCycle.quantities.remove(i);
+                        level.motorCycle.capacity += wild.capacity;
+                        level.storage.capacity -= wild.capacity;
+                        level.storage.names.add(name);
+                        level.storage.quantities.add(1);
+                        level.motorCycle.coin -= wild.sellPrice;
+                        System.out.println(name + " unloaded successfully!");
+                    } else {
+                        System.out.println("There is not enough space in the storage.");
+                    }
+                }
+            }
+            if (t == 0) {
+                System.out.println("There is not such an animal.");
+            }
+        }
+        if (ingr == null)
+            System.out.println("Please enter a valid name.");
+    }
+
+    public void MotorStart(Level level) {
+        if (level.motorCycle.counter >= level.motorCycle.Max) {
+            level.motorCycle.counter = -1;
+            level.motorCycle.capacity = 10;
+            level.motorCycle.names.clear();
+            level.motorCycle.quantities.clear();
+            level.coin += level.motorCycle.coin;
+            level.task.totalCoin += level.motorCycle.coin;
+        } else if (level.motorCycle.counter >= 0)
+            level.motorCycle.counter++;
+        // check kardan por boodan truck
+
+    }
+
+    public Ingredient StringToIngr(String name) {
+        if (name.equals("bread"))
+            return new Ingredient.Bread(1, 1);
+        else if (name.equals("flour"))
+            return new Ingredient.Flour(1, 1);
+        else if (name.equals("feather"))
+            return new Ingredient.Feather(1, 1);
+        else if (name.equals("milk"))
+            return new Ingredient.Milk(1, 1);
+        else if (name.equals("cmilk"))
+            return new Ingredient.CMilk(1, 1);
+        else if (name.equals("weave"))
+            return new Ingredient.Weave(1, 1);
+        else {
+            return null;
+        }
+    }
+
+    public WildAnimals StringToAnimal(String name) {
+        if (name.equals("lion"))
+            return new WildAnimals.Lion();
+        if (name.equals("tiger"))
+            return new WildAnimals.Tiger();
+        if (name.equals("bear"))
+            return new WildAnimals.Bear();
+        else
+            return null;
+    }
+
+    public void AnimalEater(Level level) {
+        ArrayList<WildAnimals> tAnimals = new ArrayList<>();
+        for (int i = 0; i < level.lions.size(); i++) {
+            tAnimals.add(level.lions.get(i));
+        }
+        for (int i = 0; i < level.bears.size(); i++) {
+            tAnimals.add(level.bears.get(i));
+        }
+        for (int i = 0; i < level.tigers.size(); i++) {
+            tAnimals.add(level.tigers.get(i));
+        }
+
+        for (int i = 0; i < level.chickens.size(); i++) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(i).x == level.chickens.get(i).x && tAnimals.get(i).y == level.chickens.get(i).y) {
+                    level.chickens.remove(i);
+                }
+            }
+        }
+        for (int i = 0; i < level.buffalos.size(); i++) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(i).x == level.buffalos.get(i).x && tAnimals.get(i).y == level.buffalos.get(i).y) {
+                    level.buffalos.remove(i);
+                }
+            }
+        }
+        for (int i = 0; i < level.turkies.size(); i++) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(i).x == level.turkies.get(i).x && tAnimals.get(i).y == level.turkies.get(i).y) {
+                    level.turkies.remove(i);
+                }
+            }
+        }
+
+    }
+
+    public void LionAdder (Level level){
+        WildAnimals.Lion lion = new WildAnimals.Lion();
+        Random random = new Random();
+        lion.x = random.nextInt(6)+1;
+        lion.y = random.nextInt(6) +1;
+        level.lions.add(lion);
+    }
+
+    public void BearAdder (Level level){
+        WildAnimals.Bear lion = new WildAnimals.Bear();
+        Random random = new Random();
+        lion.x = random.nextInt(6)+1;
+        lion.y = random.nextInt(6) +1;
+        level.bears.add(lion);
+    }
+
+    public void TigerAdder (Level level){
+        WildAnimals.Tiger lion = new WildAnimals.Tiger();
+        Random random = new Random();
+        lion.x = random.nextInt(6)+1;
+        lion.y = random.nextInt(6) +1;
+        level.tigers.add(lion);
+    }
+
+    public void DogAction(Level level) {
+        if (level.dogs.size() > 0) {
+            for (int i = 0; i < level.dogs.size(); i++) {
+                for (int j = 0; j < level.lions.size(); j++) {
+                    if (level.dogs.get(i).x == level.lions.get(j).x && level.dogs.get(i).y == level.lions.get(j).y) {
+                        level.dogs.remove(i);
+                        level.lions.remove(j);
+                        break;
+                    }
+                }
+                for (int j = 0; j < level.bears.size(); j++) {
+                    if (level.dogs.get(i).x == level.bears.get(j).x && level.dogs.get(i).y == level.bears.get(j).y) {
+                        level.dogs.remove(i);
+                        level.bears.remove(j);
+                        break;
+                    }
+                }
+                for (int j = 0; j < level.tigers.size(); j++) {
+                    if (level.dogs.get(i).x == level.tigers.get(j).x && level.dogs.get(i).y == level.tigers.get(j).y) {
+                        level.dogs.remove(i);
+                        level.tigers.remove(j);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void CatAction(Level level) {
+        if (level.cats.size() > 0) {
+            for (int i = 0; i < level.cats.size(); i++) {
+                int x = level.cats.get(i).x;
+                int y = level.cats.get(i).y;
+                for (int j = 0; j < level.ingredients.size(); j++) {
+                    if (level.ingredients.get(j).x == x && level.ingredients.get(j).y == y) {
+                        if (level.storage.capacity >= level.ingredients.get(j).size) {
+                            level.storage.names.add(level.ingredients.get(j).name);
+                            level.storage.quantities.add(1);
+                            level.storage.capacity -= level.ingredients.get(j).size;
+                            level.ingredients.remove(j);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public void RandomDomesticAnimalMove (Level level){
         Random random = new Random();
         int a;
@@ -518,4 +1732,99 @@
                     level.tigers.get(i).x --;
             }
         }
+    }
+
+    public void UpgradeFactory (Level level, String name){
+        if (name.equals("weavefactory")){
+            if (level.coin >= level.weaveFactory.upgradePrice){
+                if (level.weaveFactory.level ==1) {
+                    level.coin -= level.weaveFactory.upgradePrice;
+                    level.weaveFactory.level++;
+                    ////
+                }
+                else
+                    System.out.println("This factory is on its maximum level!");
+            }
+            else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        }
+
+        else if (name.equals("millfactory")){
+            if (level.coin >= level.millFactory.upgradePrice){
+                if (level.millFactory.level ==1) {
+                    level.coin -= level.millFactory.upgradePrice;
+                    level.millFactory.level++;
+                    ////
+                }
+                else
+                    System.out.println("This factory is on its maximum level!");
+            }
+            else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        }
+
+        else if (name.equals("milkfactory")){
+            if (level.coin >= level.milkFactory.upgradePrice){
+                if (level.milkFactory.level ==1) {
+                    level.coin -= level.milkFactory.upgradePrice;
+                    level.milkFactory.level++;
+                    ////
+                }
+                else
+                    System.out.println("This factory is on its maximum level!");
+            }
+            else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        }
+
+        else if (name.equals("bakery")){
+            if (level.coin >= level.bakery.upgradePrice){
+                if (level.bakery.level ==1) {
+                    level.coin -= level.bakery.upgradePrice;
+                    level.bakery.level++;
+                    ////
+                }
+                else
+                    System.out.println("This factory is in its maximum level!");
+            }
+            else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        }
+
+        else if (name.equals("icefactory")){
+            if (level.coin >= level.iceFactory.upgradePrice){
+                if (level.iceFactory.level ==1) {
+                    level.coin -= level.iceFactory.upgradePrice;
+                    level.iceFactory.level++;
+                    ////
+                }
+                else
+                    System.out.println("This factory is in its maximum level!");
+            }
+            else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        }
+
+        else if (name.equals("sewingfactory")){
+            if (level.coin >= level.sewingFactory.upgradePrice){
+                if (level.sewingFactory.level ==1) {
+                    level.coin -= level.sewingFactory.upgradePrice;
+                    level.sewingFactory.level++;
+                    ////
+                }
+                else
+                    System.out.println("This factory is in its maximum level!");
+            }
+            else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        }
+
+        else
+            System.out.println("Not a valid name.");
     }
