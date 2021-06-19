@@ -1,0 +1,677 @@
+ public void FactoryCounter(Level level) throws IOException {
+        Random random = new Random();
+        int a = random.nextInt(6)+1;
+        int b= random.nextInt(6) + 1;
+        if (level.sewingFactory.existence) {
+            if (level.sewingFactory.productTime >= level.sewingFactory.maxDuration) {
+                if (level.sewingFactory.ingredientExistence) {
+                    level.sewingFactory.productTime = -1;
+                    level.sewingFactory.ingredientExistence = false;
+                    Ingredient.Cloth product = new Ingredient.Cloth(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.sewingFactory.ingredientExistence2){
+                    level.sewingFactory.productTime = -1;
+                    level.sewingFactory.ingredientExistence2 = false;
+                    Ingredient.Cloth product = new Ingredient.Cloth(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.sewingFactory.productTime > -1) {
+                if (level.sewingFactory.ingredientExistence) {
+                    level.sewingFactory.productTime += level.sewingFactory.level;
+                }
+                if (level.sewingFactory.ingredientExistence2) {
+                    level.sewingFactory.productTime ++;
+                }
+            }
+        }
+
+        if (level.millFactory.existence) {
+            if (level.millFactory.productTime >= level.millFactory.maxDuration) {
+                if (level.millFactory.ingredientExistence) {
+                    level.millFactory.productTime = -1;
+                    level.millFactory.ingredientExistence = false;
+                    Ingredient.Flour product = new Ingredient.Flour(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.millFactory.ingredientExistence2){
+                    level.millFactory.productTime = -1;
+                    level.millFactory.ingredientExistence2 = false;
+                    Ingredient.Flour product = new Ingredient.Flour(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.millFactory.productTime > -1) {
+                if (level.millFactory.ingredientExistence) {
+                    level.millFactory.productTime += level.millFactory.level;
+                }
+                if (level.millFactory.ingredientExistence2) {
+                    level.millFactory.productTime ++;
+                }
+            }
+        }
+
+        if (level.milkFactory.existence) {
+            if (level.milkFactory.productTime >= level.milkFactory.maxDuration) {
+                if (level.milkFactory.ingredientExistence) {
+                    level.milkFactory.productTime = -1;
+                    level.milkFactory.ingredientExistence = false;
+                    Ingredient.CMilk product = new Ingredient.CMilk(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.milkFactory.ingredientExistence2){
+                    level.milkFactory.productTime = -1;
+                    level.milkFactory.ingredientExistence2 = false;
+                    Ingredient.CMilk product = new Ingredient.CMilk(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.milkFactory.productTime > -1) {
+                if (level.milkFactory.ingredientExistence) {
+                    level.milkFactory.productTime += level.milkFactory.level;
+                }
+                if (level.milkFactory.ingredientExistence2) {
+                    level.milkFactory.productTime ++;
+                }
+            }
+        }
+
+        if (level.bakery.existence) {
+            if (level.bakery.productTime >= level.bakery.maxDuration) {
+                if (level.bakery.ingredientExistence) {
+                    level.bakery.productTime = -1;
+                    level.bakery.ingredientExistence = false;
+                    Ingredient.Bread product = new Ingredient.Bread(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.bakery.ingredientExistence2){
+                    level.bakery.productTime = -1;
+                    level.bakery.ingredientExistence2 = false;
+                    Ingredient.Bread product = new Ingredient.Bread(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.bakery.productTime > -1) {
+                if (level.bakery.ingredientExistence) {
+                    level.bakery.productTime += level.bakery.level;
+                }
+                if (level.bakery.ingredientExistence2) {
+                    level.bakery.productTime ++;
+                }
+            }
+        }
+
+        if (level.weaveFactory.existence) {
+            if (level.weaveFactory.productTime >= level.weaveFactory.maxDuration) {
+                if (level.weaveFactory.ingredientExistence) {
+                    level.weaveFactory.productTime = -1;
+                    level.weaveFactory.ingredientExistence = false;
+                    Ingredient.Weave product = new Ingredient.Weave(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.weaveFactory.ingredientExistence2){
+                    level.weaveFactory.productTime = -1;
+                    level.weaveFactory.ingredientExistence2 = false;
+                    Ingredient.Weave product = new Ingredient.Weave(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.weaveFactory.productTime > -1) {
+                if (level.weaveFactory.ingredientExistence) {
+                    level.weaveFactory.productTime += level.weaveFactory.level;
+                }
+                if (level.weaveFactory.ingredientExistence2) {
+                    level.weaveFactory.productTime ++;
+                }
+            }
+        }
+
+        if (level.iceFactory.existence) {
+            if (level.iceFactory.productTime >= level.iceFactory.maxDuration) {
+                if (level.iceFactory.ingredientExistence) {
+                    level.iceFactory.productTime = -1;
+                    level.iceFactory.ingredientExistence = false;
+                    Ingredient.IceCream product = new Ingredient.IceCream(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.iceFactory.ingredientExistence2){
+                    level.iceFactory.productTime = -1;
+                    level.iceFactory.ingredientExistence2 = false;
+                    Ingredient.IceCream product = new Ingredient.IceCream(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.iceFactory.productTime > -1) {
+                if (level.iceFactory.ingredientExistence) {
+                    level.iceFactory.productTime += level.iceFactory.level;
+                }
+                if (level.iceFactory.ingredientExistence2) {
+                    level.iceFactory.productTime ++;
+                }
+            }
+        }
+        save();
+    }
+public void AnimalEater(Level level) throws IOException {
+        ArrayList<WildAnimals> tAnimals = new ArrayList<>();
+        for (int i = 0; i < level.lions.size(); i++) {
+            tAnimals.add(level.lions.get(i));
+        }
+        for (int i = 0; i < level.bears.size(); i++) {
+            tAnimals.add(level.bears.get(i));
+        }
+        for (int i = 0; i < level.tigers.size(); i++) {
+            tAnimals.add(level.tigers.get(i));
+        }
+        int e= level.chickens.size();
+        for (int i = e-1; i >=0; i--) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(j).x == level.chickens.get(i).x && tAnimals.get(j).y == level.chickens.get(i).y) {
+                    level.chickens.remove(i);
+                }
+            }
+        }
+        e = level.buffalos.size();
+        for (int i = e-1; i >=0; i--) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(j).x == level.buffalos.get(i).x && tAnimals.get(j).y == level.buffalos.get(i).y) {
+                    level.buffalos.remove(i);
+                }
+            }
+        }
+        e = level.turkies.size();
+        for (int i = e-1; i >=0; i--) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(j).x == level.turkies.get(i).x && tAnimals.get(j).y == level.turkies.get(i).y) {
+                    level.turkies.remove(i);
+                }
+            }
+        }
+        e = level.ingredients.size();
+        for (int i = e-1; i>=0; i--){
+            for (int j=0 ; j< tAnimals.size(); j++){
+                if (tAnimals.get(j).x == level.ingredients.get(i).x && tAnimals.get(j).y == level.ingredients.get(i).y)
+                    level.ingredients.remove(i);
+            }
+        }
+        save();
+
+    }
+
+public void RandomWildAnimalMove(Level level) throws IOException {
+        Random random = new Random();
+        int a;
+        for (int i = 0; i < level.lions.size(); i++) {
+            if (level.lions.get(i).x > 1 && level.lions.get(i).x < 6 && level.lions.get(i).y > 1 && level.lions.get(i).y < 6) {
+                a = random.nextInt(4);
+                if (a == 0)
+                    level.lions.get(i).y--;
+                if (a == 1)
+                    level.lions.get(i).x++;
+                if (a == 2)
+                    level.lions.get(i).y++;
+                if (a == 3)
+                    level.lions.get(i).x--;
+            } else if (level.lions.get(i).x == 1 && level.lions.get(i).y > 1 && level.lions.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.lions.get(i).y--;
+                if (a == 1)
+                    level.lions.get(i).x++;
+                if (a == 2)
+                    level.lions.get(i).y++;
+            } else if (level.lions.get(i).x == 6 && level.lions.get(i).y > 1 && level.lions.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.lions.get(i).y--;
+                if (a == 1)
+                    level.lions.get(i).x--;
+                if (a == 2)
+                    level.lions.get(i).y++;
+            } else if (level.lions.get(i).x == 1 && level.lions.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.lions.get(i).y++;
+                if (a == 1)
+                    level.lions.get(i).x++;
+            } else if (level.lions.get(i).x == 1 && level.lions.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.lions.get(i).y--;
+                if (a == 1)
+                    level.lions.get(i).x++;
+            } else if (level.lions.get(i).y == 1 && level.lions.get(i).x > 1 && level.lions.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.lions.get(i).x++;
+                if (a == 1)
+                    level.lions.get(i).y++;
+                if (a == 2)
+                    level.lions.get(i).x--;
+            } else if (level.lions.get(i).y == 6 && level.lions.get(i).x > 1 && level.lions.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.lions.get(i).x++;
+                if (a == 1)
+                    level.lions.get(i).y--;
+                if (a == 2)
+                    level.lions.get(i).x--;
+            } else if (level.lions.get(i).x == 6 && level.lions.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.lions.get(i).y++;
+                if (a == 1)
+                    level.lions.get(i).x--;
+            } else if (level.lions.get(i).x == 6 && level.lions.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.lions.get(i).y--;
+                if (a == 1)
+                    level.lions.get(i).x--;
+            }
+        }
+
+        for (int i = 0; i < level.bears.size(); i++) {
+            if (level.bears.get(i).x > 1 && level.bears.get(i).x < 6 && level.bears.get(i).y > 1 && level.bears.get(i).y < 6) {
+                a = random.nextInt(4);
+                if (a == 0)
+                    level.bears.get(i).y--;
+                if (a == 1)
+                    level.bears.get(i).x++;
+                if (a == 2)
+                    level.bears.get(i).y++;
+                if (a == 3)
+                    level.bears.get(i).x--;
+            } else if (level.bears.get(i).x == 1 && level.bears.get(i).y > 1 && level.bears.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.bears.get(i).y--;
+                if (a == 1)
+                    level.bears.get(i).x++;
+                if (a == 2)
+                    level.bears.get(i).y++;
+            } else if (level.bears.get(i).x == 6 && level.bears.get(i).y > 1 && level.bears.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.bears.get(i).y--;
+                if (a == 1)
+                    level.bears.get(i).x--;
+                if (a == 2)
+                    level.bears.get(i).y++;
+            } else if (level.bears.get(i).x == 1 && level.bears.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.bears.get(i).y++;
+                if (a == 1)
+                    level.bears.get(i).x++;
+            } else if (level.bears.get(i).x == 1 && level.bears.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.bears.get(i).y--;
+                if (a == 1)
+                    level.bears.get(i).x++;
+            } else if (level.bears.get(i).y == 1 && level.bears.get(i).x > 1 && level.bears.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.bears.get(i).x++;
+                if (a == 1)
+                    level.bears.get(i).y++;
+                if (a == 2)
+                    level.bears.get(i).x--;
+            } else if (level.bears.get(i).y == 6 && level.bears.get(i).x > 1 && level.bears.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.bears.get(i).x++;
+                if (a == 1)
+                    level.bears.get(i).y--;
+                if (a == 2)
+                    level.bears.get(i).x--;
+            } else if (level.bears.get(i).x == 6 && level.bears.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.bears.get(i).y++;
+                if (a == 1)
+                    level.bears.get(i).x--;
+            } else if (level.bears.get(i).x == 6 && level.bears.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.bears.get(i).y--;
+                if (a == 1)
+                    level.bears.get(i).x--;
+            }
+        }
+
+        for (int i = 0; i < level.tigers.size(); i++) {
+            if (level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(4);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+                if (a == 3)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+            } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y++;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+            } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+            } else if (level.tigers.get(i).y == 1 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).x++;
+                if (a == 1)
+                    level.tigers.get(i).y++;
+                if (a == 2)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).y == 6 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).x++;
+                if (a == 1)
+                    level.tigers.get(i).y--;
+                if (a == 2)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y++;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+            }
+            AnimalEater(level);
+            if (level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(4);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+                if (a == 3)
+                    level.tigers.get(i).x--;
+            }
+            else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+            } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y++;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+            } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+            } else if (level.tigers.get(i).y == 1 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).x++;
+                if (a == 1)
+                    level.tigers.get(i).y++;
+                if (a == 2)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).y == 6 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).x++;
+                if (a == 1)
+                    level.tigers.get(i).y--;
+                if (a == 2)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y++;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+            }
+        }
+        save();
+    }
+
+    public void UpgradeFactory(Level level, String name) throws IOException {
+        if (name.equals("weavefactory")) {
+            if (level.coin >= level.weaveFactory.upgradePrice) {
+                if (level.weaveFactory.level == 1) {
+                    level.coin -= level.weaveFactory.upgradePrice;
+                    level.weaveFactory.level++;
+                    ////
+                } else
+                    System.out.println("This factory is on its maximum level!");
+            } else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        } else if (name.equals("millfactory")) {
+            if (level.coin >= level.millFactory.upgradePrice) {
+                if (level.millFactory.level == 1) {
+                    level.coin -= level.millFactory.upgradePrice;
+                    level.millFactory.level++;
+                    ////
+                } else
+                    System.out.println("This factory is on its maximum level!");
+            } else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        } else if (name.equals("milkfactory")) {
+            if (level.coin >= level.milkFactory.upgradePrice) {
+                if (level.milkFactory.level == 1) {
+                    level.coin -= level.milkFactory.upgradePrice;
+                    level.milkFactory.level++;
+                    ////
+                } else
+                    System.out.println("This factory is on its maximum level!");
+            } else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        } else if (name.equals("bakery")) {
+            if (level.coin >= level.bakery.upgradePrice) {
+                if (level.bakery.level == 1) {
+                    level.coin -= level.bakery.upgradePrice;
+                    level.bakery.level++;
+                    ////
+                } else
+                    System.out.println("This factory is in its maximum level!");
+            } else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        } else if (name.equals("icefactory")) {
+            if (level.coin >= level.iceFactory.upgradePrice) {
+                if (level.iceFactory.level == 1) {
+                    level.coin -= level.iceFactory.upgradePrice;
+                    level.iceFactory.level++;
+                    ////
+                } else
+                    System.out.println("This factory is in its maximum level!");
+            } else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        } else if (name.equals("sewingfactory")) {
+            if (level.coin >= level.sewingFactory.upgradePrice) {
+                if (level.sewingFactory.level == 1) {
+                    level.coin -= level.sewingFactory.upgradePrice;
+                    level.sewingFactory.level++;
+                    ////
+                } else
+                    System.out.println("This factory is in its maximum level!");
+            } else {
+                System.out.println("Not enough coin to upgrade!");
+            }
+        } else
+            System.out.println("Not a valid name.");
+        save();
+    }
+
+    public void ProcessedAnimalMove (Level level) throws IOException {
+        int t = 0;
+        for (int i =0; i <level.map.length; i++) {
+            for (int j = 0; j < level.map.height; j++) {
+                if (level.map.map[i][j].grass > 0) {
+                    t=1;
+                    break;
+                }
+            }
+            if (t==1)
+                break;
+        }
+        if (t==1) {
+            for (int i = 0; i < level.chickens.size(); i++) {
+                Cell closestCell = ClosestGrass(level, level.chickens.get(i));
+                if (level.chickens.get(i).x > closestCell.x){
+                    level.chickens.get(i).x--;
+                }
+                else if (level.chickens.get(i).x < closestCell.x){
+                    level.chickens.get(i).x++;
+                }
+                else if (level.chickens.get(i).x == closestCell.x) {
+                    if (level.chickens.get(i).y > closestCell.y) {
+                        level.chickens.get(i).y--;
+                    } else if (level.chickens.get(i).y < closestCell.y) {
+                        level.chickens.get(i).y++;
+                    }
+                }
+            }
+            for (int i = 0; i < level.buffalos.size(); i++) {
+                Cell closestCell = ClosestGrass(level, level.buffalos.get(i));
+                if (level.buffalos.get(i).x > closestCell.x){
+                    level.buffalos.get(i).x--;
+                }
+                else if (level.buffalos.get(i).x < closestCell.x){
+                    level.buffalos.get(i).x++;
+                }
+                else if (level.buffalos.get(i).x == closestCell.x) {
+                    if (level.buffalos.get(i).y > closestCell.y) {
+                        level.buffalos.get(i).y--;
+                    } else if (level.buffalos.get(i).y < closestCell.y) {
+                        level.buffalos.get(i).y++;
+                    }
+                }
+            }
+            for (int i = 0; i < level.turkies.size(); i++) {
+                Cell closestCell = ClosestGrass(level, level.turkies.get(i));
+                if (level.turkies.get(i).x > closestCell.x){
+                    level.turkies.get(i).x--;
+                }
+                else if (level.turkies.get(i).x < closestCell.x){
+                    level.turkies.get(i).x++;
+                }
+                else if (level.turkies.get(i).x == closestCell.x) {
+                    if (level.turkies.get(i).y > closestCell.y) {
+                        level.turkies.get(i).y--;
+                    } else if (level.turkies.get(i).y < closestCell.y) {
+                        level.turkies.get(i).y++;
+                    }
+                }
+            }
+            for (int i = 0; i < level.cats.size(); i++) {
+                Cell closestCell = ClosestGrassC(level, level.cats.get(i));
+                if (level.cats.get(i).x > closestCell.x){
+                    level.cats.get(i).x--;
+                }
+                else if (level.cats.get(i).x < closestCell.x){
+                    level.cats.get(i).x++;
+                }
+                else if (level.cats.get(i).x == closestCell.x) {
+                    if (level.cats.get(i).y > closestCell.y) {
+                        level.cats.get(i).y--;
+                    } else if (level.cats.get(i).y < closestCell.y) {
+                        level.cats.get(i).y++;
+                    }
+                }
+            }
+        }
+        save();
+    }
+
+    public Cell ClosestGrass (Level level, DomesticAnimals animal) {
+        int min = 100000;
+        int minIndexX = -1;
+        int minIndexY = -1;
+        int distance = 0;
+        for (int i =0; i <level.map.length; i++){
+            for (int j= 0; j < level.map.height ; j++){
+                if (level.map.map[i][j].grass > 0){
+                    distance = Math.abs(level.map.map[i][j].x - animal.x) + Math.abs(level.map.map[i][j].y - animal.y);
+                    if (min > distance) {
+                        min = distance;
+                        minIndexX = i;
+                        minIndexY = j;
+                    }
+                }
+            }
+        }
+        return level.map.map[minIndexX][ minIndexY];
+    }
+
+    public Cell ClosestGrassC (Level level, SpecialAnimals animal) {
+        int min = 100000;
+        int minIndexX = -1;
+        int minIndexY = -1;
+        int distance = 0;
+        for (int i =0; i <level.map.length; i++){
+            for (int j= 0; j < level.map.height ; j++){
+                if (level.map.map[i][j].grass > 0){
+                    distance = Math.abs(level.map.map[i][j].x - animal.x) + Math.abs(level.map.map[i][j].y - animal.y);
+                    if (min > distance) {
+                        min = distance;
+                        minIndexX = i;
+                        minIndexY = j;
+                    }
+                }
+            }
+        }
+        return level.map.map[minIndexX][ minIndexY];
+    }
