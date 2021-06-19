@@ -1,4 +1,5 @@
 import Animals.DomesticAnimals;
+import Animals.SpecialAnimals;
 import Animals.WildAnimals;
 import LevelDesign.*;
 import com.google.gson.Gson;
@@ -112,8 +113,8 @@ public class Manager {
     public void Expirings(Level level) throws IOException {
         Date date = new Date();
         int e = level.ingredients.size();
-        for (int i = e-1; i >=0; i--) {
-            if (level.ingredients.get(i).expire == 0) {
+        for (int i = e - 1; i >= 0; i--) {
+            if (level.ingredients.get(i).expire == 1) {
                 log += ("[info] " + date + " " + level.ingredients.get(i).name + " x: " + level.ingredients.get(i).x + " y: " + level.ingredients.get(i).y);
                 logWriter();
                 level.ingredients.remove(i);
@@ -334,6 +335,7 @@ public class Manager {
                                     Ingredient.Egg feather = new Ingredient.Egg(1, 1);
                                     level.storage.capacity -= feather.size;
                                     level.millFactory.ingredientExistence = true;
+                                    level.millFactory.ingredientExistence2 = false;
                                     // Production
                                 }
                             }
@@ -357,6 +359,7 @@ public class Manager {
                                         Ingredient.Egg feather = new Ingredient.Egg(1, 1);
                                         level.storage.capacity -= feather.size;
                                         level.millFactory.ingredientExistence2 = true;
+                                        level.millFactory.ingredientExistence = false;
                                     }
                                 }
                             }
@@ -370,6 +373,7 @@ public class Manager {
                                         Ingredient.Egg feather = new Ingredient.Egg(1, 1);
                                         level.storage.capacity -= feather.size;
                                         level.millFactory.ingredientExistence = true;
+                                        level.millFactory.ingredientExistence2 = false;
                                     }
                                 }
                             }
@@ -729,19 +733,19 @@ public class Manager {
 
     public void CageEnd(Level level) throws IOException {
         int e = level.lions.size();
-        for (int i = e-1; i >=0; i--) {
+        for (int i = e - 1; i >= 0; i--) {
             if (level.lions.get(i).inCageCounter == 5) {
                 level.lions.remove(i);
             }
         }
         e = level.bears.size();
-        for (int i = e-1; i >=0; i--) {
+        for (int i = e - 1; i >= 0; i--) {
             if (level.bears.get(i).inCageCounter == 5) {
                 level.bears.remove(i);
             }
         }
         e = level.tigers.size();
-        for (int i = e-1; i >=0; i--){
+        for (int i = e - 1; i >= 0; i--) {
             if (level.tigers.get(i).inCageCounter == 5) {
                 level.tigers.remove(i);
             }
@@ -783,85 +787,15 @@ public class Manager {
         save();
     }
 
-    public void FactoryCounter(Level level) throws IOException {
-        if (level.sewingFactory.existence && level.sewingFactory.ingredientExistence) {
-            if (level.sewingFactory.productTime >= level.sewingFactory.maxDuration) {
-                level.sewingFactory.productTime = -1;
-                level.sewingFactory.ingredientExistence = false;
-                Ingredient.Cloth product = new Ingredient.Cloth(1, 1);
-                level.ingredients.add(product);
-            } else if (level.sewingFactory.productTime > -1) {
-                level.sewingFactory.productTime++;
-            }
-        }
-        if (level.millFactory.existence && level.millFactory.ingredientExistence) {
-            if (level.millFactory.productTime >= level.millFactory.maxDuration) {
-                level.millFactory.productTime = -1;
-                level.millFactory.ingredientExistence = false;
-                Ingredient.Flour product = new Ingredient.Flour(1, 1);
-                level.ingredients.add(product);
-            } else if (level.millFactory.productTime > -1) {
-                level.millFactory.productTime++;
-            }
-        }
-        if (level.milkFactory.existence && level.milkFactory.ingredientExistence) {
-            if (level.milkFactory.productTime >= level.milkFactory.maxDuration) {
-                level.milkFactory.productTime = -1;
-                level.milkFactory.ingredientExistence = false;
-                Ingredient.Milk product = new Ingredient.Milk(1, 1);
-                level.ingredients.add(product);
-            } else if (level.milkFactory.productTime > -1) {
-                level.milkFactory.productTime++;
-            }
-        }
-
-        if (level.bakery.existence && level.bakery.ingredientExistence) {
-            if (level.bakery.productTime >= level.bakery.maxDuration) {
-                level.bakery.productTime = -1;
-                level.bakery.ingredientExistence = false;
-                Ingredient.Bread product = new Ingredient.Bread(1, 1);
-                level.ingredients.add(product);
-            } else if (level.bakery.productTime > -1) {
-                level.bakery.productTime++;
-            }
-        }
-
-        if (level.weaveFactory.existence && level.weaveFactory.ingredientExistence) {
-            if (level.weaveFactory.productTime >= level.weaveFactory.maxDuration) {
-                level.weaveFactory.productTime = -1;
-                level.weaveFactory.ingredientExistence = false;
-                Ingredient.Weave product = new Ingredient.Weave(1, 1);
-                level.ingredients.add(product);
-            } else if (level.weaveFactory.productTime > -1) {
-                level.weaveFactory.productTime++;
-            }
-        }
-
-        if (level.iceFactory.existence && level.iceFactory.ingredientExistence) {
-            if (level.iceFactory.productTime >= level.iceFactory.maxDuration) {
-                level.iceFactory.productTime = -1;
-                level.iceFactory.ingredientExistence = false;
-                Ingredient.IceCream product = new Ingredient.IceCream(1, 1);
-                level.ingredients.add(product);
-            } else if (level.iceFactory.productTime > -1) {
-                level.iceFactory.productTime++;
-            }
-        }
-        save();
-    }
-
     public void AnimalCounter(Level level) throws IOException {
         int e = level.chickens.size();
-        for (int i = e-1; i >=0; i--) {
-            if (level.chickens.get(i).time >= level.chickens.get(i).productTime-1) {
+        for (int i = e - 1; i >= 0; i--) {
+            if (level.chickens.get(i).time >= level.chickens.get(i).productTime - 1) {
                 int a = level.chickens.get(i).x;
                 int b = level.chickens.get(i).y;
-                System.out.println("a : " + a);
-                System.out.println("b : " + b);
                 level.chickens.get(i).time = -1;
                 Ingredient.Egg egg = new Ingredient.Egg(a, b);
                 level.ingredients.add(egg);
-                System.out.println("added");
             } else {
                 level.chickens.get(i).time++;
             }
@@ -871,8 +805,8 @@ public class Manager {
             }
         }
         e = level.buffalos.size();
-        for (int i = e-1; i >=0; i--) {
-            if (level.buffalos.get(i).time >= level.buffalos.get(i).productTime-1) {
+        for (int i = e - 1; i >= 0; i--) {
+            if (level.buffalos.get(i).time >= level.buffalos.get(i).productTime - 1) {
                 int a = level.buffalos.get(i).x;
                 int b = level.buffalos.get(i).y;
                 level.buffalos.get(i).time = -1;
@@ -887,8 +821,8 @@ public class Manager {
             }
         }
         e = level.turkies.size();
-        for (int i = e-1; i >=0; i--) {
-            if (level.turkies.get(i).time >= level.turkies.get(i).productTime-1) {
+        for (int i = e - 1; i >= 0; i--) {
+            if (level.turkies.get(i).time >= level.turkies.get(i).productTime - 1) {
                 int a = level.turkies.get(i).x;
                 int b = level.turkies.get(i).y;
                 level.turkies.get(i).time = -1;
@@ -938,8 +872,8 @@ public class Manager {
         for (int i = 0; i < needed.size(); i++) {
             int x = needed.get(i).x;
             int y = needed.get(i).y;
-            if (level.map.map[x-1][y-1].grass >= 1) {
-                level.map.map[x-1][y-1].grass--;
+            if (level.map.map[x - 1][y - 1].grass >= 1) {
+                level.map.map[x - 1][y - 1].grass--;
                 needed.get(i).health = 100;
             }
         }
@@ -1001,7 +935,7 @@ public class Manager {
         int t = 0;
         if (ingr != null) {
             int e = level.storage.names.size();
-            for (int i = e-1; i >=0; i--) {
+            for (int i = e - 1; i >= 0; i--) {
                 if (level.storage.names.get(i).equals(name)) {
                     t = 1;
                     if (level.motorCycle.capacity >= ingr.size) {
@@ -1023,7 +957,7 @@ public class Manager {
                 System.out.println("There is not such an ingredient.");
         } else if (wild != null) {
             int e = level.storage.names.size();
-            for (int i = e-1; i >=0; i--) {
+            for (int i = e - 1; i >= 0; i--) {
                 if (level.storage.names.get(i).equals(name)) {
                     t = 1;
                     if (level.motorCycle.capacity >= wild.capacity) {
@@ -1055,7 +989,7 @@ public class Manager {
         int t = 0;
         if (ingr != null) {
             int e = level.storage.names.size();
-            for (int i = e-1; i >=0; i--) {
+            for (int i = e - 1; i >= 0; i--) {
                 if (level.motorCycle.names.get(i).equals(name)) {
                     if (level.storage.capacity >= ingr.size) {
                         t = 1;
@@ -1077,7 +1011,7 @@ public class Manager {
             }
         } else if (wild != null) {
             int e = level.storage.names.size();
-            for (int i = e-1; i >=0; i--) {
+            for (int i = e - 1; i >= 0; i--) {
                 if (level.motorCycle.names.get(i).equals(name)) {
                     if (level.storage.capacity >= wild.capacity) {
                         t = 1;
@@ -1122,28 +1056,22 @@ public class Manager {
         if (name.equals("bread")) {
             save();
             return new Ingredient.Bread(1, 1);
-        }
-        else if (name.equals("flour")) {
+        } else if (name.equals("flour")) {
             save();
             return new Ingredient.Flour(1, 1);
-        }
-        else if (name.equals("feather")) {
+        } else if (name.equals("feather")) {
             save();
             return new Ingredient.Feather(1, 1);
-        }
-        else if (name.equals("milk")) {
+        } else if (name.equals("milk")) {
             save();
             return new Ingredient.Milk(1, 1);
-        }
-        else if (name.equals("cmilk")) {
+        } else if (name.equals("cmilk")) {
             save();
             return new Ingredient.CMilk(1, 1);
-        }
-        else if (name.equals("weave")) {
+        } else if (name.equals("weave")) {
             save();
             return new Ingredient.Weave(1, 1);
-        }
-        else {
+        } else {
             return null;
         }
 
@@ -1152,57 +1080,17 @@ public class Manager {
     public WildAnimals StringToAnimal(String name) throws IOException {
         if (name.equals("lion")) {
             save();
-            return new WildAnimals.Lion();
+            return new WildAnimals.Lion(1,1);
         }
         if (name.equals("tiger")) {
             save();
-            return new WildAnimals.Tiger();
+            return new WildAnimals.Tiger(1,1);
         }
         if (name.equals("bear")) {
             save();
-            return new WildAnimals.Bear();
-        }
-        else
+            return new WildAnimals.Bear(1,1);
+        } else
             return null;
-    }
-
-    public void AnimalEater(Level level) throws IOException {
-        ArrayList<WildAnimals> tAnimals = new ArrayList<>();
-        for (int i = 0; i < level.lions.size(); i++) {
-            tAnimals.add(level.lions.get(i));
-        }
-        for (int i = 0; i < level.bears.size(); i++) {
-            tAnimals.add(level.bears.get(i));
-        }
-        for (int i = 0; i < level.tigers.size(); i++) {
-            tAnimals.add(level.tigers.get(i));
-        }
-        int e= level.chickens.size();
-        for (int i = e-1; i >=0; i--) {
-            for (int j = 0; j < tAnimals.size(); j++) {
-                if (tAnimals.get(j).x == level.chickens.get(i).x && tAnimals.get(j).y == level.chickens.get(i).y) {
-                    level.chickens.remove(i);
-                }
-            }
-        }
-        e = level.buffalos.size();
-        for (int i = e-1; i >=0; i--) {
-            for (int j = 0; j < tAnimals.size(); j++) {
-                if (tAnimals.get(j).x == level.buffalos.get(i).x && tAnimals.get(j).y == level.buffalos.get(i).y) {
-                    level.buffalos.remove(i);
-                }
-            }
-        }
-        e = level.turkies.size();
-        for (int i = e-1; i >=0; i--) {
-            for (int j = 0; j < tAnimals.size(); j++) {
-                if (tAnimals.get(j).x == level.turkies.get(i).x && tAnimals.get(j).y == level.turkies.get(i).y) {
-                    level.turkies.remove(i);
-                }
-            }
-        }
-        save();
-
     }
 
     public void DogAction(Level level) throws IOException {
@@ -1255,27 +1143,122 @@ public class Manager {
     }
 
     public void LionAdder(Level level) {
-        WildAnimals.Lion lion = new WildAnimals.Lion();
         Random random = new Random();
-        lion.x = random.nextInt(6) + 1;
-        lion.y = random.nextInt(6) + 1;
+        int a = random.nextInt(6) + 1;
+        int b = random.nextInt(6) + 1;
+        WildAnimals.Lion lion = new WildAnimals.Lion(a,b);
         level.lions.add(lion);
     }
 
     public void BearAdder(Level level) {
-        WildAnimals.Bear lion = new WildAnimals.Bear();
         Random random = new Random();
-        lion.x = random.nextInt(6) + 1;
-        lion.y = random.nextInt(6) + 1;
+        int a = random.nextInt(6) + 1;
+        int b = random.nextInt(6) + 1;
+        WildAnimals.Bear lion = new WildAnimals.Bear(a,b);
         level.bears.add(lion);
     }
 
     public void TigerAdder(Level level) {
-        WildAnimals.Tiger lion = new WildAnimals.Tiger();
         Random random = new Random();
-        lion.x = random.nextInt(6) + 1;
-        lion.y = random.nextInt(6) + 1;
+        int a = random.nextInt(6) + 1;
+        int b = random.nextInt(6) + 1;
+        WildAnimals.Tiger lion = new WildAnimals.Tiger(a,b);
         level.tigers.add(lion);
+    }
+
+    public void wildAnimalAddTimeChecker(Level level) {
+        Random random = new Random();
+        if (level.task.timeCounter == level.wildAnimalAddTimer1 && level.wildAnimalAddTimer1 != 10000) {
+            int a = random.nextInt(3) + 1;
+            if (a == 1) {
+                LionAdder(level);
+
+            } else if (a == 2) {
+                BearAdder(level);
+
+            } else if (a == 3) {
+                TigerAdder(level);
+
+            }
+        }
+        if (level.task.timeCounter >= level.wildAnimalAddTimer2 && level.wildAnimalAddTimer2 != 10000) {
+            int a = random.nextInt(3) + 1;
+            if (a == 1) {
+                LionAdder(level);
+
+            } else if (a == 2) {
+                BearAdder(level);
+
+            } else if (a == 3) {
+                TigerAdder(level);
+
+            }
+        }
+        if (level.task.timeCounter >= level.wildAnimalAddTimer3 && level.wildAnimalAddTimer3 != 10000) {
+            int a = random.nextInt(3) + 1;
+            if (a == 1) {
+                LionAdder(level);
+
+            } else if (a == 2) {
+                BearAdder(level);
+
+            } else if (a == 3) {
+                TigerAdder(level);
+
+            }
+        }
+        if (level.task.timeCounter >= level.wildAnimalAddTimer4 && level.wildAnimalAddTimer4 != 10000) {
+            int a = random.nextInt(3) + 1;
+            if (a == 1) {
+                LionAdder(level);
+
+            } else if (a == 2) {
+                BearAdder(level);
+
+            } else if (a == 3) {
+                TigerAdder(level);
+
+            }
+        }
+        if (level.task.timeCounter >= level.wildAnimalAddTimer5 && level.wildAnimalAddTimer5 != 10000) {
+            int a = random.nextInt(3) + 1;
+            if (a == 1) {
+                LionAdder(level);
+
+            } else if (a == 2) {
+                BearAdder(level);
+
+            } else if (a == 3) {
+                TigerAdder(level);
+
+            }
+        }
+        if (level.task.timeCounter >= level.wildAnimalAddTimer6 && level.wildAnimalAddTimer6 != 10000) {
+            int a = random.nextInt(3) + 1;
+            if (a == 1) {
+                LionAdder(level);
+
+            } else if (a == 2) {
+                BearAdder(level);
+
+            } else if (a == 3) {
+                TigerAdder(level);
+
+            }
+        }
+        if (level.task.timeCounter >= level.wildAnimalAddTimer7 && level.wildAnimalAddTimer7 != 10000) {
+            int a = random.nextInt(3) + 1;
+            if (a == 1) {
+                LionAdder(level);
+
+            } else if (a == 2) {
+                BearAdder(level);
+
+            } else if (a == 3) {
+                TigerAdder(level);
+
+            }
+        }
     }
 
     public void RandomDomesticAnimalMove(Level level) throws IOException {
@@ -1488,7 +1471,1157 @@ public class Manager {
                     level.turkies.get(i).x--;
             }
         }
+
+        for (int i = 0; i < level.cats.size(); i++) {
+            if (level.cats.get(i).x > 1 && level.cats.get(i).x < 6 && level.cats.get(i).y > 1 && level.cats.get(i).y < 6) {
+                a = random.nextInt(4);
+                if (a == 0)
+                    level.cats.get(i).y--;
+                if (a == 1)
+                    level.cats.get(i).x++;
+                if (a == 2)
+                    level.cats.get(i).y++;
+                if (a == 3)
+                    level.cats.get(i).x--;
+            } else if (level.cats.get(i).x == 1 && level.cats.get(i).y > 1 && level.cats.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.cats.get(i).y--;
+                if (a == 1)
+                    level.cats.get(i).x++;
+                if (a == 2)
+                    level.cats.get(i).y++;
+            } else if (level.cats.get(i).x == 6 && level.cats.get(i).y > 1 && level.cats.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.cats.get(i).y--;
+                if (a == 1)
+                    level.cats.get(i).x--;
+                if (a == 2)
+                    level.cats.get(i).y++;
+            } else if (level.cats.get(i).x == 1 && level.cats.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.cats.get(i).y++;
+                if (a == 1)
+                    level.cats.get(i).x++;
+            } else if (level.cats.get(i).x == 1 && level.cats.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.cats.get(i).y--;
+                if (a == 1)
+                    level.cats.get(i).x++;
+            } else if (level.cats.get(i).y == 1 && level.cats.get(i).x > 1 && level.cats.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.cats.get(i).x++;
+                if (a == 1)
+                    level.cats.get(i).y++;
+                if (a == 2)
+                    level.cats.get(i).x--;
+            } else if (level.cats.get(i).y == 6 && level.cats.get(i).x > 1 && level.cats.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.cats.get(i).x++;
+                if (a == 1)
+                    level.cats.get(i).y--;
+                if (a == 2)
+                    level.cats.get(i).x--;
+            } else if (level.cats.get(i).x == 6 && level.cats.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.cats.get(i).y++;
+                if (a == 1)
+                    level.cats.get(i).x--;
+            } else if (level.cats.get(i).x == 6 && level.turkies.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.cats.get(i).y--;
+                if (a == 1)
+                    level.cats.get(i).x--;
+            }
+        }
         save();
+    }
+
+
+
+
+
+
+
+
+
+    public boolean tasksChecker(Level level) throws IOException {
+        level.task.chickenCounter = level.chickens.size();
+        level.task.turkeyCounter = level.turkies.size();
+        level.task.buffaloCounter = level.buffalos.size();
+
+        boolean taskCheck = false;
+
+        if (level.task.totalCoin >= level.task.coinObj && level.task.coinObj != 10000) {
+            level.task.coinCheck = true;
+            level.task.taskCounter++;
+        }
+
+        if (level.chickens.size() >= level.task.chickenObj && level.task.chickenObj != 10000 && !level.task.chickenCheck) {
+            level.task.chickenCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.buffalos.size() >= level.task.buffaloObj && level.task.buffaloObj != 10000) {
+            level.task.buffaloCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.turkies.size() >= level.task.turkeyObj && level.task.turkeyObj != 10000) {
+            level.task.turkeyCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.breadCounter >= level.task.breadObj && level.task.breadObj != 10000) {
+            level.task.breadCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.flourCounter >= level.task.flourObj && level.task.flourObj != 10000) {
+            level.task.flourCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.milkCounter >= level.task.milkObj && level.task.milkObj != 10000) {
+            level.task.milkCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.cmilkCounter >= level.task.cmilkObj & level.task.cmilkObj != 10000) {
+            level.task.cmilkCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.iceCreamCounter >= level.task.iceCreamObj && level.task.iceCreamObj != 10000) {
+            level.task.iceCreamCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.clothCounter >= level.task.clothObj && level.task.clothObj != 10000) {
+            level.task.clothCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.eggCounter >= level.task.eggObj && level.task.eggObj != 10000) {
+            level.task.eggCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.weaveCounter >= level.task.weaveObj && level.task.weaveObj != 10000) {
+            level.task.weaveCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.task.featherCounter >= level.task.featherObj && level.task.featherObj != 10000) {
+            level.task.featherCheck = true;
+            level.task.taskCounter++;
+        }
+        if (level.passedTime >= level.task.timeObj && level.task.timeObj != 10000) {
+            level.task.timeCheck = true;
+            level.task.taskCounter++;
+        }
+
+        if (level.task.taskCounter == level.task.taskObj) {
+            System.out.println(ANSI_YELLOW + "All tasks done! You won!" + ANSI_RESET);
+            taskCheck = true;
+
+        }
+        save();
+        return taskCheck;
+
+    }
+
+    public void readUsersInfo() throws IOException {
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += "/usersInfo.json";
+        File file2 = new File(absolutePath);
+        if (file2.exists()) {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get("usersInfo.json"));
+            Users.clear();
+            List<LoginUser> temp = Arrays.asList(gson.fromJson(reader, LoginUser[].class));
+            Users.addAll(temp);
+            reader.close();
+        }
+
+    }
+
+    public boolean usernameCheck(String username) throws IOException {
+
+        boolean found = false;
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += "/usersInfo.json";
+        File file2 = new File(absolutePath);
+        if (file2.exists()) {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get("usersInfo.json"));
+            Users.clear();
+            List<LoginUser> temp = Arrays.asList(gson.fromJson(reader, LoginUser[].class));
+            Users.addAll(temp);
+            reader.close();
+            for (LoginUser u : Users) {
+                if (u.username.equals(username)) {
+                    found = true;
+                }
+            }
+        }
+        if (!found) {
+        }
+        return found;
+    }
+
+    public void signUp(String username, String password) throws IOException {
+        LoginUser user = new LoginUser(username, password);
+        Users.add(user);
+
+        Gson gson = new Gson();
+        Writer writer = Files.newBufferedWriter(Paths.get("usersInfo.json"));
+        gson.toJson(Users, writer);
+        writer.close();
+
+    }
+
+    public boolean login(String username, String password) throws IOException {
+        readUsersInfo();
+        boolean flag = false;
+        for (LoginUser u : Users) {
+            if (u.username.equals(username)) {
+                if (u.password.equals(password)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+
+
+    }
+
+    public void save() throws IOException {
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        for (Level l : levels) {
+            if (l.levelNumber == 1) {
+                absolutePath += "/LevelsInfo" + l.playerName + ".json";
+                break;
+            }
+        }
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(levels, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public boolean levelCheck(String username, int levelNumber) throws IOException {
+        boolean level_check = false;
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += "/LevelsInfo" + username + ".json";
+        File file2 = new File(absolutePath);
+        if (file2.exists()) {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get(absolutePath));
+            List<Level> temp = Arrays.asList(gson.fromJson(reader, Level[].class));
+            levels.clear();
+            levels.addAll(temp);
+
+            for (Level l : levels) {
+                if (levelNumber == l.levelNumber) {
+                    level_check = true;
+                    break;
+                }
+            }
+            if (!level_check) {
+                System.out.println(ANSI_RED + "This level has not been unlocked yet!" + ANSI_RESET);
+                System.out.println("Your unlocked levels are: ");
+                int max = 1;
+                for (Level l : levels) {
+                    if (l.levelNumber > 1) {
+                        max = l.levelNumber;
+                    }
+                }
+                for (int i = 1; i <= max; i++) {
+                    System.out.print(i);
+                    if (i != levels.size()) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.println();
+            }
+
+        } else {
+            if (levelNumber != 1) {
+                System.out.println(ANSI_RED + "You have to start the game from the beginning!" + ANSI_RESET);
+            }
+            if (levelNumber == 1) {
+
+                Level level = new Level();
+                level = readBasicLevelInfo(level, 1);
+                level.playerName = username;
+                level.levelStarted = false;
+                levels.add(level);
+                for (Level l : levels) {
+                    System.out.println(l.levelNumber);
+                }
+                save();
+                level_check = true;
+            }
+
+        }
+        save();
+
+        return level_check;
+
+    }
+
+    public Level levelReturner(int levelNumber) throws IOException {
+        for (Level l : levels) {
+            if (l.levelNumber == levelNumber) {
+                save();
+                return l;
+            }
+        }
+        save();
+        return null;
+    }
+
+    public Level levelEnd(Level playerLevel) throws IOException {
+        for (Level l : levels) {
+            if (l.levelNumber == (playerLevel.levelNumber + 1)) {
+                playerLevel.levelEnd = true;
+                playerLevel.levelStarted = true;
+                save();
+                return l;
+            }
+        }
+        Level newLevel = new Level();
+        newLevel = readBasicLevelInfo(newLevel, playerLevel.levelNumber + 1);
+        playerLevel.levelEnd = true;
+        playerLevel.levelStarted = true;
+        newLevel.levelStarted = false;
+        newLevel.levelEnd = false;
+        levels.add(newLevel);
+        save();
+        return newLevel;
+    }
+
+    public Level newLevel(int levelNumber, Level level) throws IOException {
+
+        for (Level l : levels) {
+            if (l.levelNumber == levelNumber) {
+                levels.remove(l);
+                break;
+            }
+        }
+        Level newLevel = new Level();
+        newLevel = readBasicLevelInfo(newLevel, levelNumber);
+        newLevel.playerName = level.playerName;
+        newLevel.levelNumber = levelNumber;
+        newLevel.levelStarted = false;
+        newLevel.levelEnd = false;
+        levels.add(newLevel);
+
+        save();
+        return newLevel;
+    }
+
+    public void writeBasicLevel1Info() throws IOException {
+
+        Level level = new Level();
+        level.levelNumber = 1;
+        level.coin = 500;
+        Random random1 = new Random();
+
+        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        DomesticAnimals.Chicken chicken2 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        level.chickens.add(chicken1);
+        level.chickens.add(chicken2);
+        level.bucket.full = true;
+        level.bucket.capacity = 5;
+
+        //task
+        level.task.taskCounter = 0;
+        level.task.taskObj = 2;
+        level.task.eggObj = 6;
+        level.task.timeObj = 10;
+        level.wildAnimalAddTimer1 = 4;
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + level.levelNumber + ".json");
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(level, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public void writeBasicLevel2Info() throws IOException {
+        Level level = new Level();
+        level.levelNumber = 2;
+        level.coin = 500;
+        Random random1 = new Random();
+        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        DomesticAnimals.Chicken chicken2 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+
+        level.chickens.add(chicken1);
+        level.chickens.add(chicken2);
+        level.bucket.full = true;
+        level.bucket.capacity = 5;
+        level.wildAnimalAddTimer1 = 4;
+        level.wildAnimalAddTimer2 = 8;
+
+
+        //task
+        level.task.taskCounter = 0;
+        level.task.eggObj = 6;
+        level.task.chickenObj = 4;
+        level.task.taskObj = 2;
+        level.task.timeObj = 14;
+
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + level.levelNumber + ".json");
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(level, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public void writeBasicLevel3Info() throws IOException {
+        Level level = new Level();
+        level.levelNumber = 3;
+        level.coin = 300;
+        Random random1 = new Random();
+
+        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        DomesticAnimals.Chicken chicken2 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        DomesticAnimals.Turkey turkey = new DomesticAnimals.Turkey(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+
+        level.chickens.add(chicken1);
+        level.chickens.add(chicken2);
+        level.turkies.add(turkey);
+        level.bucket.full = true;
+        level.bucket.capacity = 5;
+        level.wildAnimalAddTimer1 = 4;
+        level.wildAnimalAddTimer2 = 10;
+        level.wildAnimalAddTimer2 = 11;
+        level.wildAnimalAddTimer3 = 14;
+
+        //task
+        level.task.taskCounter = 0;
+        level.task.taskObj = 5;
+        level.task.eggObj = 8;
+        level.task.featherObj = 2;
+        level.task.flourObj = 4;
+        level.task.chickenObj = 6;
+        level.task.chickenCounter = 4;
+        level.task.timeObj = 20;
+
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + level.levelNumber + ".json");
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(level, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public void writeBasicLevel4Info() throws IOException {
+        Level level = new Level();
+        level.levelNumber = 4;
+        level.coin = 600;
+        Random random1 = new Random();
+        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        level.millFactory = new Factory.MillFactory();
+        level.millFactory.existence = true;
+        level.chickens.add(chicken1);
+        level.bucket.full = true;
+        level.bucket.capacity = 5;
+        level.wildAnimalAddTimer1 = 6;
+        level.wildAnimalAddTimer2 = 8;
+        level.wildAnimalAddTimer3 = 10;
+        level.wildAnimalAddTimer4 = 16;
+
+        //task
+        level.task.taskCounter = 0;
+        level.task.taskObj = 6;
+        level.task.coinObj = 800;
+        level.task.totalCoin = 400;
+        level.task.buffaloObj = 2;
+        level.task.flourObj = 4;
+        level.task.breadObj = 2;
+        level.task.timeObj = 24;
+
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + level.levelNumber + ".json");
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(level, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public void writeBasicLevel5Info() throws IOException {
+        Level level = new Level();
+        level.levelNumber = 5;
+        level.coin = 550;
+
+        level.millFactory = new Factory.MillFactory();
+        level.millFactory.existence = true;
+
+        level.bakery = new Factory.Bakery();
+        level.bakery.existence = true;
+
+        level.millFactory = new Factory.MillFactory();
+        level.millFactory.existence = true;
+
+        level.bucket.full = true;
+        level.bucket.capacity = 5;
+        level.wildAnimalAddTimer1 = 6;
+        level.wildAnimalAddTimer2 = 6;
+        level.wildAnimalAddTimer3 = 10;
+        level.wildAnimalAddTimer4 = 15;
+        level.wildAnimalAddTimer5 = 22;
+
+        //task
+        level.task.taskCounter = 0;
+        level.task.taskObj = 4;
+        level.task.breadObj = 8;
+        level.task.flourObj = 10;
+        level.task.weaveObj = 2;
+        level.task.timeObj = 30;
+
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + level.levelNumber + ".json");
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(level, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public void writeBasicLevel6Info() throws IOException {
+        Level level = new Level();
+        level.levelNumber = 6;
+        level.coin = 400;
+        Random random1 = new Random();
+        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        DomesticAnimals.Buffalo buffalo1 = new DomesticAnimals.Buffalo(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        level.millFactory = new Factory.MillFactory();
+        level.millFactory.existence = true;
+        level.bakery = new Factory.Bakery();
+        level.bakery.existence = true;
+
+        level.chickens.add(chicken1);
+
+        level.bucket.full = true;
+        level.bucket.capacity = 5;
+        level.wildAnimalAddTimer1 = 10;
+        level.wildAnimalAddTimer2 = 14;
+        level.wildAnimalAddTimer3 = 16;
+        level.wildAnimalAddTimer4 = 24;
+        level.wildAnimalAddTimer5 = 35;
+
+
+        //task
+        level.task.taskCounter = 0;
+        level.task.taskObj = 5;
+        level.task.chickenObj = 4;
+        level.task.breadObj = 4;
+        level.task.milkObj = 6;
+        level.task.buffaloObj = 3;
+        level.task.timeObj = 50;
+
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + level.levelNumber + ".json");
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(level, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public void writeBasicLevel7Info() throws IOException {
+        Level level = new Level();
+        level.levelNumber = 7;
+        level.coin = 1000;
+        level.weaveFactory = new Factory.WeaveFactory();
+        level.weaveFactory.existence = true;
+        level.bakery = new Factory.Bakery();
+        level.bakery.existence = true;
+
+        Random random1 = new Random();
+        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+
+
+        level.bucket.full = true;
+        level.bucket.capacity = 5;
+        level.wildAnimalAddTimer1 = 4;
+        level.wildAnimalAddTimer2 = 8;
+        level.wildAnimalAddTimer3 = 15;
+        level.wildAnimalAddTimer4 = 25;
+        level.wildAnimalAddTimer5 = 40;
+        level.wildAnimalAddTimer6 = 50;
+
+        //task
+        level.task.taskCounter = 0;
+        level.task.taskObj = 5;
+        level.task.flourObj = 10;
+        level.task.breadObj = 8;
+        level.task.buffaloObj = 4;
+        level.task.weaveObj = 4;
+        level.task.timeObj = 70;
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + level.levelNumber + ".json");
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(level, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public void writeBasicLevel8Info() throws IOException {
+        Level level = new Level();
+        level.levelNumber = 8;
+        level.coin = 900;
+        Random random1 = new Random();
+        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
+        level.millFactory = new Factory.MillFactory();
+        level.millFactory.existence = true;
+        level.bakery = new Factory.Bakery();
+        level.bakery.existence = true;
+        level.weaveFactory = new Factory.WeaveFactory();
+        level.weaveFactory.existence = true;
+        level.chickens.add(chicken1);
+
+        level.bucket.full = true;
+        level.bucket.capacity = 5;
+        level.wildAnimalAddTimer1 = 4;
+        level.wildAnimalAddTimer2 = 10;
+        level.wildAnimalAddTimer3 = 25;
+        level.wildAnimalAddTimer4 = 40;
+        level.wildAnimalAddTimer5 = 60;
+        level.wildAnimalAddTimer6 = 60;
+        level.wildAnimalAddTimer7 = 80;
+
+        //task
+        level.task.taskCounter = 0;
+        level.task.taskObj = 7;
+        level.task.flourObj = 10;
+        level.task.iceCreamObj = 6;
+        level.task.milkObj = 10;
+        level.task.weaveObj = 2;
+        level.task.buffaloObj = 4;
+        level.task.coinObj = 2000;
+        level.task.totalCoin = 900;
+        level.task.timeObj = 120;
+
+
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + level.levelNumber + ".json");
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(level, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+
+    }
+
+    public Level readBasicLevelInfo(Level level, int levelNumber) throws IOException {
+        Gson gson = new Gson();
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Level" + levelNumber + ".json");
+        FileReader fileReader = new FileReader(absolutePath);
+        level = gson.fromJson(fileReader, Level.class);
+        fileReader.close();
+        return level;
+    }
+
+    public void printTasks(Level level) {
+        System.out.println(ANSI_PURPLE + "Level goals:" + ANSI_RESET);
+        if (level.task.timeObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Minimum time to finish the level: " + level.task.timeObj + ANSI_RESET);
+        }
+        if (level.task.featherObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Feathers to collect: " + level.task.featherObj + ANSI_RESET);
+        }
+        if (level.task.weaveObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Fabrics to weave: " + level.task.weaveObj + ANSI_RESET);
+        }
+        if (level.task.eggObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Eggs to collect: " + level.task.eggObj + ANSI_RESET);
+        }
+        if (level.task.clothObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Clothes to sew: " + level.task.clothObj + ANSI_RESET);
+        }
+        if (level.task.cmilkObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Compact Milks to produce: " + level.task.cmilkObj + ANSI_RESET);
+        }
+        if (level.task.flourObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Flours to produce: " + level.task.flourObj + ANSI_RESET);
+        }
+        if (level.task.breadObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Breads to bake: " + level.task.breadObj + ANSI_RESET);
+        }
+        if (level.task.coinObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Coins to make: " + level.task.coinObj + ANSI_RESET);
+        }
+        if (level.task.iceCreamObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Ice creams to produce: " + level.task.iceCreamObj + ANSI_RESET);
+        }
+        if (level.task.chickenObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Number of Chickens you must have: " + level.task.chickenObj + ANSI_RESET);
+        }
+        if (level.task.turkeyObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Number of turkies you must have: " + level.task.turkeyObj + ANSI_RESET);
+        }
+        if (level.task.buffaloObj != 10000) {
+            System.out.println(ANSI_PURPLE + "Number of Buffalos you must have: " + level.task.buffaloObj + ANSI_RESET);
+        }
+
+
+    }
+
+    public void printInfo(Level level) {
+        System.out.println(ANSI_CYAN + "Passed time: " + level.task.timeCounter + " time units");
+        System.out.println("Your coins: " + level.coin + "$");
+        for (int i = 1; i <= 6; i++) {
+            for (int j = 1; j <= 6; j++) {
+                System.out.print(level.map.map[i - 1][j - 1].grass + " ");
+            }
+            System.out.println();
+        }
+
+        for (DomesticAnimals.Chicken chicken : level.chickens) {
+            System.out.println("Chicken " + chicken.health + "% " + "[" + chicken.x + " " + chicken.y + "]");
+        }
+        for (DomesticAnimals.Turkey turkey : level.turkies) {
+            System.out.println("Turkey " + turkey.health + "% " + "[" + turkey.x + " " + turkey.y + "]");
+        }
+        for (DomesticAnimals.Buffalo buffalo : level.buffalos) {
+            System.out.println("Buffalo " + buffalo.health + "% " + "[" + buffalo.x + " " + buffalo.y + "]");
+        }
+        for (WildAnimals.Lion lion : level.lions){
+            System.out.println("Lion "+ lion.cageP + " ["+ lion.x + " " + lion.y+"]");
+        }
+        for (WildAnimals.Bear bear : level.bears){
+            System.out.println("Bear "+ bear.cageP + " ["+ bear.x + " " + bear.y+"]");
+        }
+        for (WildAnimals.Tiger tiger : level.tigers){
+            System.out.println("Tiger "+ tiger.cageP + " ["+ tiger.x + " " + tiger.y+"]");
+        }
+        System.out.println("Factories:");
+        if (level.bakery.existence) {
+            System.out.println("-=Bakery=-");
+        }
+        if (level.iceFactory.existence) {
+            System.out.println("-=Ice Cream Factory=-");
+        }
+        if (level.milkFactory.existence) {
+            System.out.println("-=Milk Factory=-");
+        }
+        if (level.millFactory.existence) {
+            System.out.println("-=Mill Factory=-");
+        }
+        if (level.weaveFactory.existence) {
+            System.out.println("-=Weave Factory=-");
+        }
+        if (level.sewingFactory.existence) {
+            System.out.println("-=Sewing Factory=-");
+        }
+
+        System.out.println("Products: ");
+        for (Ingredient i : level.ingredients) {
+            System.out.println(i.name + " [" + i.x + " " + i.y + "]");
+        }
+
+        System.out.println("Tasks: ");
+
+        if (level.task.timeObj != 10000) {
+            System.out.println("Time: " + level.task.timeCounter + "/" + level.task.timeObj);
+        }
+        if (level.task.turkeyObj != 10000) {
+            System.out.println("Turkies: " + level.task.turkeyCounter + "/" + level.task.turkeyObj);
+        }
+        if (level.task.chickenObj != 10000) {
+            System.out.println("Chickens: " + level.task.chickenCounter + "/" + level.task.chickenObj);
+        }
+        if (level.task.buffaloObj != 10000) {
+            System.out.println("Buffalos: " + level.task.buffaloCounter + "/" + level.task.buffaloObj);
+        }
+        if (level.task.eggObj != 10000) {
+            System.out.println("Eggs: " + level.task.eggCounter + "/" + level.task.eggObj);
+        }
+        if (level.task.weaveObj != 10000) {
+            System.out.println("Fabrics: " + level.task.weaveCounter + "/" + level.task.weaveObj);
+        }
+        if (level.task.clothObj != 10000) {
+            System.out.println("Clothes: " + level.task.clothCounter + "/" + level.task.clothObj);
+        }
+        if (level.task.iceCreamObj != 10000) {
+            System.out.println("Ice creams: " + level.task.iceCreamCounter + "/" + level.task.iceCreamObj);
+        }
+        if (level.task.flourObj != 10000) {
+            System.out.println("Flours: " + level.task.flourCounter + "/" + level.task.flourObj);
+        }
+        if (level.task.milkObj != 10000) {
+            System.out.println("Milks: " + level.task.milkCounter + "/" + level.task.milkObj);
+        }
+        if (level.task.cmilkObj != 10000) {
+            System.out.println("Compact Milks: " + level.task.cmilkCounter + "/" + level.task.cmilkObj);
+        }
+        if (level.task.coinObj != 10000) {
+            System.out.println("Coins: " + level.task.totalCoin + "/" + level.task.coinObj);
+        }
+        System.out.println(ANSI_RESET);
+
+
+    }
+
+    public void mapInitialize(Level level) throws IOException {
+
+        for (int i = 1; i <= 6; i++) {
+            for (int j = 1; j <= 6; j++) {
+                level.map.map[i - 1][j - 1] = new Cell(i - 1, j - 1);
+                level.map.map[i - 1][j - 1].grass = 0;
+            }
+
+        }
+        logger("info", "map", level);
+
+        save();
+    }
+
+    public void logger(String category, String type, Level level) throws IOException {
+        Date date = new Date();
+
+        if (category.equals("error")) {
+            if (type.equals("wrong pass")) {
+                log += ("[error] " + date + " Wrong password!\n");
+            } else if (type.equals("no account")) {
+                log += ("[error] " + date + " Account doesn't exist!\n");
+            } else if (type.equals("account exists")) {
+                log += ("[error] " + date + " Account already exists!\n");
+            } else if (type.equals("invalid input")) {
+                log += ("[error] " + date + " Invalid input entered!\n");
+            } else if (type.equals("low coin")) {
+                log += ("[error] " + date + " Not enough coin!\n");
+            } else if (type.equals("no space")) {
+                log += ("[error] " + date + " There's not enough space in the storage!\n");
+            } else if (type.equals("nothing to pickup")) {
+                log += ("[error] " + date + " There's nothing there to pick up!\n");
+            }
+        } else if (category.equals("info")) {
+            if (type.equals("log in")) {
+                log += ("[info] " + date + " Logged in successfully!\n");
+            } else if (type.equals("username entered")) {
+                log += ("[info] " + date + " username entered!\n");
+            } else if (type.equals("account created")) {
+                log += ("[info] " + date + " Account created successfully!\n");
+            } else if (type.equals("exit")) {
+                log += ("[info] " + date + " Exited from the game!\n");
+            } else if (type.equals("log out")) {
+                log += ("[info] " + date + " Logged out successfully!\n");
+            } else if (type.equals("level started")) {
+                log += ("[info] " + date + " Level " + level.levelNumber + " started!\n");
+            } else if (type.equals("settings")) {
+                log += ("[info] " + date + " settings\n");
+            } else if (type.equals("new level")) {
+                log += ("[info] " + date + " new Level " + level.levelNumber + " created!\n");
+            } else if (type.equals("level continue")) {
+                log += ("[info] " + date + " Level " + level.levelNumber + " continued!\n");
+            } else if (type.equals("map")) {
+                log += ("[info] " + date + " Map initialized!\n");
+            } else if (type.equals("buy chicken")) {
+                log += ("[info] " + date + " Chicken bought!\n");
+            } else if (type.equals("buy buffalo")) {
+                log += ("[info] " + date + " Buffalo bought!\n");
+            } else if (type.equals("buy turkey")) {
+                log += ("[info] " + date + " Turkey bought!\n");
+            } else if (type.equals("expired")) {
+                log += ("[info] " + date + " Item expired!\n");
+            } else if (type.equals("build bakery")) {
+                log += ("[info] " + date + " Bakery built!\n");
+            } else if (type.equals("build sewing")) {
+                log += ("[info] " + date + " Sewing factory built!\n");
+            } else if (type.equals("build ice factory")) {
+                log += ("[info] " + date + " Ice cream factory built!\n");
+            } else if (type.equals("build mill factory")) {
+                log += ("[info] " + date + " Mill factory built!\n");
+            } else if (type.equals("build weave factory")) {
+                log += ("[info] " + date + " Weave factory built!\n");
+            } else if (type.equals("build milk factory")) {
+                log += ("[info] " + date + " Milk factory built!\n");
+            } else if (type.equals("work bakery")) {
+                log += ("[info] " + date + " Bakery started working!\n");
+            } else if (type.equals("work sewingfactory")) {
+                log += ("[info] " + date + " Sewing factory started working!\n");
+            } else if (type.equals("work icefactory")) {
+                log += ("[info] " + date + " Ice cream factory started working!\n");
+            } else if (type.equals("work millfactory")) {
+                log += ("[info] " + date + " Mill factory started working!\n");
+            } else if (type.equals("work weavefactory")) {
+                log += ("[info] " + date + " Weave factory started working!\n");
+            } else if (type.equals("work milkfactory")) {
+                log += ("[info] " + date + " Milk factory started working!\n");
+            }
+
+        } else if (category.equals("alarm")) {
+
+        }
+        logWriter();
+    }
+
+    public void logWriter() throws IOException {
+        File file = new File("Log.txt");
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(log);
+        fileWriter.close();
+
+    }
+
+    public void turn(Level playerLevel, int turnCounter) throws IOException {
+        for (int i = 0; i < turnCounter; i++) {
+            RandomDomesticAnimalMove(playerLevel);
+            RandomWildAnimalMove(playerLevel);
+            MotorStart(playerLevel);
+            FactoryCounter(playerLevel);
+            Expirings(playerLevel);
+            Well(playerLevel);
+            NeededFiller(playerLevel, AnimalHealth(playerLevel));
+            AnimalCounter(playerLevel);
+            wildAnimalAddTimeChecker(playerLevel);
+        }
+        playerLevel.task.timeCounter += turnCounter;
+        save();
+    }
+
+    public void FactoryCounter(Level level) throws IOException {
+        Random random = new Random();
+        int a = random.nextInt(6)+1;
+        int b= random.nextInt(6) + 1;
+        if (level.sewingFactory.existence) {
+            if (level.sewingFactory.productTime >= level.sewingFactory.maxDuration) {
+                if (level.sewingFactory.ingredientExistence) {
+                    level.sewingFactory.productTime = -1;
+                    level.sewingFactory.ingredientExistence = false;
+                    Ingredient.Cloth product = new Ingredient.Cloth(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.sewingFactory.ingredientExistence2){
+                    level.sewingFactory.productTime = -1;
+                    level.sewingFactory.ingredientExistence2 = false;
+                    Ingredient.Cloth product = new Ingredient.Cloth(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.sewingFactory.productTime > -1) {
+                if (level.sewingFactory.ingredientExistence) {
+                    level.sewingFactory.productTime += level.sewingFactory.level;
+                }
+                if (level.sewingFactory.ingredientExistence2) {
+                    level.sewingFactory.productTime ++;
+                }
+            }
+        }
+
+        if (level.millFactory.existence) {
+            if (level.millFactory.productTime >= level.millFactory.maxDuration) {
+                if (level.millFactory.ingredientExistence) {
+                    level.millFactory.productTime = -1;
+                    level.millFactory.ingredientExistence = false;
+                    level.millFactory.ingredientExistence2 = false;
+                    Ingredient.Flour product = new Ingredient.Flour(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.millFactory.ingredientExistence2){
+                    level.millFactory.productTime = -1;
+                    level.millFactory.ingredientExistence2 = false;
+                    level.millFactory.ingredientExistence = false;
+                    Ingredient.Flour product = new Ingredient.Flour(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.millFactory.productTime > -1) {
+                if (level.millFactory.ingredientExistence) {
+                    level.millFactory.productTime += level.millFactory.level;
+                    System.out.println(" Line 2466 : " + level.millFactory.level);
+                }
+                if (level.millFactory.ingredientExistence2) {
+                    level.millFactory.productTime ++;
+                }
+            }
+        }
+
+        if (level.milkFactory.existence) {
+            if (level.milkFactory.productTime >= level.milkFactory.maxDuration) {
+                if (level.milkFactory.ingredientExistence) {
+                    level.milkFactory.productTime = -1;
+                    level.milkFactory.ingredientExistence = false;
+                    Ingredient.CMilk product = new Ingredient.CMilk(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.milkFactory.ingredientExistence2){
+                    level.milkFactory.productTime = -1;
+                    level.milkFactory.ingredientExistence2 = false;
+                    Ingredient.CMilk product = new Ingredient.CMilk(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.milkFactory.productTime > -1) {
+                if (level.milkFactory.ingredientExistence) {
+                    level.milkFactory.productTime += level.milkFactory.level;
+                }
+                if (level.milkFactory.ingredientExistence2) {
+                    level.milkFactory.productTime ++;
+                }
+            }
+        }
+
+        if (level.bakery.existence) {
+            if (level.bakery.productTime >= level.bakery.maxDuration) {
+                if (level.bakery.ingredientExistence) {
+                    level.bakery.productTime = -1;
+                    level.bakery.ingredientExistence = false;
+                    Ingredient.Bread product = new Ingredient.Bread(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.bakery.ingredientExistence2){
+                    level.bakery.productTime = -1;
+                    level.bakery.ingredientExistence2 = false;
+                    Ingredient.Bread product = new Ingredient.Bread(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.bakery.productTime > -1) {
+                if (level.bakery.ingredientExistence) {
+                    level.bakery.productTime += level.bakery.level;
+                }
+                if (level.bakery.ingredientExistence2) {
+                    level.bakery.productTime ++;
+                }
+            }
+        }
+
+        if (level.weaveFactory.existence) {
+            if (level.weaveFactory.productTime >= level.weaveFactory.maxDuration) {
+                if (level.weaveFactory.ingredientExistence) {
+                    level.weaveFactory.productTime = -1;
+                    level.weaveFactory.ingredientExistence = false;
+                    Ingredient.Weave product = new Ingredient.Weave(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.weaveFactory.ingredientExistence2){
+                    level.weaveFactory.productTime = -1;
+                    level.weaveFactory.ingredientExistence2 = false;
+                    Ingredient.Weave product = new Ingredient.Weave(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.weaveFactory.productTime > -1) {
+                if (level.weaveFactory.ingredientExistence) {
+                    level.weaveFactory.productTime += level.weaveFactory.level;
+                }
+                if (level.weaveFactory.ingredientExistence2) {
+                    level.weaveFactory.productTime ++;
+                }
+            }
+        }
+
+        if (level.iceFactory.existence) {
+            if (level.iceFactory.productTime >= level.iceFactory.maxDuration) {
+                if (level.iceFactory.ingredientExistence) {
+                    level.iceFactory.productTime = -1;
+                    level.iceFactory.ingredientExistence = false;
+                    Ingredient.IceCream product = new Ingredient.IceCream(a, b);
+                    level.ingredients.add(product);
+                }
+                if (level.iceFactory.ingredientExistence2){
+                    level.iceFactory.productTime = -1;
+                    level.iceFactory.ingredientExistence2 = false;
+                    Ingredient.IceCream product = new Ingredient.IceCream(a, b);
+                    level.ingredients.add(product);
+                    level.ingredients.add(product);
+                }
+            } else if (level.iceFactory.productTime > -1) {
+                if (level.iceFactory.ingredientExistence) {
+                    level.iceFactory.productTime += level.iceFactory.level;
+                }
+                if (level.iceFactory.ingredientExistence2) {
+                    level.iceFactory.productTime ++;
+                }
+            }
+        }
+        save();
+    }
+
+    public void AnimalEater(Level level) throws IOException {
+        ArrayList<WildAnimals> tAnimals = new ArrayList<>();
+        for (int i = 0; i < level.lions.size(); i++) {
+            tAnimals.add(level.lions.get(i));
+        }
+        for (int i = 0; i < level.bears.size(); i++) {
+            tAnimals.add(level.bears.get(i));
+        }
+        for (int i = 0; i < level.tigers.size(); i++) {
+            tAnimals.add(level.tigers.get(i));
+        }
+        int e= level.chickens.size();
+        for (int i = e-1; i >=0; i--) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(j).x == level.chickens.get(i).x && tAnimals.get(j).y == level.chickens.get(i).y) {
+                    level.chickens.remove(i);
+                }
+            }
+        }
+        e = level.buffalos.size();
+        for (int i = e-1; i >=0; i--) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(j).x == level.buffalos.get(i).x && tAnimals.get(j).y == level.buffalos.get(i).y) {
+                    level.buffalos.remove(i);
+                }
+            }
+        }
+        e = level.turkies.size();
+        for (int i = e-1; i >=0; i--) {
+            for (int j = 0; j < tAnimals.size(); j++) {
+                if (tAnimals.get(j).x == level.turkies.get(i).x && tAnimals.get(j).y == level.turkies.get(i).y) {
+                    level.turkies.remove(i);
+                }
+            }
+        }
+        e = level.ingredients.size();
+        for (int i = e-1; i>=0; i--){
+            for (int j=0 ; j< tAnimals.size(); j++){
+                if (tAnimals.get(j).x == level.ingredients.get(i).x && tAnimals.get(j).y == level.ingredients.get(i).y)
+                    level.ingredients.remove(i);
+            }
+        }
+        save();
+
     }
 
     public void RandomWildAnimalMove(Level level) throws IOException {
@@ -1702,11 +2835,80 @@ public class Manager {
                 if (a == 1)
                     level.tigers.get(i).x--;
             }
+            AnimalEater(level);
+            if (level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(4);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+                if (a == 3)
+                    level.tigers.get(i).x--;
+            }
+            else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+                if (a == 2)
+                    level.tigers.get(i).y++;
+            } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y++;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+            } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x++;
+            } else if (level.tigers.get(i).y == 1 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).x++;
+                if (a == 1)
+                    level.tigers.get(i).y++;
+                if (a == 2)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).y == 6 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.tigers.get(i).x++;
+                if (a == 1)
+                    level.tigers.get(i).y--;
+                if (a == 2)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y++;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+            } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.tigers.get(i).y--;
+                if (a == 1)
+                    level.tigers.get(i).x--;
+            }
         }
         save();
     }
 
-    public void UpgradeFactory(Level level, String name) {
+    public void UpgradeFactory(Level level, String name) throws IOException {
         if (name.equals("weavefactory")) {
             if (level.coin >= level.weaveFactory.upgradePrice) {
                 if (level.weaveFactory.level == 1) {
@@ -1775,831 +2977,228 @@ public class Manager {
             }
         } else
             System.out.println("Not a valid name.");
-    }
-
-
-
-
-
-    public boolean tasksChecker(Level level) throws IOException {
-        level.task.chickenCounter = level.chickens.size();
-        level.task.turkeyCounter = level.turkies.size();
-        level.task.buffaloCounter = level.buffalos.size();
-
-        boolean taskCheck = false;
-
-        if (level.task.totalCoin >= level.task.coinObj && level.task.coinObj != 10000) {
-            level.task.coinCheck = true;
-            level.task.taskCounter++;
-        }
-
-        if (level.chickens.size() >= level.task.chickenObj && level.task.chickenObj != 10000 && !level.task.chickenCheck) {
-            level.task.chickenCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.buffalos.size() >= level.task.buffaloObj && level.task.buffaloObj != 10000) {
-            level.task.buffaloCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.turkies.size() >= level.task.turkeyObj && level.task.turkeyObj != 10000) {
-            level.task.turkeyCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.breadCounter >= level.task.breadObj && level.task.breadObj != 10000) {
-            level.task.breadCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.flourCounter >= level.task.flourObj && level.task.flourObj != 10000) {
-            level.task.flourCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.milkCounter >= level.task.milkObj && level.task.milkObj != 10000) {
-            level.task.milkCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.cmilkCounter >= level.task.cmilkObj & level.task.cmilkObj != 10000) {
-            level.task.cmilkCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.iceCreamCounter >= level.task.iceCreamObj && level.task.iceCreamObj != 10000) {
-            level.task.iceCreamCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.clothCounter >= level.task.clothObj && level.task.clothObj != 10000) {
-            level.task.clothCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.eggCounter >= level.task.eggObj && level.task.eggObj != 10000) {
-            level.task.eggCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.weaveCounter >= level.task.weaveObj && level.task.weaveObj != 10000) {
-            level.task.weaveCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.task.featherCounter >= level.task.featherObj && level.task.featherObj != 10000) {
-            level.task.featherCheck = true;
-            level.task.taskCounter++;
-        }
-        if (level.passedTime >= level.task.timeObj && level.task.timeObj != 10000) {
-            level.task.timeCheck = true;
-            level.task.taskCounter++;
-        }
-
-        if (level.task.taskCounter == level.task.taskObj) {
-            System.out.println(ANSI_YELLOW + "All tasks done! You won!" + ANSI_RESET);
-            taskCheck = true;
-
-        }
         save();
-        return taskCheck;
-
     }
 
-    public void readUsersInfo() throws IOException {
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += "\\usersInfo.json";
-        File file2 = new File(absolutePath);
-        if (file2.exists()) {
-            Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get("usersInfo.json"));
-            Users.clear();
-            List<LoginUser> temp = Arrays.asList(gson.fromJson(reader, LoginUser[].class));
-            Users.addAll(temp);
-            reader.close();
-        }
-
-    }
-
-    public boolean usernameCheck(String username) throws IOException {
-
-        boolean found = false;
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += "\\usersInfo.json";
-        File file2 = new File(absolutePath);
-        if (file2.exists()) {
-            Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get("usersInfo.json"));
-            Users.clear();
-            List<LoginUser> temp = Arrays.asList(gson.fromJson(reader, LoginUser[].class));
-            Users.addAll(temp);
-            reader.close();
-            for (LoginUser u : Users) {
-                if (u.username.equals(username)) {
-                    found = true;
-                }
-            }
-        }
-        if (!found) {
-        }
-        return found;
-    }
-
-    public void signUp(String username, String password) throws IOException {
-        LoginUser user = new LoginUser(username, password);
-        Users.add(user);
-
-        Gson gson = new Gson();
-        Writer writer = Files.newBufferedWriter(Paths.get("usersInfo.json"));
-        gson.toJson(Users, writer);
-        writer.close();
-
-    }
-
-    public boolean login(String username, String password) throws IOException {
-        readUsersInfo();
-        boolean flag = false;
-        for (LoginUser u : Users) {
-            if (u.username.equals(username)) {
-                if (u.password.equals(password)) {
-                    flag = true;
-                }
-            }
-        }
-        return flag;
-
-
-    }
-
-    public void save() throws IOException {
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        for (Level l : levels) {
-            if (l.levelNumber == 1) {
-                absolutePath += "\\LevelsInfo" + l.playerName + ".json";
-                break;
-            }
-        }
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(levels, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public boolean levelCheck(String username, int levelNumber) throws IOException {
-        boolean level_check = false;
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += "\\LevelsInfo" + username + ".json";
-        File file2 = new File(absolutePath);
-        if (file2.exists()) {
-            Gson gson = new Gson();
-            Reader reader = Files.newBufferedReader(Paths.get(absolutePath));
-            List<Level> temp = Arrays.asList(gson.fromJson(reader, Level[].class));
-            levels.clear();
-            levels.addAll(temp);
-
-            for (Level l : levels) {
-                if (levelNumber == l.levelNumber) {
-                    level_check = true;
+    public void ProcessedAnimalMove (Level level) throws IOException {
+        int t = 0;
+        for (int i =0; i <level.map.length; i++) {
+            for (int j = 0; j < level.map.height; j++) {
+                if (level.map.map[i][j].grass > 0) {
+                    t=1;
                     break;
                 }
             }
-            if (!level_check) {
-                System.out.println(ANSI_RED + "This level has not been unlocked yet!" + ANSI_RESET);
-                System.out.println("Your unlocked levels are: ");
-                int max = 1;
-                for (Level l : levels) {
-                    if (l.levelNumber > 1) {
-                        max = l.levelNumber;
-                    }
-                }
-                for (int i = 1; i <= max; i++) {
-                    System.out.print(i);
-                    if (i != levels.size()) {
-                        System.out.print(", ");
-                    }
-                }
-                System.out.println();
-            }
-
-        } else {
-            if (levelNumber != 1) {
-                System.out.println(ANSI_RED + "You have to start the game from the beginning!" + ANSI_RESET);
-            }
-            if (levelNumber == 1) {
-
-                Level level = new Level();
-                level = readBasicLevelInfo(level, 1);
-                level.playerName = username;
-                level.levelStarted = false;
-                levels.add(level);
-                for (Level l : levels) {
-                    System.out.println(l.levelNumber);
-                }
-                save();
-                level_check = true;
-            }
-
-        }
-        save();
-
-        return level_check;
-
-    }
-
-    public Level levelReturner(int levelNumber) throws IOException {
-        for (Level l : levels) {
-            if (l.levelNumber == levelNumber) {
-                save();
-                return l;
-            }
-        }
-        save();
-        return null;
-    }
-
-    public Level levelEnd(Level playerLevel) throws IOException {
-        for (Level l : levels) {
-            if (l.levelNumber == (playerLevel.levelNumber + 1)) {
-                playerLevel.levelEnd = true;
-                playerLevel.levelStarted = true;
-                save();
-                return l;
-            }
-        }
-        Level newLevel = new Level();
-        newLevel = readBasicLevelInfo(newLevel, playerLevel.levelNumber + 1);
-        playerLevel.levelEnd = true;
-        playerLevel.levelStarted = true;
-        newLevel.levelStarted = false;
-        newLevel.levelEnd = false;
-        levels.add(newLevel);
-        save();
-        return newLevel;
-    }
-
-    public Level newLevel(int levelNumber, Level level) throws IOException {
-
-        for (Level l : levels) {
-            if (l.levelNumber == levelNumber) {
-                levels.remove(l);
+            if (t==1)
                 break;
+        }
+        if (t==1) {
+            for (int i = 0; i < level.chickens.size(); i++) {
+                Cell closestCell = ClosestGrass(level, level.chickens.get(i));
+                if (level.chickens.get(i).x > closestCell.x){
+                    level.chickens.get(i).x--;
+                }
+                else if (level.chickens.get(i).x < closestCell.x){
+                    level.chickens.get(i).x++;
+                }
+                else if (level.chickens.get(i).x == closestCell.x) {
+                    if (level.chickens.get(i).y > closestCell.y) {
+                        level.chickens.get(i).y--;
+                    } else if (level.chickens.get(i).y < closestCell.y) {
+                        level.chickens.get(i).y++;
+                    }
+                }
+            }
+            for (int i = 0; i < level.buffalos.size(); i++) {
+                Cell closestCell = ClosestGrass(level, level.buffalos.get(i));
+                if (level.buffalos.get(i).x > closestCell.x){
+                    level.buffalos.get(i).x--;
+                }
+                else if (level.buffalos.get(i).x < closestCell.x){
+                    level.buffalos.get(i).x++;
+                }
+                else if (level.buffalos.get(i).x == closestCell.x) {
+                    if (level.buffalos.get(i).y > closestCell.y) {
+                        level.buffalos.get(i).y--;
+                    } else if (level.buffalos.get(i).y < closestCell.y) {
+                        level.buffalos.get(i).y++;
+                    }
+                }
+            }
+            for (int i = 0; i < level.turkies.size(); i++) {
+                Cell closestCell = ClosestGrass(level, level.turkies.get(i));
+                if (level.turkies.get(i).x > closestCell.x){
+                    level.turkies.get(i).x--;
+                }
+                else if (level.turkies.get(i).x < closestCell.x){
+                    level.turkies.get(i).x++;
+                }
+                else if (level.turkies.get(i).x == closestCell.x) {
+                    if (level.turkies.get(i).y > closestCell.y) {
+                        level.turkies.get(i).y--;
+                    } else if (level.turkies.get(i).y < closestCell.y) {
+                        level.turkies.get(i).y++;
+                    }
+                }
+            }
+            for (int i = 0; i < level.cats.size(); i++) {
+                Cell closestCell = ClosestGrassC(level, level.cats.get(i));
+                if (level.cats.get(i).x > closestCell.x){
+                    level.cats.get(i).x--;
+                }
+                else if (level.cats.get(i).x < closestCell.x){
+                    level.cats.get(i).x++;
+                }
+                else if (level.cats.get(i).x == closestCell.x) {
+                    if (level.cats.get(i).y > closestCell.y) {
+                        level.cats.get(i).y--;
+                    } else if (level.cats.get(i).y < closestCell.y) {
+                        level.cats.get(i).y++;
+                    }
+                }
             }
         }
-        Level newLevel = new Level();
-        newLevel = readBasicLevelInfo(newLevel, levelNumber);
-        newLevel.playerName = level.playerName;
-        newLevel.levelNumber = levelNumber;
-        newLevel.levelStarted = false;
-        newLevel.levelEnd = false;
-        levels.add(newLevel);
-
-        save();
-        return newLevel;
-    }
-
-    public void writeBasicLevel1Info() throws IOException {
-
-        Level level = new Level();
-        level.levelNumber = 1;
-        level.coin = 500;
-        Random random1 = new Random();
-
-        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        DomesticAnimals.Chicken chicken2 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        level.chickens.add(chicken1);
-        level.chickens.add(chicken2);
-        level.bucket.full = true;
-        level.bucket.capacity = 5;
-
-        //task
-        level.task.taskCounter = 0;
-        level.task.taskObj = 1;
-        level.task.eggObj = 6;
-        level.task.timeObj = 12;
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + level.levelNumber + ".json");
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(level, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public void writeBasicLevel2Info() throws IOException {
-        Level level = new Level();
-        level.levelNumber = 2;
-        level.coin = 500;
-        Random random1 = new Random();
-        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        DomesticAnimals.Chicken chicken2 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-
-        level.chickens.add(chicken1);
-        level.chickens.add(chicken2);
-        level.bucket.full = true;
-        level.bucket.capacity = 5;
-
-        //task
-        level.task.taskCounter = 0;
-        level.task.eggObj = 6;
-        level.task.chickenObj = 4;
-        level.task.taskObj = 2;
-        level.task.timeObj = 14;
-
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + level.levelNumber + ".json");
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(level, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public void writeBasicLevel3Info() throws IOException {
-        Level level = new Level();
-        level.levelNumber = 3;
-        level.coin = 300;
-        Random random1 = new Random();
-
-        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        DomesticAnimals.Chicken chicken2 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        DomesticAnimals.Turkey turkey = new DomesticAnimals.Turkey(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-
-        level.chickens.add(chicken1);
-        level.chickens.add(chicken2);
-        level.turkies.add(turkey);
-        level.bucket.full = true;
-        level.bucket.capacity = 5;
-
-        //task
-        level.task.taskCounter = 0;
-        level.task.taskObj = 3;
-        level.task.eggObj = 8;
-        level.task.featherObj = 2;
-        level.task.flourObj = 4;
-        level.task.chickenObj = 6;
-        level.task.chickenCounter = 4;
-        level.task.timeObj = 20;
-
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + level.levelNumber + ".json");
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(level, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public void writeBasicLevel4Info() throws IOException {
-        Level level = new Level();
-        level.levelNumber = 4;
-        level.coin = 600;
-        Random random1 = new Random();
-        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        level.millFactory = new Factory.MillFactory();
-        level.millFactory.existence = true;
-        level.chickens.add(chicken1);
-        level.bucket.full = true;
-        level.bucket.capacity = 5;
-
-        //task
-        level.task.taskCounter = 0;
-        level.task.taskObj = 6;
-        level.task.coinObj = 800;
-        level.task.totalCoin = 400;
-        level.task.buffaloObj = 2;
-        level.task.flourObj = 4;
-        level.task.breadObj = 2;
-        level.task.timeObj = 24;
-
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + level.levelNumber + ".json");
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(level, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public void writeBasicLevel5Info() throws IOException {
-        Level level = new Level();
-        level.levelNumber = 5;
-        level.coin = 550;
-
-        level.millFactory = new Factory.MillFactory();
-        level.millFactory.existence = true;
-
-        level.bakery = new Factory.Bakery();
-        level.bakery.existence = true;
-
-        level.millFactory = new Factory.MillFactory();
-        level.millFactory.existence = true;
-
-        level.bucket.full = true;
-        level.bucket.capacity = 5;
-
-        //task
-        level.task.taskCounter = 0;
-        level.task.taskObj = 4;
-        level.task.breadObj = 8;
-        level.task.flourObj = 10;
-        level.task.weaveObj = 2;
-        level.task.timeObj = 30;
-
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + level.levelNumber + ".json");
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(level, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public void writeBasicLevel6Info() throws IOException {
-        Level level = new Level();
-        level.levelNumber = 6;
-        level.coin = 400;
-        Random random1 = new Random();
-        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        DomesticAnimals.Buffalo buffalo1 = new DomesticAnimals.Buffalo(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        level.millFactory = new Factory.MillFactory();
-        level.millFactory.existence = true;
-        level.bakery = new Factory.Bakery();
-        level.bakery.existence = true;
-
-        level.chickens.add(chicken1);
-
-        level.bucket.full = true;
-        level.bucket.capacity = 5;
-
-        //task
-        level.task.taskCounter = 0;
-        level.task.taskObj = 5;
-        level.task.chickenObj = 4;
-        level.task.breadObj = 4;
-        level.task.milkObj = 6;
-        level.task.buffaloObj = 3;
-        level.task.timeObj = 50;
-
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + level.levelNumber + ".json");
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(level, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public void writeBasicLevel7Info() throws IOException {
-        Level level = new Level();
-        level.levelNumber = 7;
-        level.coin = 1000;
-        level.weaveFactory = new Factory.WeaveFactory();
-        level.weaveFactory.existence = true;
-        level.bakery = new Factory.Bakery();
-        level.bakery.existence = true;
-
-        Random random1 = new Random();
-        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-
-
-        level.bucket.full = true;
-        level.bucket.capacity = 5;
-
-        //task
-        level.task.taskCounter = 0;
-        level.task.taskObj = 5;
-        level.task.flourObj = 10;
-        level.task.breadObj = 8;
-        level.task.buffaloObj = 4;
-        level.task.weaveObj = 4;
-        level.task.timeObj = 70;
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + level.levelNumber + ".json");
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(level, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public void writeBasicLevel8Info() throws IOException {
-        Level level = new Level();
-        level.levelNumber = 8;
-        level.coin = 900;
-        Random random1 = new Random();
-        DomesticAnimals.Chicken chicken1 = new DomesticAnimals.Chicken(random1.nextInt(6) + 1, random1.nextInt(6) + 1);
-        level.millFactory = new Factory.MillFactory();
-        level.millFactory.existence = true;
-        level.bakery = new Factory.Bakery();
-        level.bakery.existence = true;
-        level.weaveFactory = new Factory.WeaveFactory();
-        level.weaveFactory.existence = true;
-        level.chickens.add(chicken1);
-
-        level.bucket.full = true;
-        level.bucket.capacity = 5;
-
-        //task
-        level.task.taskCounter = 0;
-        level.task.taskObj = 6;
-        level.task.flourObj = 10;
-        level.task.iceCreamObj = 6;
-        level.task.milkObj = 10;
-        level.task.weaveObj = 2;
-        level.task.buffaloObj = 4;
-        level.task.coinObj = 1500;
-        level.task.totalCoin = 900;
-
-
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + level.levelNumber + ".json");
-        Gson write = new GsonBuilder().setPrettyPrinting().create();
-        FileWriter fileWriter = new FileWriter(absolutePath);
-        write.toJson(level, fileWriter);
-        fileWriter.flush();
-        fileWriter.close();
-
-    }
-
-    public Level readBasicLevelInfo(Level level, int levelNumber) throws IOException {
-        Gson gson = new Gson();
-        File file1 = new File("");
-        String absolutePath = file1.getAbsolutePath();
-        absolutePath += ("/Level" + levelNumber + ".json");
-        FileReader fileReader = new FileReader(absolutePath);
-        level = gson.fromJson(fileReader, Level.class);
-        fileReader.close();
-        return level;
-    }
-
-    public void printTasks(Level level) {
-        System.out.println(ANSI_PURPLE + "Level goals:" + ANSI_RESET);
-        if (level.task.timeObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Minimum time to finish the level: " + level.task.timeObj + ANSI_RESET);
-        }
-        if (level.task.featherObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Feathers to collect: " + level.task.featherObj + ANSI_RESET);
-        }
-        if (level.task.weaveObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Fabrics to weave: " + level.task.weaveObj + ANSI_RESET);
-        }
-        if (level.task.eggObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Eggs to collect: " + level.task.eggObj + ANSI_RESET);
-        }
-        if (level.task.clothObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Clothes to sew: " + level.task.clothObj + ANSI_RESET);
-        }
-        if (level.task.cmilkObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Compact Milks to produce: " + level.task.cmilkObj + ANSI_RESET);
-        }
-        if (level.task.flourObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Flours to produce: " + level.task.flourObj + ANSI_RESET);
-        }
-        if (level.task.breadObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Breads to bake: " + level.task.breadObj + ANSI_RESET);
-        }
-        if (level.task.coinObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Coins to make: " + level.task.coinObj + ANSI_RESET);
-        }
-        if (level.task.iceCreamObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Ice creams to produce: " + level.task.iceCreamObj + ANSI_RESET);
-        }
-        if (level.task.chickenObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Number of Chickens you must have: " + level.task.chickenObj + ANSI_RESET);
-        }
-        if (level.task.turkeyObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Number of turkies you must have: " + level.task.turkeyObj + ANSI_RESET);
-        }
-        if (level.task.buffaloObj != 10000) {
-            System.out.println(ANSI_PURPLE + "Number of Buffalos you must have: " + level.task.buffaloObj + ANSI_RESET);
-        }
-
-
-    }
-
-    public void printInfo(Level level) {
-        System.out.println(ANSI_CYAN + "Passed time: " + level.task.timeCounter + " time units");
-        System.out.println("Your coins: " + level.coin + "$");
-        for (int i = 1; i <= 6; i++) {
-            for (int j = 1; j <= 6; j++) {
-                System.out.print(level.map.map[i - 1][j - 1].grass + " ");
-            }
-            System.out.println();
-        }
-
-        for (DomesticAnimals.Chicken chicken : level.chickens) {
-            System.out.println("Chicken " + chicken.health + "% " + "[" + chicken.x + " " + chicken.y + "]");
-        }
-        for (DomesticAnimals.Turkey turkey : level.turkies) {
-            System.out.println("Turkey " + turkey.health + "% " + "[" + turkey.x + " " + turkey.y + "]");
-        }
-        for (DomesticAnimals.Buffalo buffalo : level.buffalos) {
-            System.out.println("Buffalo " + buffalo.health + "% " + "[" + buffalo.x + " " + buffalo.y + "]");
-        }
-        System.out.println("Factories:");
-        if (level.bakery.existence) {
-            System.out.println("-=Bakery=-");
-        }
-        if (level.iceFactory.existence) {
-            System.out.println("-=Ice Cream Factory=-");
-        }
-        if (level.milkFactory.existence) {
-            System.out.println("-=Milk Factory=-");
-        }
-        if (level.millFactory.existence) {
-            System.out.println("-=Mill Factory=-");
-        }
-        if (level.weaveFactory.existence) {
-            System.out.println("-=Weave Factory=-");
-        }
-        if (level.sewingFactory.existence) {
-            System.out.println("-=Sewing Factory=-");
-        }
-
-        System.out.println("Products: ");
-        for (Ingredient i : level.ingredients) {
-            System.out.println(i.name + " [" + i.x + " " + i.y + "]");
-        }
-
-        System.out.println("Tasks: ");
-
-        if (level.task.timeObj != 10000) {
-            System.out.println("Time: " + level.task.timeCounter + "/" + level.task.timeObj);
-        }
-        if (level.task.turkeyObj != 10000) {
-            System.out.println("Turkies: " + level.task.turkeyCounter + "/" + level.task.turkeyObj);
-        }
-        if (level.task.chickenObj != 10000) {
-            System.out.println("Chickens: " + level.task.chickenCounter + "/" + level.task.chickenObj);
-        }
-        if (level.task.buffaloObj != 10000) {
-            System.out.println("Buffalos: " + level.task.buffaloCounter + "/" + level.task.buffaloObj);
-        }
-        if (level.task.eggObj != 10000) {
-            System.out.println("Eggs: " + level.task.eggCounter + "/" + level.task.eggObj);
-        }
-        if (level.task.weaveObj != 10000) {
-            System.out.println("Fabrics: " + level.task.weaveCounter + "/" + level.task.weaveObj);
-        }
-        if (level.task.clothObj != 10000) {
-            System.out.println("Clothes: " + level.task.clothCounter + "/" + level.task.clothObj);
-        }
-        if (level.task.iceCreamObj != 10000) {
-            System.out.println("Ice creams: " + level.task.iceCreamCounter + "/" + level.task.iceCreamObj);
-        }
-        if (level.task.flourObj != 10000) {
-            System.out.println("Flours: " + level.task.flourCounter + "/" + level.task.flourObj);
-        }
-        if (level.task.milkObj != 10000) {
-            System.out.println("Milks: " + level.task.milkCounter + "/" + level.task.milkObj);
-        }
-        if (level.task.cmilkObj != 10000) {
-            System.out.println("Compact Milks: " + level.task.cmilkCounter + "/" + level.task.cmilkObj);
-        }
-        if (level.task.coinObj != 10000) {
-            System.out.println("Coins: " + level.task.totalCoin + "/" + level.task.coinObj);
-        }
-        System.out.println(ANSI_RESET);
-
-
-    }
-
-    public void mapInitialize(Level level) throws IOException {
-
-        for (int i = 1; i <= 6; i++) {
-            for (int j = 1; j <= 6; j++) {
-                level.map.map[i - 1][j - 1] = new Cell(i - 1, j - 1);
-                level.map.map[i - 1][j - 1].grass = 0;
-            }
-
-        }
-        logger("info", "map", level);
-
         save();
     }
 
-    public void logger(String category, String type, Level level) throws IOException {
-        Date date = new Date();
-
-        if (category.equals("error")) {
-            if (type.equals("wrong pass")) {
-                log += ("[error] " + date + " Wrong password!\n");
-            } else if (type.equals("no account")) {
-                log += ("[error] " + date + " Account doesn't exist!\n");
-            } else if (type.equals("account exists")) {
-                log += ("[error] " + date + " Account already exists!\n");
-            } else if (type.equals("invalid input")) {
-                log += ("[error] " + date + " Invalid input entered!\n");
-            } else if (type.equals("low coin")) {
-                log += ("[error] " + date + " Not enough coin!\n");
-            } else if (type.equals("no space")) {
-                log += ("[error] " + date + " There's not enough space in the storage!\n");
-            } else if (type.equals("nothing to pickup")) {
-                log += ("[error] " + date + " There's nothing there to pick up!\n");
+    public Cell ClosestGrass (Level level, DomesticAnimals animal) {
+        int min = 100000;
+        int minIndexX = -1;
+        int minIndexY = -1;
+        int distance = 0;
+        for (int i =0; i <level.map.length; i++){
+            for (int j= 0; j < level.map.height ; j++){
+                if (level.map.map[i][j].grass > 0){
+                    distance = Math.abs(level.map.map[i][j].x - animal.x) + Math.abs(level.map.map[i][j].y - animal.y);
+                    if (min > distance) {
+                        min = distance;
+                        minIndexX = i;
+                        minIndexY = j;
+                    }
+                }
             }
-        } else if (category.equals("info")) {
-            if (type.equals("log in")) {
-                log += ("[info] " + date + " Logged in successfully!\n");
-            } else if (type.equals("username entered")) {
-                log += ("[info] " + date + " username entered!\n");
-            } else if (type.equals("account created")) {
-                log += ("[info] " + date + " Account created successfully!\n");
-            } else if (type.equals("exit")) {
-                log += ("[info] " + date + " Exited from the game!\n");
-            } else if (type.equals("log out")) {
-                log += ("[info] " + date + " Logged out successfully!\n");
-            } else if (type.equals("level started")) {
-                log += ("[info] " + date + " Level " + level.levelNumber + " started!\n");
-            } else if (type.equals("settings")) {
-                log += ("[info] " + date + " settings\n");
-            } else if (type.equals("new level")) {
-                log += ("[info] " + date + " new Level " + level.levelNumber + " created!\n");
-            } else if (type.equals("level continue")) {
-                log += ("[info] " + date + " Level " + level.levelNumber + " continued!\n");
-            } else if (type.equals("map")) {
-                log += ("[info] " + date + " Map initialized!\n");
-            } else if (type.equals("buy chicken")) {
-                log += ("[info] " + date + " Chicken bought!\n");
-            } else if (type.equals("buy buffalo")) {
-                log += ("[info] " + date + " Buffalo bought!\n");
-            } else if (type.equals("buy turkey")) {
-                log += ("[info] " + date + " Turkey bought!\n");
-            } else if (type.equals("expired")) {
-                log += ("[info] " + date + " Item expired!\n");
-            } else if (type.equals("build bakery")) {
-                log += ("[info] " + date + " Bakery built!\n");
-            } else if (type.equals("build sewing")) {
-                log += ("[info] " + date + " Sewing factory built!\n");
-            } else if (type.equals("build ice factory")) {
-                log += ("[info] " + date + " Ice cream factory built!\n");
-            } else if (type.equals("build mill factory")) {
-                log += ("[info] " + date + " Mill factory built!\n");
-            } else if (type.equals("build weave factory")) {
-                log += ("[info] " + date + " Weave factory built!\n");
-            } else if (type.equals("build milk factory")) {
-                log += ("[info] " + date + " Milk factory built!\n");
-            } else if (type.equals("work bakery")) {
-                log += ("[info] " + date + " Bakery started working!\n");
-            } else if (type.equals("work sewingfactory")) {
-                log += ("[info] " + date + " Sewing factory started working!\n");
-            } else if (type.equals("work icefactory")) {
-                log += ("[info] " + date + " Ice cream factory started working!\n");
-            } else if (type.equals("work millfactory")) {
-                log += ("[info] " + date + " Mill factory started working!\n");
-            } else if (type.equals("work weavefactory")) {
-                log += ("[info] " + date + " Weave factory started working!\n");
-            } else if (type.equals("work milkfactory")) {
-                log += ("[info] " + date + " Milk factory started working!\n");
+        }
+        return level.map.map[minIndexX][ minIndexY];
+    }
+
+    public Cell ClosestGrassC (Level level, SpecialAnimals animal) {
+        int min = 100000;
+        int minIndexX = -1;
+        int minIndexY = -1;
+        int distance = 0;
+        for (int i =0; i <level.map.length; i++){
+            for (int j= 0; j < level.map.height ; j++){
+                if (level.map.map[i][j].grass > 0){
+                    distance = Math.abs(level.map.map[i][j].x - animal.x) + Math.abs(level.map.map[i][j].y - animal.y);
+                    if (min > distance) {
+                        min = distance;
+                        minIndexX = i;
+                        minIndexY = j;
+                    }
+                }
             }
-
-        } else if (category.equals("alarm")) {
-
         }
-        logWriter();
+        return level.map.map[minIndexX][ minIndexY];
     }
 
-    public void logWriter() throws IOException {
-        File file = new File("Log.txt");
-        FileWriter fileWriter = new FileWriter(file);
-        fileWriter.write(log);
-        fileWriter.close();
-
-    }
-
-    public void turn(Level playerLevel, int turnCounter) throws IOException {
-        for (int i = 0; i < turnCounter; i++) {
-            RandomDomesticAnimalMove(playerLevel);
-            RandomWildAnimalMove(playerLevel);
-            MotorStart(playerLevel);
-            FactoryCounter(playerLevel);
-            Expirings(playerLevel);
-            Well(playerLevel);
-            NeededFiller(playerLevel, AnimalHealth(playerLevel));
-            AnimalCounter(playerLevel);
+    public void TotalMove (Level level) throws IOException {
+        int t=0;
+        for (int i =0 ; i<level.map.length; i++){
+            for (int j =0; j < level.map.height; j ++){
+                if (level.map.map[i][j].grass > 0 ){
+                    t=1;
+                    break;
+                }
+            }
+            if (t==1)
+                break;
         }
-        playerLevel.task.timeCounter +=turnCounter;
-        save();
+        if (t==0){
+            RandomDomesticAnimalMove(level);
+            RandomWildAnimalMove(level);
+            RandomDogMove(level);
+        }
+        if (t==1){
+            ProcessedAnimalMove(level);
+            RandomWildAnimalMove(level);
+            RandomDogMove(level);
+        }
     }
+
+    public void RandomDogMove (Level level){
+        Random random = new Random();
+        int a= 0;
+        for (int i = 0; i < level.dogs.size(); i++) {
+            if (level.dogs.get(i).x > 1 && level.dogs.get(i).x < 6 && level.dogs.get(i).y > 1 && level.dogs.get(i).y < 6) {
+                a = random.nextInt(4);
+                if (a == 0)
+                    level.dogs.get(i).y--;
+                if (a == 1)
+                    level.dogs.get(i).x++;
+                if (a == 2)
+                    level.dogs.get(i).y++;
+                if (a == 3)
+                    level.dogs.get(i).x--;
+            } else if (level.dogs.get(i).x == 1 && level.dogs.get(i).y > 1 && level.dogs.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.dogs.get(i).y--;
+                if (a == 1)
+                    level.dogs.get(i).x++;
+                if (a == 2)
+                    level.dogs.get(i).y++;
+            } else if (level.dogs.get(i).x == 6 && level.dogs.get(i).y > 1 && level.dogs.get(i).y < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.dogs.get(i).y--;
+                if (a == 1)
+                    level.dogs.get(i).x--;
+                if (a == 2)
+                    level.dogs.get(i).y++;
+            } else if (level.dogs.get(i).x == 1 && level.dogs.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.dogs.get(i).y++;
+                if (a == 1)
+                    level.dogs.get(i).x++;
+            } else if (level.dogs.get(i).x == 1 && level.dogs.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.dogs.get(i).y--;
+                if (a == 1)
+                    level.dogs.get(i).x++;
+            } else if (level.dogs.get(i).y == 1 && level.dogs.get(i).x > 1 && level.dogs.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.dogs.get(i).x++;
+                if (a == 1)
+                    level.dogs.get(i).y++;
+                if (a == 2)
+                    level.dogs.get(i).x--;
+            } else if (level.dogs.get(i).y == 6 && level.dogs.get(i).x > 1 && level.dogs.get(i).x < 6) {
+                a = random.nextInt(3);
+                if (a == 0)
+                    level.dogs.get(i).x++;
+                if (a == 1)
+                    level.dogs.get(i).y--;
+                if (a == 2)
+                    level.dogs.get(i).x--;
+            } else if (level.dogs.get(i).x == 6 && level.dogs.get(i).y == 1) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.dogs.get(i).y++;
+                if (a == 1)
+                    level.dogs.get(i).x--;
+            } else if (level.dogs.get(i).x == 6 && level.dogs.get(i).y == 6) {
+                a = random.nextInt(2);
+                if (a == 0)
+                    level.dogs.get(i).y--;
+                if (a == 1)
+                    level.dogs.get(i).x--;
+            }
+        }
+    }
+
 
 
 }

@@ -125,6 +125,11 @@ public class InputProcessor {
         manager.mapInitialize(level);
     }
 
+    private void upgradeFactoryProcess(Level level, String name) throws IOException {
+
+        manager.UpgradeFactory(level, name);
+    }
+
     boolean flag_logout = true, flag_endgame = true, flag_end1 = true;
     Level playerLevel;
     String username;
@@ -219,7 +224,7 @@ public class InputProcessor {
                         String command = Command.toLowerCase();
                         String[] split = command.split("\\s+");
                         if (command.startsWith("start")) {
-                            if (startProcess(username, Integer.parseInt(split[1]))) {
+                            if (split.length == 2 && startProcess(username, Integer.parseInt(split[1]))) {
                                 flag_logout = false;
                                 flag_end2 = true;
                                 playerLevel = levelReturnerProcess(Integer.parseInt(split[1]));
@@ -320,6 +325,11 @@ public class InputProcessor {
             while (!(Command = scanner.nextLine()).equals("exit")) {
                 if (manager.tasksChecker(playerLevel)) {
                     playerLevel = manager.levelEnd(playerLevel);
+                    System.out.println("Please enter [menu] to go to Level menu");
+                    while (!scanner.nextLine().equals("menu")) {
+
+                    }
+                    break;
                 }
 
                 if (!turnCheck) {
@@ -333,12 +343,11 @@ public class InputProcessor {
                         pickupProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
 
                     } else if (command.startsWith("well")) {
-                        if(playerLevel.bucket.duration >-1){
+                        if (playerLevel.bucket.duration > -1) {
                             System.out.println("The bucket is getting filled now.");
-                        }else if(playerLevel.bucket.full){
+                        } else if (playerLevel.bucket.full) {
                             System.out.println("The bucket must be empty to fill it again!");
-                        }
-                        else if (playerLevel.bucket.duration == -1) {
+                        } else if (playerLevel.bucket.duration == -1) {
                             playerLevel.bucket.duration = 0;
                         }
 
@@ -397,13 +406,11 @@ public class InputProcessor {
                         buildProcess(playerLevel, split[1]);
                     } else if (command.equals("end")) {
                         playerLevel = manager.levelEnd(playerLevel);
-                        System.out.println("Please enter [menu] to go to Level menu");
-                        while (!scanner.nextLine().equals("menu")) {
-
-                        }
-                        break;
                     } else if (command.equals("inquiry")) {
                         printInfoProcess(playerLevel);
+                    } else if (command.startsWith("upgrade") && split.length == 2) {
+                        upgradeFactoryProcess(playerLevel, split[1]);
+
                     } else {
                         System.out.println(ANSI_RED + "Invalid input! Please enter your input again:" + ANSI_RESET);
                     }
