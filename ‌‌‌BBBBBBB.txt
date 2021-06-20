@@ -1,0 +1,288 @@
+public void RandomWildAnimalMove(Level level) throws IOException {
+        Random random = new Random();
+        int a;
+        for (int i = 0; i < level.lions.size(); i++) {
+            if (!level.lions.get(i).inCage) {
+                if (level.lions.get(i).x > 1 && level.lions.get(i).x < 6 && level.lions.get(i).y > 1 && level.lions.get(i).y < 6) {
+                    a = random.nextInt(4);
+                    if (a == 0)
+                        level.lions.get(i).y--;
+                    if (a == 1)
+                        level.lions.get(i).x++;
+                    if (a == 2)
+                        level.lions.get(i).y++;
+                    if (a == 3)
+                        level.lions.get(i).x--;
+                } else if (level.lions.get(i).x == 1 && level.lions.get(i).y > 1 && level.lions.get(i).y < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.lions.get(i).y--;
+                    if (a == 1)
+                        level.lions.get(i).x++;
+                    if (a == 2)
+                        level.lions.get(i).y++;
+                } else if (level.lions.get(i).x == 6 && level.lions.get(i).y > 1 && level.lions.get(i).y < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.lions.get(i).y--;
+                    if (a == 1)
+                        level.lions.get(i).x--;
+                    if (a == 2)
+                        level.lions.get(i).y++;
+                } else if (level.lions.get(i).x == 1 && level.lions.get(i).y == 1) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.lions.get(i).y++;
+                    if (a == 1)
+                        level.lions.get(i).x++;
+                } else if (level.lions.get(i).x == 1 && level.lions.get(i).y == 6) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.lions.get(i).y--;
+                    if (a == 1)
+                        level.lions.get(i).x++;
+                } else if (level.lions.get(i).y == 1 && level.lions.get(i).x > 1 && level.lions.get(i).x < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.lions.get(i).x++;
+                    if (a == 1)
+                        level.lions.get(i).y++;
+                    if (a == 2)
+                        level.lions.get(i).x--;
+                } else if (level.lions.get(i).y == 6 && level.lions.get(i).x > 1 && level.lions.get(i).x < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.lions.get(i).x++;
+                    if (a == 1)
+                        level.lions.get(i).y--;
+                    if (a == 2)
+                        level.lions.get(i).x--;
+                } else if (level.lions.get(i).x == 6 && level.lions.get(i).y == 1) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.lions.get(i).y++;
+                    if (a == 1)
+                        level.lions.get(i).x--;
+                } else if (level.lions.get(i).x == 6 && level.lions.get(i).y == 6) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.lions.get(i).y--;
+                    if (a == 1)
+                        level.lions.get(i).x--;
+                }
+            }
+        }
+
+        for (int i = 0; i < level.bears.size(); i++) {
+            if (!level.bears.get(i).inCage) {
+                if (level.bears.get(i).x > 1 && level.bears.get(i).x < 6 && level.bears.get(i).y > 1 && level.bears.get(i).y < 6) {
+                    a = random.nextInt(4);
+                    if (a == 0)
+                        level.bears.get(i).y--;
+                    if (a == 1)
+                        level.bears.get(i).x++;
+                    if (a == 2)
+                        level.bears.get(i).y++;
+                    if (a == 3)
+                        level.bears.get(i).x--;
+                } else if (level.bears.get(i).x == 1 && level.bears.get(i).y > 1 && level.bears.get(i).y < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.bears.get(i).y--;
+                    if (a == 1)
+                        level.bears.get(i).x++;
+                    if (a == 2)
+                        level.bears.get(i).y++;
+                } else if (level.bears.get(i).x == 6 && level.bears.get(i).y > 1 && level.bears.get(i).y < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.bears.get(i).y--;
+                    if (a == 1)
+                        level.bears.get(i).x--;
+                    if (a == 2)
+                        level.bears.get(i).y++;
+                } else if (level.bears.get(i).x == 1 && level.bears.get(i).y == 1) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.bears.get(i).y++;
+                    if (a == 1)
+                        level.bears.get(i).x++;
+                } else if (level.bears.get(i).x == 1 && level.bears.get(i).y == 6) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.bears.get(i).y--;
+                    if (a == 1)
+                        level.bears.get(i).x++;
+                } else if (level.bears.get(i).y == 1 && level.bears.get(i).x > 1 && level.bears.get(i).x < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.bears.get(i).x++;
+                    if (a == 1)
+                        level.bears.get(i).y++;
+                    if (a == 2)
+                        level.bears.get(i).x--;
+                } else if (level.bears.get(i).y == 6 && level.bears.get(i).x > 1 && level.bears.get(i).x < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.bears.get(i).x++;
+                    if (a == 1)
+                        level.bears.get(i).y--;
+                    if (a == 2)
+                        level.bears.get(i).x--;
+                } else if (level.bears.get(i).x == 6 && level.bears.get(i).y == 1) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.bears.get(i).y++;
+                    if (a == 1)
+                        level.bears.get(i).x--;
+                } else if (level.bears.get(i).x == 6 && level.bears.get(i).y == 6) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.bears.get(i).y--;
+                    if (a == 1)
+                        level.bears.get(i).x--;
+                }
+            }
+        }
+
+        for (int i = 0; i < level.tigers.size(); i++) {
+            if (!level.tigers.get(i).inCage) {
+                if (level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                    a = random.nextInt(4);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x++;
+                    if (a == 2)
+                        level.tigers.get(i).y++;
+                    if (a == 3)
+                        level.tigers.get(i).x--;
+                } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x++;
+                    if (a == 2)
+                        level.tigers.get(i).y++;
+                } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x--;
+                    if (a == 2)
+                        level.tigers.get(i).y++;
+                } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 1) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.tigers.get(i).y++;
+                    if (a == 1)
+                        level.tigers.get(i).x++;
+                } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 6) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x++;
+                } else if (level.tigers.get(i).y == 1 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.tigers.get(i).x++;
+                    if (a == 1)
+                        level.tigers.get(i).y++;
+                    if (a == 2)
+                        level.tigers.get(i).x--;
+                } else if (level.tigers.get(i).y == 6 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.tigers.get(i).x++;
+                    if (a == 1)
+                        level.tigers.get(i).y--;
+                    if (a == 2)
+                        level.tigers.get(i).x--;
+                } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 1) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.tigers.get(i).y++;
+                    if (a == 1)
+                        level.tigers.get(i).x--;
+                } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 6) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x--;
+                }
+                AnimalEater(level);
+                if (level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                    a = random.nextInt(4);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x++;
+                    if (a == 2)
+                        level.tigers.get(i).y++;
+                    if (a == 3)
+                        level.tigers.get(i).x--;
+                } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x++;
+                    if (a == 2)
+                        level.tigers.get(i).y++;
+                } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y > 1 && level.tigers.get(i).y < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x--;
+                    if (a == 2)
+                        level.tigers.get(i).y++;
+                } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 1) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.tigers.get(i).y++;
+                    if (a == 1)
+                        level.tigers.get(i).x++;
+                } else if (level.tigers.get(i).x == 1 && level.tigers.get(i).y == 6) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x++;
+                } else if (level.tigers.get(i).y == 1 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.tigers.get(i).x++;
+                    if (a == 1)
+                        level.tigers.get(i).y++;
+                    if (a == 2)
+                        level.tigers.get(i).x--;
+                } else if (level.tigers.get(i).y == 6 && level.tigers.get(i).x > 1 && level.tigers.get(i).x < 6) {
+                    a = random.nextInt(3);
+                    if (a == 0)
+                        level.tigers.get(i).x++;
+                    if (a == 1)
+                        level.tigers.get(i).y--;
+                    if (a == 2)
+                        level.tigers.get(i).x--;
+                } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 1) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.tigers.get(i).y++;
+                    if (a == 1)
+                        level.tigers.get(i).x--;
+                } else if (level.tigers.get(i).x == 6 && level.tigers.get(i).y == 6) {
+                    a = random.nextInt(2);
+                    if (a == 0)
+                        level.tigers.get(i).y--;
+                    if (a == 1)
+                        level.tigers.get(i).x--;
+                }
+            }
+        }
+        save();
+    }
