@@ -1,0 +1,15 @@
+public Cell ClosestIngredientC (Level level, SpecialAnimals animal) {
+        int min = 100000;
+        int minIndexX = -1;
+        int minIndexY = -1;
+        int distance = 0;
+        for (int i =0; i <level.ingredients.size(); i++){ 
+            distance  = Math.abs(level.ingredients.get(i).x - animal.x) + Math.abs(level.ingredients.get(i).y - animal.y);
+            if (min > distance){
+                min = distance;
+                minIndexX = level.ingredients.get(i).x;
+                minIndexY = level.ingredients.get(i).y;
+            }
+        }
+        return level.map.map[minIndexX-1][ minIndexY-1];
+    }
