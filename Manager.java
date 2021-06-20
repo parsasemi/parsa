@@ -519,129 +519,6 @@ public class Manager {
         save();
     }
 
-    public void MotorLoad(Level level, String name) throws IOException {
-        Ingredient ingr = StringToIngr(name);
-        WildAnimals wild = StringToAnimal(name);
-        int t = 0;
-        if (ingr != null) {
-            int e = level.storage.names.size();
-            for (int i = e - 1; i >= 0; i--) {
-                if (level.storage.names.get(i).equals(name)) {
-                    t = 1;
-                    if (level.motorCycle.capacity >= ingr.size) {
-                        level.motorCycle.capacity -= ingr.size;
-                        level.storage.names.remove(i);
-                        level.storage.quantities.remove(i);
-                        level.storage.capacity += ingr.size;
-                        level.motorCycle.names.add(name);
-                        level.motorCycle.quantities.add(1);
-                        level.motorCycle.coin += ingr.price;
-                        System.out.println(name + " loaded successfully!");
-                    } else {
-                        System.out.println("There is not enough space in the truck!");
-                    }
-                    break;
-                }
-            }
-            if (t == 0)
-                System.out.println("There is not such an ingredient.");
-        } else if (wild != null) {
-            int e = level.storage.names.size();
-            for (int i = e - 1; i >= 0; i--) {
-                if (level.storage.names.get(i).equals(name)) {
-                    t = 1;
-                    if (level.motorCycle.capacity >= wild.capacity) {
-                        level.motorCycle.capacity -= wild.capacity;
-                        level.storage.names.remove(i);
-                        level.storage.quantities.remove(i);
-                        level.storage.capacity += wild.capacity;
-                        level.motorCycle.names.add(name);
-                        level.motorCycle.quantities.add(1);
-                        level.motorCycle.coin += wild.sellPrice;
-                        System.out.println(name + " loaded successfully!");
-                    } else {
-                        System.out.println("There is not enough space in the truck!");
-                    }
-                    break;
-                }
-            }
-            if (t == 0)
-                System.out.println("There is not such an animal.");
-        }
-        if (ingr == null && wild == null)
-            System.out.println("Please enter a valid name.");
-        save();
-    }
-
-    public void MotorUnload(Level level, String name) throws IOException {
-        Ingredient ingr = StringToIngr(name);
-        WildAnimals wild = StringToAnimal(name);
-        int t = 0;
-        if (ingr != null) {
-            int e = level.storage.names.size();
-            for (int i = e - 1; i >= 0; i--) {
-                if (level.motorCycle.names.get(i).equals(name)) {
-                    if (level.storage.capacity >= ingr.size) {
-                        t = 1;
-                        level.motorCycle.names.remove(i);
-                        level.motorCycle.quantities.remove(i);
-                        level.motorCycle.capacity += ingr.size;
-                        level.storage.capacity -= ingr.size;
-                        level.storage.names.add(name);
-                        level.storage.quantities.add(1);
-                        level.motorCycle.coin -= ingr.price;
-                        System.out.println(name + " unloaded successfully!");
-                    } else {
-                        System.out.println("There is not enough space in the storage.");
-                    }
-                }
-            }
-            if (t == 0) {
-                System.out.println("There is not such an ingredient.");
-            }
-        } else if (wild != null) {
-            int e = level.storage.names.size();
-            for (int i = e - 1; i >= 0; i--) {
-                if (level.motorCycle.names.get(i).equals(name)) {
-                    if (level.storage.capacity >= wild.capacity) {
-                        t = 1;
-                        level.motorCycle.names.remove(i);
-                        level.motorCycle.quantities.remove(i);
-                        level.motorCycle.capacity += wild.capacity;
-                        level.storage.capacity -= wild.capacity;
-                        level.storage.names.add(name);
-                        level.storage.quantities.add(1);
-                        level.motorCycle.coin -= wild.sellPrice;
-                        System.out.println(name + " unloaded successfully!");
-                    } else {
-                        System.out.println("There is not enough space in the storage.");
-                    }
-                }
-            }
-            if (t == 0) {
-                System.out.println("There is not such an animal.");
-            }
-        }
-        if (ingr == null)
-            System.out.println("Please enter a valid name.");
-        save();
-    }
-
-    public void MotorStart(Level level) throws IOException {
-        if (level.motorCycle.counter >= level.motorCycle.Max) {
-            level.motorCycle.counter = -1;
-            level.motorCycle.capacity = 10;
-            level.motorCycle.names.clear();
-            level.motorCycle.quantities.clear();
-            level.coin += level.motorCycle.coin;
-            level.task.totalCoin += level.motorCycle.coin;
-        } else if (level.motorCycle.counter >= 0)
-            level.motorCycle.counter++;
-        // check kardan por boodan truck
-        save();
-
-    }
-
     public Ingredient StringToIngr(String name) throws IOException {
         if (name.equals("bread")) {
             save();
@@ -661,6 +538,9 @@ public class Manager {
         } else if (name.equals("weave")) {
             save();
             return new Ingredient.Weave(1, 1);
+        } else if (name.equals("egg")) {
+            save();
+            return new Ingredient.Egg(1, 1);
         } else {
             return null;
         }
@@ -717,13 +597,32 @@ public class Manager {
             for (int i = 0; i < level.cats.size(); i++) {
                 int x = level.cats.get(i).x;
                 int y = level.cats.get(i).y;
-                for (int j = 0; j < level.ingredients.size(); j++) {
+                int e = level.ingredients.size();
+                for (int j = e - 1; j >= 0; j--) {
                     if (level.ingredients.get(j).x == x && level.ingredients.get(j).y == y) {
                         if (level.storage.capacity >= level.ingredients.get(j).size) {
                             level.storage.names.add(level.ingredients.get(j).name);
                             level.storage.quantities.add(1);
                             level.storage.capacity -= level.ingredients.get(j).size;
-                            level.ingredients.remove(j);
+                            if (level.ingredients.get(j).name.equals("egg")) {
+                                level.task.eggCounter++;
+                            } else if (level.ingredients.get(j).name.equals("flour")) {
+                                level.task.flourCounter++;
+                            } else if (level.ingredients.get(j).name.equals("milk")) {
+                                level.task.milkCounter++;
+                            } else if (level.ingredients.get(j).name.equals("cmilk")) {
+                                level.task.cmilkCounter++;
+                            } else if (level.ingredients.get(j).name.equals("weave")) {
+                                level.task.weaveCounter++;
+                            } else if (level.ingredients.get(j).name.equals("icecream")) {
+                                level.task.iceCreamCounter++;
+                            } else if (level.ingredients.get(j).name.equals("feather")) {
+                                level.task.featherCounter++;
+                            } else if (level.ingredients.get(j).name.equals("cloth")) {
+                                level.task.clothCounter++;
+                            } else if (level.ingredients.get(j).name.equals("bread")) {
+                                level.task.breadCounter++;
+                            }
                         }
                     }
                 }
@@ -932,7 +831,7 @@ public class Manager {
                 System.out.println(ANSI_YELLOW + "Level finished! Level " + (level.levelNumber + 1) + " unlocked!" + ANSI_RESET);
                 System.out.println(ANSI_PURPLE + "You recieve a silver Medal for finishing the level before the third time objective!" + ANSI_RESET);
                 taskCheck = true;
-            }else if (level.task.timeCheck1 && level.task.timeCheck2 && level.task.timeCheck3) {
+            } else if (level.task.timeCheck1 && level.task.timeCheck2 && level.task.timeCheck3) {
 
                 System.out.println(ANSI_YELLOW + "Meeeeeh okay... Level finished! Level " + (level.levelNumber + 1) + " unlocked!" + ANSI_RESET);
                 System.out.println(ANSI_PURPLE + "You recieve a golden banana for finishing the level after the third time objective!" + ANSI_RESET);
@@ -946,7 +845,7 @@ public class Manager {
 
     }
 
-    public void timeTaskchecker(Level level){
+    public void timeTaskchecker(Level level) {
         if (level.task.timeCounter >= level.task.timeObj1) {
             level.task.timeCheck1 = true;
         }
@@ -1138,6 +1037,7 @@ public class Manager {
         levels.add(newLevel);
         save();
         return newLevel;
+
     }
 
     public Level newLevel(int levelNumber, Level level) throws IOException {
@@ -1217,8 +1117,8 @@ public class Manager {
         level.task.chickenObj = 4;
         level.task.taskObj = 2;
         level.task.timeObj1 = 10;
-        level.task.timeObj1 = 12;
-        level.task.timeObj1 = 16;
+        level.task.timeObj2 = 12;
+        level.task.timeObj3 = 16;
 
 
         File file1 = new File("");
@@ -3177,42 +3077,42 @@ public class Manager {
         if (t == 1) {
             for (int i = 0; i < level.chickens.size(); i++) {
                 Cell closestCell = ClosestGrass(level, level.chickens.get(i));
-                if (level.chickens.get(i).x > closestCell.x) {
+                if (level.chickens.get(i).x > closestCell.x + 1) {
                     level.chickens.get(i).x--;
-                } else if (level.chickens.get(i).x < closestCell.x+1) {
+                } else if (level.chickens.get(i).x < closestCell.x + 1) {
                     level.chickens.get(i).x++;
-                } else if (level.chickens.get(i).x == closestCell.x+1) {
-                    if (level.chickens.get(i).y > closestCell.y+1) {
+                } else if (level.chickens.get(i).x == closestCell.x + 1) {
+                    if (level.chickens.get(i).y > closestCell.y + 1) {
                         level.chickens.get(i).y--;
-                    } else if (level.chickens.get(i).y < closestCell.y+1) {
+                    } else if (level.chickens.get(i).y < closestCell.y + 1) {
                         level.chickens.get(i).y++;
                     }
                 }
             }
             for (int i = 0; i < level.buffalos.size(); i++) {
                 Cell closestCell = ClosestGrass(level, level.buffalos.get(i));
-                if (level.buffalos.get(i).x > closestCell.x+1) {
+                if (level.buffalos.get(i).x > closestCell.x + 1) {
                     level.buffalos.get(i).x--;
-                } else if (level.buffalos.get(i).x < closestCell.x+1) {
+                } else if (level.buffalos.get(i).x < closestCell.x + 1) {
                     level.buffalos.get(i).x++;
-                } else if (level.buffalos.get(i).x == closestCell.x+1) {
-                    if (level.buffalos.get(i).y > closestCell.y+1) {
+                } else if (level.buffalos.get(i).x == closestCell.x + 1) {
+                    if (level.buffalos.get(i).y > closestCell.y + 1) {
                         level.buffalos.get(i).y--;
-                    } else if (level.buffalos.get(i).y < closestCell.y+1) {
+                    } else if (level.buffalos.get(i).y < closestCell.y + 1) {
                         level.buffalos.get(i).y++;
                     }
                 }
             }
             for (int i = 0; i < level.turkies.size(); i++) {
                 Cell closestCell = ClosestGrass(level, level.turkies.get(i));
-                if (level.turkies.get(i).x > closestCell.x+1) {
+                if (level.turkies.get(i).x > closestCell.x + 1) {
                     level.turkies.get(i).x--;
-                } else if (level.turkies.get(i).x < closestCell.x+1) {
+                } else if (level.turkies.get(i).x < closestCell.x + 1) {
                     level.turkies.get(i).x++;
-                } else if (level.turkies.get(i).x == closestCell.x+1) {
-                    if (level.turkies.get(i).y > closestCell.y+1) {
+                } else if (level.turkies.get(i).x == closestCell.x + 1) {
+                    if (level.turkies.get(i).y > closestCell.y + 1) {
                         level.turkies.get(i).y--;
-                    } else if (level.turkies.get(i).y < closestCell.y+1) {
+                    } else if (level.turkies.get(i).y < closestCell.y + 1) {
                         level.turkies.get(i).y++;
                     }
                 }
@@ -3229,7 +3129,7 @@ public class Manager {
             } else if (level.cats.get(i).x < closestCell.x + 1) {
                 level.cats.get(i).x++;
             } else if (level.cats.get(i).x == closestCell.x + 1) {
-                if (level.cats.get(i).y > closestCell.y) {
+                if (level.cats.get(i).y > closestCell.y + 1) {
                     level.cats.get(i).y--;
                 } else if (level.cats.get(i).y < closestCell.y + 1) {
                     level.cats.get(i).y++;
@@ -3268,6 +3168,272 @@ public class Manager {
         }
     }
 
+    public void MotorLoad(Level level, String name) throws IOException {
+        Ingredient ingr = StringToIngr(name);
+        WildAnimals wild = StringToAnimal(name);
+        DomesticAnimals dom = StringToAnimalDomestic(name);
+        int t = 0;
+        if (level.motorCycle.counter == -1) {
+            if (ingr != null) {
+                int e = level.storage.names.size();
+                for (int i = e - 1; i >= 0; i--) {
+                    if (level.storage.names.get(i).equals(name)) {
+                        t = 1;
+                        if (level.motorCycle.capacity >= ingr.size) {
+                            level.motorCycle.capacity -= ingr.size;
+                            level.storage.names.remove(i);
+                            level.storage.quantities.remove(i);
+                            level.storage.capacity += ingr.size;
+                            level.motorCycle.names.add(name);
+                            level.motorCycle.quantities.add(1);
+                            level.motorCycle.coin += ingr.price;
+                            System.out.println(name + " loaded successfully!");
+                        } else {
+                            System.out.println("There is not enough space in the truck!");
+                        }
+                        break;
+                    }
+                }
+                if (t == 0)
+                    System.out.println("There is not such an ingredient.");
+            } else if (wild != null) {
+                int e = level.storage.names.size();
+                for (int i = e - 1; i >= 0; i--) {
+                    if (level.storage.names.get(i).equals(name)) {
+                        t = 1;
+                        if (level.motorCycle.capacity >= wild.capacity) {
+                            level.motorCycle.capacity -= wild.capacity;
+                            level.storage.names.remove(i);
+                            level.storage.quantities.remove(i);
+                            level.storage.capacity += wild.capacity;
+                            level.motorCycle.names.add(name);
+                            level.motorCycle.quantities.add(1);
+                            level.motorCycle.coin += wild.sellPrice;
+                            System.out.println(name + " loaded successfully!");
+                        } else {
+                            System.out.println("There is not enough space in the truck!");
+                        }
+                        break;
+                    }
+                }
+                if (t == 0)
+                    System.out.println("There is not such an animal.");
+            } else if (dom != null) {
+                if (name.equals("chicken")) {
+                    int e = level.chickens.size();
+                    for (int i = e - 1; i >= 0; i--) {
+                        if (true) {
+                            t = 1;
+                            if (level.motorCycle.capacity >= dom.capacity) {
+                                level.motorCycle.capacity -= dom.capacity;
+                                level.chickens.remove(i);
+                                level.motorCycle.names.add(name);
+                                level.motorCycle.quantities.add(1);
+                                level.motorCycle.coin += dom.sellPrice;
+                                System.out.println(name + " loaded successfully!");
+                            } else {
+                                System.out.println("There is not enough space in the truck!");
+                            }
+                            break;
+                        }
+                    }
+                }
+                if (name.equals("buffalo")) {
+                    int e = level.buffalos.size();
+                    for (int i = e - 1; i >= 0; i--) {
+                        if (true) {
+                            t = 1;
+                            if (level.motorCycle.capacity >= dom.capacity) {
+                                level.motorCycle.capacity -= dom.capacity;
+                                level.buffalos.remove(i);
+                                level.motorCycle.names.add(name);
+                                level.motorCycle.quantities.add(1);
+                                level.motorCycle.coin += dom.sellPrice;
+                                System.out.println(name + " loaded successfully!");
+                            } else {
+                                System.out.println("There is not enough space in the truck!");
+                            }
+                            break;
+                        }
+                    }
+                }
+                if (name.equals("turkey")) {
+                    int e = level.turkies.size();
+                    for (int i = e - 1; i >= 0; i--) {
+                        if (true) {
+                            t = 1;
+                            if (level.motorCycle.capacity >= dom.capacity) {
+                                level.motorCycle.capacity -= dom.capacity;
+                                level.turkies.remove(i);
+                                level.motorCycle.names.add(name);
+                                level.motorCycle.quantities.add(1);
+                                level.motorCycle.coin += dom.sellPrice;
+                                System.out.println(name + " loaded successfully!");
+                            } else {
+                                System.out.println("There is not enough space in the truck!");
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                if (t == 0)
+                    System.out.println("There is not such an animal.");
+            }
+            if (ingr == null && wild == null && dom == null)
+                System.out.println("Please enter a valid name.");
+        } else
+            System.out.println("Truck is on the way!");
+        save();
+    }
+
+    public void MotorUnload(Level level, String name) throws IOException {
+        Ingredient ingr = StringToIngr(name);
+        WildAnimals wild = StringToAnimal(name);
+        DomesticAnimals dom = StringToAnimalDomestic(name);
+        int t = 0;
+        if (level.motorCycle.counter == -1) {
+            if (ingr != null) {
+                int e = level.motorCycle.names.size();
+                for (int i = e - 1; i >= 0; i--) {
+                    if (level.motorCycle.names.get(i).equals(name)) {
+                        if (level.storage.capacity >= ingr.size) {
+                            t = 1;
+                            level.motorCycle.names.remove(i);
+                            level.motorCycle.quantities.remove(i);
+                            level.motorCycle.capacity += ingr.size;
+                            level.storage.capacity -= ingr.size;
+                            level.storage.names.add(name);
+                            level.storage.quantities.add(1);
+                            level.motorCycle.coin -= ingr.price;
+                            System.out.println(name + " unloaded successfully!");
+                        } else {
+                            System.out.println("There is not enough space in the storage.");
+                        }
+                    }
+                }
+                if (t == 0) {
+                    System.out.println("There is not such an ingredient.");
+                }
+            } else if (wild != null) {
+                int e = level.motorCycle.names.size();
+                for (int i = e - 1; i >= 0; i--) {
+                    if (level.motorCycle.names.get(i).equals(name)) {
+                        if (level.storage.capacity >= wild.capacity) {
+                            t = 1;
+                            level.motorCycle.names.remove(i);
+                            level.motorCycle.quantities.remove(i);
+                            level.motorCycle.capacity += wild.capacity;
+                            level.storage.capacity -= wild.capacity;
+                            level.storage.names.add(name);
+                            level.storage.quantities.add(1);
+                            level.motorCycle.coin -= wild.sellPrice;
+                            System.out.println(name + " unloaded successfully!");
+                        } else {
+                            System.out.println("There is not enough space in the storage.");
+                        }
+                    }
+                }
+                if (t == 0) {
+                    System.out.println("There is not such an animal.");
+                }
+            } else if (dom != null) {
+                if (name.equals("chicken")) {
+                    int e = level.motorCycle.names.size();
+                    for (int i = e - 1; i >= 0; i--) {
+                        if (level.motorCycle.names.get(i).equals(name)) {
+                            if (level.storage.capacity >= dom.capacity) {
+                                t = 1;
+                                level.motorCycle.names.remove(i);
+                                level.motorCycle.quantities.remove(i);
+                                level.motorCycle.capacity += dom.capacity;
+                                level.chickens.add(new DomesticAnimals.Chicken(1, 1));
+                                level.motorCycle.coin -= dom.sellPrice;
+                                System.out.println(name + " unloaded successfully!");
+                            } else {
+                                System.out.println("There is not enough space in the storage.");
+                            }
+                        }
+                    }
+                }
+                if (name.equals("buffalo")) {
+                    int e = level.motorCycle.names.size();
+                    for (int i = e - 1; i >= 0; i--) {
+                        if (level.motorCycle.names.get(i).equals(name)) {
+                            if (level.storage.capacity >= dom.capacity) {
+                                t = 1;
+                                level.motorCycle.names.remove(i);
+                                level.motorCycle.quantities.remove(i);
+                                level.motorCycle.capacity += dom.capacity;
+                                level.buffalos.add(new DomesticAnimals.Buffalo(1, 1));
+                                level.motorCycle.coin -= dom.sellPrice;
+                                System.out.println(name + " unloaded successfully!");
+                            } else {
+                                System.out.println("There is not enough space in the storage.");
+                            }
+                        }
+                    }
+                }
+                if (name.equals("turkey")) {
+                    int e = level.motorCycle.names.size();
+                    for (int i = e - 1; i >= 0; i--) {
+                        if (level.motorCycle.names.get(i).equals(name)) {
+                            if (level.storage.capacity >= dom.capacity) {
+                                t = 1;
+                                level.motorCycle.names.remove(i);
+                                level.motorCycle.quantities.remove(i);
+                                level.motorCycle.capacity += dom.capacity;
+                                level.turkies.add(new DomesticAnimals.Turkey(1, 1));
+                                level.motorCycle.coin -= dom.sellPrice;
+                                System.out.println(name + " unloaded successfully!");
+                            } else {
+                                System.out.println("There is not enough space in the storage.");
+                            }
+                        }
+                    }
+                }
+                if (t == 0) {
+                    System.out.println("There is not such an animal.");
+                }
+            }
+            if (ingr == null && wild == null && dom == null)
+                System.out.println("Please enter a valid name.");
+        } else
+            System.out.println("Truck is on the way!");
+        save();
+    }
+
+    public void MotorStart(Level level) throws IOException {
+        if (level.motorCycle.counter >= level.motorCycle.Max) {
+            level.motorCycle.counter = -1;
+            level.motorCycle.capacity = 10;
+            level.motorCycle.names.clear();
+            level.motorCycle.quantities.clear();
+            level.coin += level.motorCycle.coin;
+            level.task.totalCoin += level.motorCycle.coin;
+        } else if (level.motorCycle.counter >= 0)
+            level.motorCycle.counter++;
+        // check kardan por boodan truck
+        save();
+
+    }
+
+    public DomesticAnimals StringToAnimalDomestic(String name) throws IOException {
+        if (name.equals("chicken")) {
+            save();
+            return new DomesticAnimals.Chicken(1, 1);
+        }
+        if (name.equals("turkey")) {
+            save();
+            return new DomesticAnimals.Turkey(1, 1);
+        }
+        if (name.equals("buffalo")) {
+            save();
+            return new DomesticAnimals.Buffalo(1, 1);
+        } else
+            return null;
+    }
+
     public void turn(Level playerLevel, int turnCounter) throws IOException {
         for (int i = 0; i < turnCounter; i++) {
             playerLevel.task.timeCounter++;
@@ -3293,7 +3459,9 @@ public class Manager {
 
         }
         save();
-        printInfo(playerLevel);
+        if (!playerLevel.TaskCheck) {
+            printInfo(playerLevel);
+        }
         Date date = new Date();
         log += ("[Info] " + date + turnCounter + "Time units passed.\n");
         logWriter();

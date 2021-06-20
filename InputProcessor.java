@@ -396,7 +396,7 @@ public class InputProcessor {
                         truckUnloadProcess(playerLevel, split[2]);
 
                     } else if (command.equals("truck go")) {
-                        if (playerLevel.motorCycle.capacity != 15) {
+                        if (playerLevel.motorCycle.names.size() > 0) {
                             playerLevel.motorCycle.counter = 0;
                         } else {
                             System.out.println(ANSI_RED + "The truck is empty now!" + ANSI_RESET);
@@ -404,13 +404,15 @@ public class InputProcessor {
 
                     } else if (command.startsWith("build")) {
                         buildProcess(playerLevel, split[1]);
-                    } else if (command.equals("end")) {
-                        playerLevel = manager.levelEnd(playerLevel);
-                    } else if (command.equals("inquiry")) {
+                    }  else if (command.equals("inquiry")) {
                         printInfoProcess(playerLevel);
                     } else if (command.startsWith("upgrade") && split.length == 2) {
                         upgradeFactoryProcess(playerLevel, split[1]);
 
+                    } else if(command.equals("end")){
+                        System.out.println("Please enter [menu] to go to Level menu");
+                        playerLevel = manager.levelEnd(playerLevel);
+                        break;
                     } else {
                         System.out.println(ANSI_RED + "Invalid input! Please enter your input again:" + ANSI_RESET);
                     }
