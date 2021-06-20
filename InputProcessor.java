@@ -59,7 +59,7 @@ public class InputProcessor {
 
     }
 
-    private void wellProcess(Level level, int counter) throws IOException {
+    private void wellProcess(Level level) throws IOException {
         manager.Well(level);
         saveProcess();
 
@@ -321,9 +321,9 @@ public class InputProcessor {
             String Command;
             Boolean turnCheck = false;
             int turnCounter = 0;
-            ArrayList<String> commands = new ArrayList<>();
+
             while (!(Command = scanner.nextLine()).equals("exit")) {
-                if (manager.tasksChecker(playerLevel)) {
+                if (playerLevel.TaskCheck) {
                     playerLevel = manager.levelEnd(playerLevel);
                     System.out.println("Please enter [menu] to go to Level menu");
                     while (!scanner.nextLine().equals("menu")) {
@@ -383,7 +383,7 @@ public class InputProcessor {
                         workProcess(split[1], playerLevel);
 
                     } else if (command.startsWith("cage")) {
-                        //  cageProcess();
+                          cageProcess(Integer.parseInt(split[1]),Integer.parseInt(split[2]),playerLevel);
 
                     } else if (command.startsWith("turn") && split.length == 2) {
                         turnCounter = Integer.parseInt(split[1]);
@@ -418,7 +418,6 @@ public class InputProcessor {
                 if (turnCheck) {
                     turnProcess(playerLevel, turnCounter);
                     turnCheck = false;
-                    manager.printInfo(playerLevel);
                 }
             }
             flag_endgame = false;
