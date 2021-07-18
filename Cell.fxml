@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="Ground" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="116.6" prefWidth="150.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.TileWrapper">
+   <children>
+      <ChoiceBox fx:id="Ingeridient00" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="20.0" prefWidth="44.0" />
+      <ChoiceBox fx:id="Animal00" layoutX="106.0" maxHeight="-Infinity" minHeight="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="20.0" prefWidth="44.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </ChoiceBox>
+      <ImageView fx:id="C00" fitHeight="74.0" fitWidth="54.0" layoutX="1.0" layoutY="22.0" pickOnBounds="true" />
+      <ImageView fx:id="T00" fitHeight="68.0" fitWidth="54.0" layoutX="99.0" layoutY="24.0" pickOnBounds="true" />
+      <ImageView fx:id="B00" fitHeight="87.0" fitWidth="77.0" layoutX="38.0" layoutY="19.0" pickOnBounds="true" />
+      <ImageView fx:id="Grass00" fitHeight="33.0" fitWidth="160.0" layoutX="-5.0" layoutY="85.0" pickOnBounds="true" />
+      <Label fx:id="GrassLabel00" alignment="CENTER" layoutX="40.0" layoutY="90.0" prefHeight="26.0" prefWidth="75.0" text="Label">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="BCounter00" alignment="CENTER" contentDisplay="RIGHT" layoutX="74.0" layoutY="51.0" text="B" />
+      <Label fx:id="TCounter00" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="-3.0" layoutY="44.0" prefHeight="30.0" prefWidth="30.0" text="T" />
+      <Label fx:id="CCounter00" layoutX="121.0" layoutY="36.0" prefHeight="47.0" prefWidth="34.0" text="C" />
+      <ImageView fx:id="Alert00" fitHeight="22.0" fitWidth="39.0" layoutX="57.0" layoutY="-1.0" pickOnBounds="true" />
+   </children>
+</Pane>
