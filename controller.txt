@@ -1,0 +1,41 @@
+public void readLevel() throws IOException {
+
+        final int levelNumber = MapController.getLevelNumber();
+        final String username = MapController.getUsername();
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        absolutePath += ("/Graphics/LevelsInfo"+username+".json");
+        File file2 = new File(absolutePath);
+        //ArrayList<Level> levels = new ArrayList<>();
+        if (file2.exists()) {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get(absolutePath));
+            levels.clear();
+            List<Level> temp = Arrays.asList(gson.fromJson(reader, Level[].class));
+            levels.addAll(temp);
+            for (Level l:levels) {
+                if(l.levelNumber==levelNumber){
+                    playerLevel = l;
+                    break;
+                }
+            }
+            reader.close();
+        }
+    }
+
+    public void saveLevel() throws IOException {
+        File file1 = new File("");
+        String absolutePath = file1.getAbsolutePath();
+        for (Level l : levels) {
+            if (l.levelNumber == 1) {
+                absolutePath += "/Graphics/LevelsInfo" + l.playerName + ".json";
+                System.out.println(absolutePath);
+                break;
+            }
+        }
+        Gson write = new GsonBuilder().setPrettyPrinting().create();
+        FileWriter fileWriter = new FileWriter(absolutePath);
+        write.toJson(levels, fileWriter);
+        fileWriter.flush();
+        fileWriter.close();
+    }
