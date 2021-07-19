@@ -50,6 +50,8 @@ public class Controller implements Initializable
     @FXML private Button Menu;
     @FXML private Button Bucket;
     @FXML private Button Turn;
+    private Image fillBucketpng = new Image(getClass().getResourceAsStream("FillBucket.png"));
+    private Image emptyBucketpng = new Image(getClass().getResourceAsStream("EmptyBucket.png"));
     private Image image = new Image(getClass().getResourceAsStream("Grass.png"));
     private Image chickenpng = new Image(getClass().getResourceAsStream("Chicken.png"));
     private Image turkeypng = new Image(getClass().getResourceAsStream("Turkey.png"));
@@ -184,11 +186,42 @@ public class Controller implements Initializable
 
             // manager.Well(playerLevel);
         });
-      //  BucketImage.setImage();
+
+        Storage.setOnAction(actionEvent -> {
+            Stage popupWindow = new Stage();
+
+            popupWindow.initModality(Modality.APPLICATION_MODAL);
+            popupWindow.setTitle("Level finished");
+            Label label1 = new Label("Level finished!");
+            Button close = new Button("Close");
+            close.setOnAction(e->{
+                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.close();
+            });
+            close.setId("close");
+            VBox vBox = new VBox(10);
+            vBox.getChildren().addAll(label1, close);
+            vBox.setAlignment(Pos.CENTER);
+            Scene scene1 = new Scene(vBox, 400, 400);
+            popupWindow.centerOnScreen();
+
+            scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            popupWindow.setScene(scene1);
+            popupWindow.showAndWait();
+
+        });
+        try {
+            readLevel();
+            if (playerLevel.bucket.capacity>=5) {
+                BucketImage.setImage(fillBucketpng);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Bucket.setOnAction(actionEvent -> {
             try {
                 readLevel();
-                manager.Well(playerLevel);
+                playerLevel.bucket.duration=0;
                 saveLevel();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -205,6 +238,9 @@ public class Controller implements Initializable
                 tile.grass.setOnMouseClicked(mouseEvent -> {
                     try {
                         readLevel();
+                        if (playerLevel.bucket.capacity<=1){
+                            BucketImage.setImage(emptyBucketpng);
+                        }
                         manager.Plant(x,y,playerLevel);
                         System.out.println(playerLevel.map.map[x-1][y-1].grass);
                         if (playerLevel.map.map[x-1][y-1].grass>=1){
@@ -367,6 +403,7 @@ public class Controller implements Initializable
         }
         Turn.setOnAction(actionEvent -> {
             try {
+                System.out.println(playerLevel.bucket.duration);
                 readLevel();
                 manager.turn(playerLevel, 1);
                 ////Animals & ChoiceBox
@@ -513,6 +550,13 @@ public class Controller implements Initializable
 
                     }
 
+                }
+
+                if (!playerLevel.bucket.full){
+                    BucketImage.setImage(emptyBucketpng);
+                }
+                else{
+                    BucketImage.setImage(fillBucketpng);
                 }
                 /////
 
