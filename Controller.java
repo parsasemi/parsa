@@ -1,7 +1,6 @@
 package Graphics;
 
 import LevelDesign.Level;
-import LevelDesign.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.beans.value.ChangeListener;
@@ -50,6 +49,24 @@ public class Controller implements Initializable
     @FXML private Button Menu;
     @FXML private Button Bucket;
     @FXML private Button Turn;
+    @FXML private Button pause;
+    @FXML private GridPane StorageView;
+
+    @FXML private Label EggLabel;
+    @FXML private Label FeatherLabel;
+    @FXML private Label MilkLabel;
+    @FXML private Label FlourLabel;
+    @FXML private Label WeaveLabel;
+    @FXML private Label CMilkLabel;
+    @FXML private Label BreadLabel;
+    @FXML private Label ClothLabel;
+    @FXML private Label IceCreamLabel;
+    @FXML private Label LionLabel;
+    @FXML private Label BearLabel;
+    @FXML private Label TigerLabel;
+
+
+
     private Image fillBucketpng = new Image(getClass().getResourceAsStream("FillBucket.png"));
     private Image emptyBucketpng = new Image(getClass().getResourceAsStream("EmptyBucket.png"));
     private Image image = new Image(getClass().getResourceAsStream("Grass.png"));
@@ -82,6 +99,9 @@ public class Controller implements Initializable
                     playerLevel = l;
                     break;
                 }
+            }
+            if (!playerLevel.levelStarted){
+                manager.mapInitialize(playerLevel);
             }
             reader.close();
         }
@@ -118,27 +138,63 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Menu.setOnAction(actionEvent -> {
-              /*  playerLevel = manager.levelEnd(playerLevel);
-                saveLevel();*/
 
 
+
+
+
+
+
+
+
+        //CHECKING IF THE LEVEL IS FINISHED
+        try {
+            readLevel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (playerLevel.task.taskCheck) {
             Stage popupWindow = new Stage();
             popupWindow.initModality(Modality.APPLICATION_MODAL);
-            popupWindow.setTitle("Error");
-            Label label1 = new Label("Level finished!");
+            popupWindow.setTitle("Level finished!");
+
+            String string = "";
+
+            if (playerLevel.task.taskCounter == playerLevel.task.taskObj) {
+                try {
+                    playerLevel = manager.levelEnd(playerLevel,levels);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (!playerLevel.task.timeCheck1 && !playerLevel.task.timeCheck2 && !playerLevel.task.timeCheck3) {
+                    string += ("Level finished! Level " + (playerLevel.levelNumber + 1) + " unlocked!\n" + "You recieve a golden Medal for finishing the level before the first time objective!");
+                } else if (playerLevel.task.timeCheck1 && !playerLevel.task.timeCheck2 && !playerLevel.task.timeCheck3) {
+
+                    string += ("Level finished! Level " + (playerLevel.levelNumber + 1) + " unlocked!\n" + "You recieve a silver Medal for finishing the level before the first time objective!");
+                } else if (playerLevel.task.timeCheck1 && playerLevel.task.timeCheck2 && !playerLevel.task.timeCheck3) {
+
+                    string += ("Level finished! Level " + (playerLevel.levelNumber + 1) + " unlocked!\n" + "You recieve a bronze Medal for finishing the level before the first time objective!");
+
+                } else if (playerLevel.task.timeCheck1 && playerLevel.task.timeCheck2 && playerLevel.task.timeCheck3) {
+
+                    string += ("Level finished! Level " + (playerLevel.levelNumber + 1) + " unlocked!\n" + "You recieve a NOTHING!!! for finishing the level before the first time objective!");
+
+                }
+            }
+
+
+            Label label1 = new Label(string);
+            label1.setText(string);
             Button close = new Button("Close");
             close.setId("close");
             close.setOnAction(e -> {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("mapp.fxml"));
-
                 try {
                     root = loader.load();
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-                stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                stage.close();
                 stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
                 stage.close();
 
@@ -160,8 +216,98 @@ public class Controller implements Initializable
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-                for (Button button: buttons) {
-                    if(Integer.parseInt(button.getText())>max){
+                for (Button button : buttons) {
+                    if (Integer.parseInt(button.getText()) > max) {
+                        button.setDisable(true);
+                    }
+                }
+                scene = new Scene(root, 700, 500);
+                scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.show();
+                try {
+                    saveLevel();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+
+            });
+            VBox vBox = new VBox(10);
+            vBox.getChildren().addAll(label1, close);
+            vBox.setAlignment(Pos.CENTER);
+            Scene scene1 = new Scene(vBox, 500, 500);
+            popupWindow.centerOnScreen();
+
+            scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            popupWindow.setScene(scene1);
+            popupWindow.showAndWait();
+
+        }
+        try {
+            saveLevel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        Menu.setOnAction(actionEvent -> {
+
+        });
+
+
+
+        pause.setOnAction(actionEvent -> {
+            try {
+                readLevel();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Stage popupWindow = new Stage();
+            popupWindow.initModality(Modality.APPLICATION_MODAL);
+            popupWindow.setTitle("Level finished");
+
+            Button close = new Button("Resume");
+            close.setOnAction(e -> {
+                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.close();
+            });
+
+            Button map = new Button("Map");
+            map.setOnAction(e->{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("mapp.fxml"));
+                try {
+                    root = loader.load();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.close();
+
+
+                MapController mapController = loader.getController();
+                mapController.username = MapController.getUsername();
+                ArrayList<Button> buttons = new ArrayList<>();
+                buttons.add(mapController.level1);
+                buttons.add(mapController.level2);
+                buttons.add(mapController.level3);
+                buttons.add(mapController.level4);
+                buttons.add(mapController.level5);
+                buttons.add(mapController.level6);
+                buttons.add(mapController.level7);
+                buttons.add(mapController.level8);
+                int max = 0;
+                try {
+                    max = manager.levelCheck(MapController.getUsername());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                for (Button button : buttons) {
+                    if (Integer.parseInt(button.getText()) > max) {
                         button.setDisable(true);
                     }
                 }
@@ -174,7 +320,7 @@ public class Controller implements Initializable
 
             });
             VBox vBox = new VBox(10);
-            vBox.getChildren().addAll(label1, close);
+            vBox.getChildren().addAll(close,map);
             vBox.setAlignment(Pos.CENTER);
             Scene scene1 = new Scene(vBox, 400, 400);
             popupWindow.centerOnScreen();
@@ -182,38 +328,55 @@ public class Controller implements Initializable
             scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
             popupWindow.setScene(scene1);
             popupWindow.showAndWait();
-
-
-            // manager.Well(playerLevel);
+            try {
+                saveLevel();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
+
 
         Storage.setOnAction(actionEvent -> {
             Stage popupWindow = new Stage();
+            try {
+                StorageView = FXMLLoader.load(getClass().getResource("StorageMenu.fxml"));
+                Scene sCene = new Scene(StorageView);
+                popupWindow.centerOnScreen();
+                popupWindow.setScene(sCene);
+                popupWindow.initModality(Modality.APPLICATION_MODAL);
+                popupWindow.setTitle("Storage");
+                readLevel();
+                popupWindow.show();
+                saveLevel();
 
-            popupWindow.initModality(Modality.APPLICATION_MODAL);
-            popupWindow.setTitle("Level finished");
-            Label label1 = new Label("Level finished!");
-            Button close = new Button("Close");
-            close.setOnAction(e->{
-                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                stage.close();
-            });
-            close.setId("close");
-            VBox vBox = new VBox(10);
-            vBox.getChildren().addAll(label1, close);
-            vBox.setAlignment(Pos.CENTER);
-            Scene scene1 = new Scene(vBox, 400, 400);
-            popupWindow.centerOnScreen();
-
-            scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-            popupWindow.setScene(scene1);
-            popupWindow.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+//            Label label1 = new Label("Level finished!");
+//            Button close = new Button("Close");
+//            close.setOnAction(e->{
+//                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+//                stage.close();
+//            });
+//            close.setId("close");
+//            VBox vBox = new VBox(10);
+//            vBox.getChildren().addAll(label1, close);
+//            vBox.setAlignment(Pos.CENTER);
+//            Scene scene1 = new Scene(vBox, 400, 400);
+//            popupWindow.centerOnScreen();
+//
+//            scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+//            popupWindow.setScene(scene1);
+//            popupWindow.showAndWait();
 
         });
         try {
             readLevel();
             if (playerLevel.bucket.capacity>=5) {
                 BucketImage.setImage(fillBucketpng);
+            }
+            else {
+                BucketImage.setImage(emptyBucketpng);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -380,6 +543,9 @@ public class Controller implements Initializable
                 tile.ingredient.getItems().addAll(s);
                 s.clear();
                 tile.ingredient.getItems().addAll(s);
+                if (!tile.ingredient.getItems().contains("ingredient")){
+                    tile.ingredient.getItems().add("ingredient");
+                }
                 for (int t=0 ; t<playerLevel.chickens.size();t++){
                     if (playerLevel.chickens.get(t).x==x && playerLevel.chickens.get(t).y==y){
                         s.add("Chicken    "+ playerLevel.chickens.get(t).health);
@@ -397,13 +563,40 @@ public class Controller implements Initializable
 
                 //////
 
+                tile.ingredient.valueProperty().addListener(new ChangeListener<String>() {
+                    @Override
+                    public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                        if (t1 != null) {
+
+                            String[] e = t1.split("\\s+");
+                            try {
+                                readLevel();
+                                for (int i = 0; i < playerLevel.ingredients.size(); i++) {
+                                    if (e[0].equals(playerLevel.ingredients.get(i).name) && e[1].equals(playerLevel.ingredients.get(i).expire+"")) {
+                                        if (playerLevel.ingredients.get(i).x-1 == tile.x && playerLevel.ingredients.get(i).y-1 == tile.y) {
+                                            System.out.println(t1);
+                                            playerLevel.storage.names.add(playerLevel.ingredients.get(i).name);
+                                            playerLevel.ingredients.remove(playerLevel.ingredients.get(i));
+                                            tile.ingredient.getItems().remove(t1);
+                                            break;
+                                        }
+                                    }
+
+                                }
+                                saveLevel();
+                            } catch (IOException ioException) {
+                                ioException.printStackTrace();
+                            }
+                        }
+                    }
+                });
+
 
                 Map.add(tile, j,i);
             }
         }
         Turn.setOnAction(actionEvent -> {
             try {
-                System.out.println(playerLevel.bucket.duration);
                 readLevel();
                 manager.turn(playerLevel, 1);
                 ////Animals & ChoiceBox
@@ -518,6 +711,7 @@ public class Controller implements Initializable
 
 
                         ArrayList<String> s = new ArrayList<>();
+                        s.add("ingredient");
                         for (int t=0 ; t<tile.ingredient.getItems().size(); t++){
                             tile.ingredient.getItems().remove(t);
                         }
@@ -540,6 +734,7 @@ public class Controller implements Initializable
                             }
                         }
                         tile.animal.getItems().addAll(s);
+
                         //tile.animal.setValue("Animals");
                         try {
                             saveLevel();
