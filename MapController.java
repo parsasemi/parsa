@@ -17,7 +17,6 @@ public class MapController {
     Stage stage;
     Scene scene;
     Parent root;
-    String username;
 
     @FXML
     Button level1;
@@ -40,6 +39,7 @@ public class MapController {
 
     public static final Manager manager = new Manager();
     static int levelNumber;
+    static String username;
     static Level playerLevel;
 
     public void switchToGameplay(ActionEvent actionEvent) throws IOException {
@@ -51,6 +51,7 @@ public class MapController {
         Controller controller = loader.getController();
         controller.playerLevel = manager.levelReturner(levelNumber);
         playerLevel = manager.levelReturner(levelNumber);
+
 
 
         stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -67,5 +68,8 @@ public class MapController {
     public static Level getPlayerLevel(){
         return playerLevel;
     }
+    public static String getUsername(){
+        return username;
     }
+}
 
