@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -40,8 +42,12 @@ public class Controller implements Initializable
     Parent root;
     ArrayList<Level> levels = new ArrayList<>();
     @FXML private ChoiceBox<String> ingredient;
-
+    Stage stage;
+    Scene scene;
+    @FXML private ImageView BucketImage;
     @FXML private Button Storage;
+    @FXML private Button Truck;
+    @FXML private Button Menu;
     @FXML private Button Bucket;
     @FXML private Button Turn;
     private Image image = new Image(getClass().getResourceAsStream("Grass.png"));
@@ -110,7 +116,7 @@ public class Controller implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Bucket.setOnAction(actionEvent -> {
+        Menu.setOnAction(actionEvent -> {
               /*  playerLevel = manager.levelEnd(playerLevel);
                 saveLevel();*/
 
@@ -148,7 +154,7 @@ public class Controller implements Initializable
                 buttons.add(mapController.level8);
                 int max = 0;
                 try {
-                    max = manager.maxLevelReturner(MapController.getUsername());
+                    max = manager.levelCheck(MapController.getUsername());
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
@@ -177,6 +183,16 @@ public class Controller implements Initializable
 
 
             // manager.Well(playerLevel);
+        });
+      //  BucketImage.setImage();
+        Bucket.setOnAction(actionEvent -> {
+            try {
+                readLevel();
+                manager.Well(playerLevel);
+                saveLevel();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
         Tile[][] tiles  = new Tile[6][6];
         for (int i=0; i <6; i++){
@@ -314,7 +330,6 @@ public class Controller implements Initializable
 
                 ////////// ChoiceBox
                 ArrayList<String> s = new ArrayList<>();
-                s.add("ingredients");
                 try {
                     readLevel();
                 } catch (IOException e) {
@@ -325,7 +340,7 @@ public class Controller implements Initializable
                                 s.add(playerLevel.ingredients.get(t).name + "   " + playerLevel.ingredients.get(t).expire);
                             }
                         }
-                tile.ingredient.setValue("ingredients");
+                //tile.ingredient.setValue("ingredients");
                 tile.ingredient.getItems().addAll(s);
                 s.clear();
                 tile.ingredient.getItems().addAll(s);
@@ -334,8 +349,8 @@ public class Controller implements Initializable
                         s.add("Chicken    "+ playerLevel.chickens.get(t).health);
                     }
                 }
-                s.add("Animals");
-                tile.animal.setValue("Animals");
+
+                //tile.animal.setValue("Animals");
                 tile.animal.getItems().addAll(s);
                 try {
                     saveLevel();
@@ -466,27 +481,29 @@ public class Controller implements Initializable
 
 
                         ArrayList<String> s = new ArrayList<>();
-                        s.add("ingredients");
-                        tile.ingredient.getItems().removeAll();
+                        for (int t=0 ; t<tile.ingredient.getItems().size(); t++){
+                            tile.ingredient.getItems().remove(t);
+                        }
                         for (int t=0 ; t<playerLevel.ingredients.size();t++){
                             if (playerLevel.ingredients.get(t).x==x && playerLevel.ingredients.get(t).y==y){
                                 s.add(playerLevel.ingredients.get(t).name + "   " + playerLevel.ingredients.get(t).expire);
+
                             }
                         }
                         tile.ingredient.getItems().addAll(s);
-                        tile.ingredient.setValue("ingredients");
+                        //tile.ingredient.setValue("ingredients");
                         s.clear();
 
-                        s.add("Animals");
-                        tile.animal.getItems().remove
+                        for (int t=0 ; t<tile.animal.getItems().size(); t++){
+                            tile.animal.getItems().remove(t);
+                        }
                         for (int t=0 ; t<playerLevel.chickens.size();t++){
                             if (playerLevel.chickens.get(t).x==x && playerLevel.chickens.get(t).y==y){
                                 s.add("Chicken    "+ playerLevel.chickens.get(t).health);
-                                System.out.println(s.get(1));
                             }
                         }
                         tile.animal.getItems().addAll(s);
-                        tile.animal.setValue("Animals");
+                        //tile.animal.setValue("Animals");
                         try {
                             saveLevel();
                         } catch (IOException e) {
