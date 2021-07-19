@@ -1,0 +1,1862 @@
+[
+  {
+    "levelNumber": 4,
+    "passedTime": 0,
+    "playerName": "parsa",
+    "levelEnd": false,
+    "levelStarted": true,
+    "coin": 600,
+    "ingredients": [
+      {
+        "name": "egg",
+        "price": 15,
+        "size": 1,
+        "x": 4,
+        "y": 4,
+        "expire": 2
+      }
+    ],
+    "chickens": [],
+    "buffalos": [],
+    "turkies": [],
+    "bears": [
+      {
+        "sellPrice": 400,
+        "x": 6,
+        "y": 2,
+        "cageP": 4,
+        "cageCounter": 0,
+        "capacity": 15,
+        "speed": 1,
+        "inCage": false,
+        "inCageCounter": 0,
+        "cagePlus": false
+      },
+      {
+        "sellPrice": 400,
+        "x": 5,
+        "y": 5,
+        "cageP": 4,
+        "cageCounter": 0,
+        "capacity": 15,
+        "speed": 1,
+        "inCage": false,
+        "inCageCounter": 0,
+        "cagePlus": false
+      }
+    ],
+    "lions": [
+      {
+        "sellPrice": 300,
+        "x": 6,
+        "y": 4,
+        "cageP": 3,
+        "cageCounter": 0,
+        "capacity": 15,
+        "speed": 1,
+        "inCage": false,
+        "inCageCounter": 0,
+        "cagePlus": false
+      }
+    ],
+    "tigers": [],
+    "cats": [],
+    "dogs": [],
+    "map": {
+      "length": 6,
+      "height": 6,
+      "map": [
+        [
+          {
+            "x": 0,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 1,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 2,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 3,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 4,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 5,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "grass": 0
+          }
+        ]
+      ]
+    },
+    "bucket": {
+      "capacity": 5,
+      "duration": -1,
+      "maxDuration": 5,
+      "full": true
+    },
+    "weaveFactory": {
+      "buildPrice": 250,
+      "maxDuration": 4,
+      "ingredient": "feather",
+      "product": {
+        "name": "weave",
+        "price": 50,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "millFactory": {
+      "buildPrice": 150,
+      "maxDuration": 3,
+      "ingredient": "egg",
+      "product": {
+        "name": "flour",
+        "price": 40,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": true,
+      "ingredientExistence2": false
+    },
+    "milkFactory": {
+      "buildPrice": 400,
+      "maxDuration": 5,
+      "ingredient": "milk",
+      "product": {
+        "name": "cmilk",
+        "price": 60,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "bakery": {
+      "buildPrice": 250,
+      "maxDuration": 4,
+      "ingredient": "flour",
+      "product": {
+        "name": "bread",
+        "price": 80,
+        "size": 4,
+        "x": 1,
+        "y": 1,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "sewingFactory": {
+      "buildPrice": 400,
+      "maxDuration": 5,
+      "ingredient": "weave",
+      "product": {
+        "name": "cloth",
+        "price": 100,
+        "size": 4,
+        "x": 0,
+        "y": 0,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "iceFactory": {
+      "buildPrice": 550,
+      "maxDuration": 6,
+      "ingredient": "cmilk",
+      "product": {
+        "name": "icecream",
+        "price": 120,
+        "size": 4,
+        "x": 1,
+        "y": 1,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "storage": {
+      "capacity": 30,
+      "names": [],
+      "quantities": []
+    },
+    "motorCycle": {
+      "capacity": 20,
+      "names": [],
+      "quantities": [],
+      "counter": -1,
+      "Max": 9,
+      "coin": 0
+    },
+    "task": {
+      "taskCounter": 0,
+      "taskObj": 5,
+      "taskCheck": false,
+      "timeObj1": 18,
+      "timeObj2": 22,
+      "timeObj3": 26,
+      "chickenObj": 10000,
+      "buffaloObj": 2,
+      "turkeyObj": 10000,
+      "coinObj": 800,
+      "eggObj": 10000,
+      "flourObj": 4,
+      "featherObj": 10000,
+      "milkObj": 10000,
+      "cmilkObj": 10000,
+      "breadObj": 2,
+      "weaveObj": 10000,
+      "clothObj": 10000,
+      "iceCreamObj": 10000,
+      "coinCheck": false,
+      "chickenCheck": false,
+      "buffaloCheck": false,
+      "turkeyCheck": false,
+      "eggCheck": false,
+      "flourCheck": false,
+      "featherCheck": false,
+      "milkCheck": false,
+      "cmilkCheck": false,
+      "breadCheck": false,
+      "weaveCheck": false,
+      "clothCheck": false,
+      "iceCreamCheck": false,
+      "timeCheck1": false,
+      "timeCheck2": false,
+      "timeCheck3": false,
+      "totalCoin": 400,
+      "eggCounter": 0,
+      "flourCounter": 0,
+      "featherCounter": 0,
+      "milkCounter": 0,
+      "cmilkCounter": 0,
+      "breadCounter": 0,
+      "weaveCounter": 0,
+      "clothCounter": 0,
+      "iceCreamCounter": 0,
+      "chickenCounter": 0,
+      "turkeyCounter": 0,
+      "buffaloCounter": 0,
+      "timeCounter": 10
+    },
+    "wildAnimalAddTimer1": 6,
+    "wildAnimalAddTimer2": 8,
+    "wildAnimalAddTimer3": 10,
+    "wildAnimalAddTimer4": 16,
+    "wildAnimalAddTimer5": 10000,
+    "wildAnimalAddTimer6": 10000,
+    "wildAnimalAddTimer7": 10000,
+    "TaskCheck": false
+  },
+  {
+    "levelNumber": 2,
+    "passedTime": 0,
+    "playerName": "parsa",
+    "levelEnd": false,
+    "levelStarted": true,
+    "coin": 500,
+    "ingredients": [
+      {
+        "name": "egg",
+        "price": 15,
+        "size": 1,
+        "x": 5,
+        "y": 5,
+        "expire": 1
+      },
+      {
+        "name": "egg",
+        "price": 15,
+        "size": 1,
+        "x": 2,
+        "y": 1,
+        "expire": 1
+      },
+      {
+        "name": "egg",
+        "price": 15,
+        "size": 1,
+        "x": 5,
+        "y": 5,
+        "expire": 3
+      },
+      {
+        "name": "egg",
+        "price": 15,
+        "size": 1,
+        "x": 2,
+        "y": 1,
+        "expire": 3
+      }
+    ],
+    "chickens": [
+      {
+        "sellPrice": 0,
+        "BuyPrice": 100,
+        "x": 3,
+        "y": 1,
+        "health": 50,
+        "speed": 1,
+        "capacity": 0,
+        "product": "egg",
+        "productTime": 1,
+        "time": 0,
+        "existence": false
+      },
+      {
+        "sellPrice": 0,
+        "BuyPrice": 100,
+        "x": 5,
+        "y": 4,
+        "health": 50,
+        "speed": 1,
+        "capacity": 0,
+        "product": "egg",
+        "productTime": 1,
+        "time": 0,
+        "existence": false
+      }
+    ],
+    "buffalos": [],
+    "turkies": [],
+    "bears": [
+      {
+        "sellPrice": 400,
+        "x": 3,
+        "y": 2,
+        "cageP": 4,
+        "cageCounter": 0,
+        "capacity": 15,
+        "speed": 1,
+        "inCage": false,
+        "inCageCounter": 0,
+        "cagePlus": false
+      }
+    ],
+    "lions": [],
+    "tigers": [],
+    "cats": [],
+    "dogs": [],
+    "map": {
+      "length": 6,
+      "height": 6,
+      "map": [
+        [
+          {
+            "x": 0,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 1,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 2,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 3,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 4,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 5,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "grass": 0
+          }
+        ]
+      ]
+    },
+    "bucket": {
+      "capacity": 5,
+      "duration": -1,
+      "maxDuration": 5,
+      "full": true
+    },
+    "weaveFactory": {
+      "buildPrice": 250,
+      "maxDuration": 4,
+      "ingredient": "feather",
+      "product": {
+        "name": "weave",
+        "price": 50,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "millFactory": {
+      "buildPrice": 150,
+      "maxDuration": 3,
+      "ingredient": "egg",
+      "product": {
+        "name": "flour",
+        "price": 40,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "milkFactory": {
+      "buildPrice": 400,
+      "maxDuration": 5,
+      "ingredient": "milk",
+      "product": {
+        "name": "cmilk",
+        "price": 60,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "bakery": {
+      "buildPrice": 250,
+      "maxDuration": 4,
+      "ingredient": "flour",
+      "product": {
+        "name": "bread",
+        "price": 80,
+        "size": 4,
+        "x": 1,
+        "y": 1,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "sewingFactory": {
+      "buildPrice": 400,
+      "maxDuration": 5,
+      "ingredient": "weave",
+      "product": {
+        "name": "cloth",
+        "price": 100,
+        "size": 4,
+        "x": 0,
+        "y": 0,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "iceFactory": {
+      "buildPrice": 550,
+      "maxDuration": 6,
+      "ingredient": "cmilk",
+      "product": {
+        "name": "icecream",
+        "price": 120,
+        "size": 4,
+        "x": 1,
+        "y": 1,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "storage": {
+      "capacity": 30,
+      "names": [],
+      "quantities": []
+    },
+    "motorCycle": {
+      "capacity": 20,
+      "names": [],
+      "quantities": [],
+      "counter": -1,
+      "Max": 9,
+      "coin": 0
+    },
+    "task": {
+      "taskCounter": 0,
+      "taskObj": 2,
+      "taskCheck": false,
+      "timeObj1": 10,
+      "timeObj2": 12,
+      "timeObj3": 16,
+      "chickenObj": 4,
+      "buffaloObj": 10000,
+      "turkeyObj": 10000,
+      "coinObj": 10000,
+      "eggObj": 6,
+      "flourObj": 10000,
+      "featherObj": 10000,
+      "milkObj": 10000,
+      "cmilkObj": 10000,
+      "breadObj": 10000,
+      "weaveObj": 10000,
+      "clothObj": 10000,
+      "iceCreamObj": 10000,
+      "coinCheck": false,
+      "chickenCheck": false,
+      "buffaloCheck": false,
+      "turkeyCheck": false,
+      "eggCheck": false,
+      "flourCheck": false,
+      "featherCheck": false,
+      "milkCheck": false,
+      "cmilkCheck": false,
+      "breadCheck": false,
+      "weaveCheck": false,
+      "clothCheck": false,
+      "iceCreamCheck": false,
+      "timeCheck1": false,
+      "timeCheck2": false,
+      "timeCheck3": false,
+      "totalCoin": 0,
+      "eggCounter": 0,
+      "flourCounter": 0,
+      "featherCounter": 0,
+      "milkCounter": 0,
+      "cmilkCounter": 0,
+      "breadCounter": 0,
+      "weaveCounter": 0,
+      "clothCounter": 0,
+      "iceCreamCounter": 0,
+      "chickenCounter": 2,
+      "turkeyCounter": 0,
+      "buffaloCounter": 0,
+      "timeCounter": 5
+    },
+    "wildAnimalAddTimer1": 4,
+    "wildAnimalAddTimer2": 8,
+    "wildAnimalAddTimer3": 10000,
+    "wildAnimalAddTimer4": 10000,
+    "wildAnimalAddTimer5": 10000,
+    "wildAnimalAddTimer6": 10000,
+    "wildAnimalAddTimer7": 10000,
+    "TaskCheck": false
+  },
+  {
+    "levelNumber": 3,
+    "passedTime": 0,
+    "playerName": "parsa",
+    "levelEnd": false,
+    "levelStarted": true,
+    "coin": 300,
+    "ingredients": [
+      {
+        "name": "egg",
+        "price": 15,
+        "size": 1,
+        "x": 1,
+        "y": 4,
+        "expire": 1
+      },
+      {
+        "name": "egg",
+        "price": 15,
+        "size": 1,
+        "x": 4,
+        "y": 3,
+        "expire": 1
+      },
+      {
+        "name": "feather",
+        "price": 20,
+        "size": 1,
+        "x": 6,
+        "y": 6,
+        "expire": 2
+      }
+    ],
+    "chickens": [
+      {
+        "sellPrice": 0,
+        "BuyPrice": 100,
+        "x": 2,
+        "y": 2,
+        "health": 50,
+        "speed": 1,
+        "capacity": 0,
+        "product": "egg",
+        "productTime": 1,
+        "time": 0,
+        "existence": false
+      },
+      {
+        "sellPrice": 0,
+        "BuyPrice": 100,
+        "x": 1,
+        "y": 5,
+        "health": 50,
+        "speed": 1,
+        "capacity": 0,
+        "product": "egg",
+        "productTime": 1,
+        "time": 0,
+        "existence": false
+      }
+    ],
+    "buffalos": [],
+    "turkies": [
+      {
+        "sellPrice": 0,
+        "BuyPrice": 200,
+        "x": 6,
+        "y": 4,
+        "health": 50,
+        "speed": 1,
+        "capacity": 0,
+        "product": "feather",
+        "productTime": 2,
+        "time": 1,
+        "existence": false
+      }
+    ],
+    "bears": [
+      {
+        "sellPrice": 400,
+        "x": 2,
+        "y": 1,
+        "cageP": 4,
+        "cageCounter": 4,
+        "capacity": 15,
+        "speed": 1,
+        "inCage": true,
+        "inCageCounter": 0,
+        "cagePlus": true
+      }
+    ],
+    "lions": [],
+    "tigers": [],
+    "cats": [],
+    "dogs": [],
+    "map": {
+      "length": 6,
+      "height": 6,
+      "map": [
+        [
+          {
+            "x": 0,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 1,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 2,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 3,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 4,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 5,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "grass": 0
+          }
+        ]
+      ]
+    },
+    "bucket": {
+      "capacity": 5,
+      "duration": -1,
+      "maxDuration": 5,
+      "full": true
+    },
+    "weaveFactory": {
+      "buildPrice": 250,
+      "maxDuration": 4,
+      "ingredient": "feather",
+      "product": {
+        "name": "weave",
+        "price": 50,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "millFactory": {
+      "buildPrice": 150,
+      "maxDuration": 3,
+      "ingredient": "egg",
+      "product": {
+        "name": "flour",
+        "price": 40,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "milkFactory": {
+      "buildPrice": 400,
+      "maxDuration": 5,
+      "ingredient": "milk",
+      "product": {
+        "name": "cmilk",
+        "price": 60,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "bakery": {
+      "buildPrice": 250,
+      "maxDuration": 4,
+      "ingredient": "flour",
+      "product": {
+        "name": "bread",
+        "price": 80,
+        "size": 4,
+        "x": 1,
+        "y": 1,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "sewingFactory": {
+      "buildPrice": 400,
+      "maxDuration": 5,
+      "ingredient": "weave",
+      "product": {
+        "name": "cloth",
+        "price": 100,
+        "size": 4,
+        "x": 0,
+        "y": 0,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "iceFactory": {
+      "buildPrice": 550,
+      "maxDuration": 6,
+      "ingredient": "cmilk",
+      "product": {
+        "name": "icecream",
+        "price": 120,
+        "size": 4,
+        "x": 1,
+        "y": 1,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "storage": {
+      "capacity": 28,
+      "names": [
+        "egg",
+        "egg"
+      ],
+      "quantities": [
+        1,
+        1
+      ]
+    },
+    "motorCycle": {
+      "capacity": 20,
+      "names": [],
+      "quantities": [],
+      "counter": -1,
+      "Max": 9,
+      "coin": 0
+    },
+    "task": {
+      "taskCounter": 0,
+      "taskObj": 4,
+      "taskCheck": false,
+      "timeObj1": 16,
+      "timeObj2": 18,
+      "timeObj3": 22,
+      "chickenObj": 6,
+      "buffaloObj": 10000,
+      "turkeyObj": 10000,
+      "coinObj": 10000,
+      "eggObj": 8,
+      "flourObj": 4,
+      "featherObj": 2,
+      "milkObj": 10000,
+      "cmilkObj": 10000,
+      "breadObj": 10000,
+      "weaveObj": 10000,
+      "clothObj": 10000,
+      "iceCreamObj": 10000,
+      "coinCheck": false,
+      "chickenCheck": false,
+      "buffaloCheck": false,
+      "turkeyCheck": false,
+      "eggCheck": false,
+      "flourCheck": false,
+      "featherCheck": false,
+      "milkCheck": false,
+      "cmilkCheck": false,
+      "breadCheck": false,
+      "weaveCheck": false,
+      "clothCheck": false,
+      "iceCreamCheck": false,
+      "timeCheck1": false,
+      "timeCheck2": false,
+      "timeCheck3": false,
+      "totalCoin": 0,
+      "eggCounter": 2,
+      "flourCounter": 0,
+      "featherCounter": 0,
+      "milkCounter": 0,
+      "cmilkCounter": 0,
+      "breadCounter": 0,
+      "weaveCounter": 0,
+      "clothCounter": 0,
+      "iceCreamCounter": 0,
+      "chickenCounter": 2,
+      "turkeyCounter": 1,
+      "buffaloCounter": 0,
+      "timeCounter": 5
+    },
+    "wildAnimalAddTimer1": 4,
+    "wildAnimalAddTimer2": 11,
+    "wildAnimalAddTimer3": 14,
+    "wildAnimalAddTimer4": 10000,
+    "wildAnimalAddTimer5": 10000,
+    "wildAnimalAddTimer6": 10000,
+    "wildAnimalAddTimer7": 10000,
+    "TaskCheck": false
+  },
+  {
+    "levelNumber": 1,
+    "passedTime": 0,
+    "playerName": "parsa",
+    "levelEnd": false,
+    "levelStarted": true,
+    "coin": 500,
+    "ingredients": [],
+    "chickens": [
+      {
+        "sellPrice": 0,
+        "BuyPrice": 100,
+        "x": 2,
+        "y": 4,
+        "health": 90,
+        "speed": 1,
+        "capacity": 0,
+        "product": "egg",
+        "productTime": 1,
+        "time": 0,
+        "existence": false
+      },
+      {
+        "sellPrice": 0,
+        "BuyPrice": 100,
+        "x": 5,
+        "y": 1,
+        "health": 90,
+        "speed": 1,
+        "capacity": 0,
+        "product": "egg",
+        "productTime": 1,
+        "time": 0,
+        "existence": false
+      }
+    ],
+    "buffalos": [],
+    "turkies": [],
+    "bears": [],
+    "lions": [],
+    "tigers": [],
+    "cats": [],
+    "dogs": [],
+    "map": {
+      "length": 6,
+      "height": 6,
+      "map": [
+        [
+          {
+            "x": 0,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 0,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 1,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 1,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 2,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 3,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 3,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 4,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 4,
+            "y": 5,
+            "grass": 0
+          }
+        ],
+        [
+          {
+            "x": 5,
+            "y": 0,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 1,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 2,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 3,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 4,
+            "grass": 0
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "grass": 0
+          }
+        ]
+      ]
+    },
+    "bucket": {
+      "capacity": 5,
+      "duration": -1,
+      "maxDuration": 5,
+      "full": true
+    },
+    "weaveFactory": {
+      "buildPrice": 250,
+      "maxDuration": 4,
+      "ingredient": "feather",
+      "product": {
+        "name": "weave",
+        "price": 50,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "millFactory": {
+      "buildPrice": 150,
+      "maxDuration": 3,
+      "ingredient": "egg",
+      "product": {
+        "name": "flour",
+        "price": 40,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "milkFactory": {
+      "buildPrice": 400,
+      "maxDuration": 5,
+      "ingredient": "milk",
+      "product": {
+        "name": "cmilk",
+        "price": 60,
+        "size": 2,
+        "x": 1,
+        "y": 1,
+        "expire": 5
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "bakery": {
+      "buildPrice": 250,
+      "maxDuration": 4,
+      "ingredient": "flour",
+      "product": {
+        "name": "bread",
+        "price": 80,
+        "size": 4,
+        "x": 1,
+        "y": 1,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "sewingFactory": {
+      "buildPrice": 400,
+      "maxDuration": 5,
+      "ingredient": "weave",
+      "product": {
+        "name": "cloth",
+        "price": 100,
+        "size": 4,
+        "x": 0,
+        "y": 0,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "iceFactory": {
+      "buildPrice": 550,
+      "maxDuration": 6,
+      "ingredient": "cmilk",
+      "product": {
+        "name": "icecream",
+        "price": 120,
+        "size": 4,
+        "x": 1,
+        "y": 1,
+        "expire": 6
+      },
+      "level": 1,
+      "upgradePrice": 0,
+      "ingredientExistence": false,
+      "productTime": -1,
+      "existence": false,
+      "ingredientExistence2": false
+    },
+    "storage": {
+      "capacity": 30,
+      "names": [],
+      "quantities": []
+    },
+    "motorCycle": {
+      "capacity": 20,
+      "names": [],
+      "quantities": [],
+      "counter": -1,
+      "Max": 9,
+      "coin": 0
+    },
+    "task": {
+      "taskCounter": 0,
+      "taskObj": 1,
+      "taskCheck": false,
+      "timeObj1": 8,
+      "timeObj2": 10,
+      "timeObj3": 12,
+      "chickenObj": 10000,
+      "buffaloObj": 10000,
+      "turkeyObj": 10000,
+      "coinObj": 10000,
+      "eggObj": 6,
+      "flourObj": 10000,
+      "featherObj": 10000,
+      "milkObj": 10000,
+      "cmilkObj": 10000,
+      "breadObj": 10000,
+      "weaveObj": 10000,
+      "clothObj": 10000,
+      "iceCreamObj": 10000,
+      "coinCheck": false,
+      "chickenCheck": false,
+      "buffaloCheck": false,
+      "turkeyCheck": false,
+      "eggCheck": false,
+      "flourCheck": false,
+      "featherCheck": false,
+      "milkCheck": false,
+      "cmilkCheck": false,
+      "breadCheck": false,
+      "weaveCheck": false,
+      "clothCheck": false,
+      "iceCreamCheck": false,
+      "timeCheck1": false,
+      "timeCheck2": false,
+      "timeCheck3": false,
+      "totalCoin": 0,
+      "eggCounter": 0,
+      "flourCounter": 0,
+      "featherCounter": 0,
+      "milkCounter": 0,
+      "cmilkCounter": 0,
+      "breadCounter": 0,
+      "weaveCounter": 0,
+      "clothCounter": 0,
+      "iceCreamCounter": 0,
+      "chickenCounter": 2,
+      "turkeyCounter": 0,
+      "buffaloCounter": 0,
+      "timeCounter": 1
+    },
+    "wildAnimalAddTimer1": 4,
+    "wildAnimalAddTimer2": 10000,
+    "wildAnimalAddTimer3": 10000,
+    "wildAnimalAddTimer4": 10000,
+    "wildAnimalAddTimer5": 10000,
+    "wildAnimalAddTimer6": 10000,
+    "wildAnimalAddTimer7": 10000,
+    "TaskCheck": false
+  }
+]
