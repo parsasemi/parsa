@@ -1,0 +1,189 @@
+
+        //CHECKING IF THE LEVEL IS FINISHED
+        try {
+            readLevel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (playerLevel.task.taskCheck) {
+            Stage popupWindow = new Stage();
+            popupWindow.initModality(Modality.APPLICATION_MODAL);
+            popupWindow.setTitle("Level finished!");
+
+            String string = "";
+
+            if (playerLevel.task.taskCounter == playerLevel.task.taskObj) {
+                try {
+                    playerLevel = manager.levelEnd(playerLevel,levels);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (!playerLevel.task.timeCheck1 && !playerLevel.task.timeCheck2 && !playerLevel.task.timeCheck3) {
+                    string += ("Level finished! Level " + (playerLevel.levelNumber + 1) + " unlocked!\n" + "You recieve a golden Medal for finishing the level before the first time objective!");
+                } else if (playerLevel.task.timeCheck1 && !playerLevel.task.timeCheck2 && !playerLevel.task.timeCheck3) {
+
+                    string += ("Level finished! Level " + (playerLevel.levelNumber + 1) + " unlocked!\n" + "You recieve a silver Medal for finishing the level before the first time objective!");
+                } else if (playerLevel.task.timeCheck1 && playerLevel.task.timeCheck2 && !playerLevel.task.timeCheck3) {
+
+                    string += ("Level finished! Level " + (playerLevel.levelNumber + 1) + " unlocked!\n" + "You recieve a bronze Medal for finishing the level before the first time objective!");
+
+                } else if (playerLevel.task.timeCheck1 && playerLevel.task.timeCheck2 && playerLevel.task.timeCheck3) {
+
+                    string += ("Level finished! Level " + (playerLevel.levelNumber + 1) + " unlocked!\n" + "You recieve a NOTHING!!! for finishing the level before the first time objective!");
+
+                }
+            }
+
+
+            Label label1 = new Label(string);
+            label1.setText(string);
+            Button close = new Button("Close");
+            close.setId("close");
+            close.setOnAction(e -> {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("mapp.fxml"));
+                try {
+                    root = loader.load();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.close();
+
+
+                MapController mapController = loader.getController();
+                mapController.username = MapController.getUsername();
+                ArrayList<Button> buttons = new ArrayList<>();
+                buttons.add(mapController.level1);
+                buttons.add(mapController.level2);
+                buttons.add(mapController.level3);
+                buttons.add(mapController.level4);
+                buttons.add(mapController.level5);
+                buttons.add(mapController.level6);
+                buttons.add(mapController.level7);
+                buttons.add(mapController.level8);
+                int max = 0;
+                try {
+                    max = manager.levelCheck(MapController.getUsername());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                for (Button button : buttons) {
+                    if (Integer.parseInt(button.getText()) > max) {
+                        button.setDisable(true);
+                    }
+                }
+                scene = new Scene(root, 700, 500);
+                scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.show();
+                try {
+                    saveLevel();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+
+            });
+            VBox vBox = new VBox(10);
+            vBox.getChildren().addAll(label1, close);
+            vBox.setAlignment(Pos.CENTER);
+            Scene scene1 = new Scene(vBox, 500, 500);
+            popupWindow.centerOnScreen();
+
+            scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            popupWindow.setScene(scene1);
+            popupWindow.showAndWait();
+
+        }
+        try {
+            saveLevel();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+        Menu.setOnAction(actionEvent -> {
+
+        });
+
+
+
+        pause.setOnAction(actionEvent -> {
+            try {
+                readLevel();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Stage popupWindow = new Stage();
+            popupWindow.initModality(Modality.APPLICATION_MODAL);
+            popupWindow.setTitle("Level finished");
+
+            Button close = new Button("Resume");
+            close.setOnAction(e -> {
+                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.close();
+            });
+
+            Button map = new Button("Map");
+            map.setOnAction(e->{
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("mapp.fxml"));
+                try {
+                    root = loader.load();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                stage.close();
+
+
+                MapController mapController = loader.getController();
+                mapController.username = MapController.getUsername();
+                ArrayList<Button> buttons = new ArrayList<>();
+                buttons.add(mapController.level1);
+                buttons.add(mapController.level2);
+                buttons.add(mapController.level3);
+                buttons.add(mapController.level4);
+                buttons.add(mapController.level5);
+                buttons.add(mapController.level6);
+                buttons.add(mapController.level7);
+                buttons.add(mapController.level8);
+                int max = 0;
+                try {
+                    max = manager.levelCheck(MapController.getUsername());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                for (Button button : buttons) {
+                    if (Integer.parseInt(button.getText()) > max) {
+                        button.setDisable(true);
+                    }
+                }
+                scene = new Scene(root, 700, 500);
+                scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+                stage.setScene(scene);
+                stage.centerOnScreen();
+                stage.show();
+
+
+            });
+            VBox vBox = new VBox(10);
+            vBox.getChildren().addAll(close,map);
+            vBox.setAlignment(Pos.CENTER);
+            Scene scene1 = new Scene(vBox, 400, 400);
+            popupWindow.centerOnScreen();
+
+            scene1.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            popupWindow.setScene(scene1);
+            popupWindow.showAndWait();
+            try {
+                saveLevel();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
