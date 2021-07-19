@@ -1,0 +1,13 @@
+Storage.setOnAction(actionEvent -> {
+            Stage popupWindow = new Stage();
+            try {
+                StorageView = FXMLLoader.load(getClass().getResource("StorageMenu.fxml"));
+                Scene sCene = new Scene(StorageView);
+                popupWindow.centerOnScreen();
+                popupWindow.setScene(sCene);
+                readLevel();
+                popupWindow.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
