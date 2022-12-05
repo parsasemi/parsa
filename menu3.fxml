@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="map" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Graphics.Menu3Controller">
+   <children>
+      <MenuButton fx:id="options" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" text="Options">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#switchToMenu" text="Logout" />
+          <MenuItem mnemonicParsing="false" onAction="#Exit" text="Exit" />
+        </items>
+      </MenuButton>
+   </children>
+</AnchorPane>

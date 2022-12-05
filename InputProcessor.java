@@ -1,7 +1,9 @@
+package Graphics;
+
+import Graphics.Manager;
 import LevelDesign.Level;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class InputProcessor {
@@ -32,10 +34,10 @@ public class InputProcessor {
 
     }
 
-    private boolean startProcess(String username, int levelNumber) throws IOException {
+    /*private boolean startProcess(String username, int levelNumber) throws IOException {
         return manager.levelCheck(username, levelNumber);
 
-    }
+    }*/
 
     private void settingsProcess() {
 
@@ -224,7 +226,7 @@ public class InputProcessor {
                         String command = Command.toLowerCase();
                         String[] split = command.split("\\s+");
                         if (command.startsWith("start")) {
-                            if (split.length == 2 && startProcess(username, Integer.parseInt(split[1]))) {
+                            if (split.length == 2/* && startProcess(username, Integer.parseInt(split[1]))*/) {
                                 flag_logout = false;
                                 flag_end2 = true;
                                 playerLevel = levelReturnerProcess(Integer.parseInt(split[1]));
@@ -382,8 +384,8 @@ public class InputProcessor {
                         }
                         workProcess(split[1], playerLevel);
 
-                    } else if (command.startsWith("cage")) {
-                          cageProcess(Integer.parseInt(split[1]),Integer.parseInt(split[2]),playerLevel);
+                    } else if (command.startsWith("cage") && split.length == 3) {
+                        cageProcess(Integer.parseInt(split[1]), Integer.parseInt(split[2]), playerLevel);
 
                     } else if (command.startsWith("turn") && split.length == 2) {
                         turnCounter = Integer.parseInt(split[1]);
@@ -404,12 +406,12 @@ public class InputProcessor {
 
                     } else if (command.startsWith("build")) {
                         buildProcess(playerLevel, split[1]);
-                    }  else if (command.equals("inquiry")) {
+                    } else if (command.equals("inquiry")) {
                         printInfoProcess(playerLevel);
                     } else if (command.startsWith("upgrade") && split.length == 2) {
                         upgradeFactoryProcess(playerLevel, split[1]);
 
-                    } else if(command.equals("end")){
+                    } else if (command.equals("end")) {
                         System.out.println("Please enter [menu] to go to Level menu");
                         playerLevel = manager.levelEnd(playerLevel);
                         break;

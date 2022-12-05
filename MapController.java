@@ -71,5 +71,5 @@ public class MapController {
     public static String getUsername(){
         return username;
     }
-}
+    }
 
